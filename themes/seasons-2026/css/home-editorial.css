@@ -61,3 +61,10 @@
 .seasons-now-item p { color: #a89a95; font: 400 14px/1.65 Arial,sans-serif; margin: 0 auto; max-width: 285px; }
 @media(max-width:760px) { .seasons-now-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 36px 22px; } .seasons-now-heading { margin-bottom: 38px; } }
 @media(max-width:480px) { .seasons-now { padding: 48px 18px 56px; } .seasons-now-grid { grid-template-columns: 1fr; gap: 32px; } .seasons-now-icon { width: 72px; height: 72px; } }
+
+/* Garden tasks panel between the seasonal checklist and From My Garden. */
+.seasons-home-garden-now { background: #f5f1e8; }
+.seasons-home-garden-now .seasons-home-heading { text-align: center; margin-bottom: 32px; }
+.seasons-home-eyebrow { display: block; margin-bottom: 12px; font: 600 12px/1.5 Arial,sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #a35e35; }
+.seasons-home-garden-now .gardencare { width: 100%; max-width: 1100px; margin: 0 auto; }
+.seasons-home-garden-now .gardencare:empty { display: none; }
