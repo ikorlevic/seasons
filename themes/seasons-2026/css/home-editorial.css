@@ -249,3 +249,9 @@ body.valentines .seasons-home .seasons-explore-winter {
     .seasons-home .seasons-diy-hero { min-height: 320px; padding: 48px 20px; background-position: 43% center; }
     .seasons-home .seasons-diy-hero::before { background: rgba(28, 26, 21, .55); }
 }
+
+/* Cross-category Season taxonomy archive reuses homepage editorial cards. */
+.seasons-home .seasons-season-archive-intro { background: #fff; }
+.seasons-season-archive-intro .seasons-home-heading { max-width: 800px; margin: 0 auto; }
+.seasons-season-archive-intro .seasons-home-heading h1 { font: 600 clamp(38px, 5vw, 58px)/1.15 Georgia, 'Times New Roman', serif; margin: 8px 0 16px; }
+.seasons-season-archive-description { font-size: 17px; line-height: 1.7; }
