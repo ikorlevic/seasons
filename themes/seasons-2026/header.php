@@ -15,7 +15,7 @@
   $season = $actualSeason;
 
   // Garden is a content category, not a seasonal skin.
-  if (is_category(array('garden', 'recipes', 'home'))) {
+  if (is_category(array('garden', 'recipes', 'home', 'diy', 'diy-projects'))) {
       $season = $actualSeason;
   } elseif(is_home()) {
       $season = $actualSeason;
@@ -89,5 +89,5 @@
         </div>
         </div>
     </header>
-                <?php get_template_part('templates-part/season-moto', get_post_format()); ?>
+                <?php if (!is_category(array('diy', 'diy-projects'))) { get_template_part('templates-part/season-moto', get_post_format()); } ?>
 <?php wp_reset_query(); ?>
