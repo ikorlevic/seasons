@@ -169,3 +169,11 @@ body.garden-category .moto { min-height: 300px; padding-top: 28px; padding-botto
 body.editorial-main-category .moto { min-height: 300px; padding-top: 28px; padding-bottom: 28px; }
 .seasons-category-editorial .seasons-featured-recipe-grid { grid-template-columns: minmax(0, 440px); justify-content: center; }
 @media (max-width: 650px) { body.editorial-main-category .moto { min-height: 240px; } }
+
+/* Article card CTAs: use the garden green rather than the legacy orange link color. */
+.seasons-home .seasons-home-card a.seasons-home-card-link .seasons-home-readmore,
+.seasons-home .seasons-home-card a.seasons-home-card-link:visited .seasons-home-readmore,
+.seasons-home .seasons-home-card a.seasons-home-card-link:hover .seasons-home-readmore,
+.seasons-home .seasons-home-card a.seasons-home-card-link:focus-visible .seasons-home-readmore {
+    color: #456c45;
+}
