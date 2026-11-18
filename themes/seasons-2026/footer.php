@@ -44,15 +44,15 @@ $footer_groups = array(
         </div>
         <?php if (has_nav_menu('footer_mid')) : ?>
             <nav class="seasons-footer-extra" aria-label="<?php esc_attr_e('Additional links', 'seasons'); ?>">
-                <?php wp_nav_menu(array('theme_location' => 'footer_mid', 'container' => false, 'fallback_cb' => false)); ?>
+                <?php wp_nav_menu(array('theme_location' => 'footer_mid', 'container' => false, 'fallback_cb' => false, 'menu_class' => 'd-flex')); ?>
             </nav>
         <?php endif; ?>
         <?php if (has_nav_menu('footer_bottom')) : ?>
             <nav class="seasons-footer-extra" aria-label="<?php esc_attr_e('More information', 'seasons'); ?>">
-                <?php wp_nav_menu(array('theme_location' => 'footer_bottom', 'container' => false, 'fallback_cb' => false)); ?>
+                <?php wp_nav_menu(array('theme_location' => 'footer_bottom', 'container' => false, 'fallback_cb' => false, 'menu_class' => 'd-flex')); ?>
             </nav>
         <?php endif; ?>
-        <div class="seasons-footer-bottom">
+        <div class="seasons-footer-bottom d-flex jcsb">
             <small>&copy; <?php echo esc_html(wp_date('Y')); ?> <?php bloginfo('name'); ?></small>
             <span><?php esc_html_e('In the garden and at home, through the seasons.', 'seasons'); ?></span>
         </div>
