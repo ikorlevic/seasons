@@ -6,39 +6,38 @@
  * Time: 19:04
  */
 
-if (!function_exists('current_season')) {
-    /**
-     * Return the existing theme's seasonal identifier using the WordPress site timezone.
-     * Keep autumn, valentines, halloween, yule and ny for existing templates/CSS.
-     */
+if(!function_exists("current_season")){
     function current_season() {
-        $date = current_time('md');
+                                $season="spring";
 
-        if ($date < '0321' || $date >= '1221') {
-            $season = 'winter';
-        } elseif ($date < '0621') {
-            $season = 'spring';
-        } elseif ($date < '0921') {
-            $season = 'summer';
-        } else {
-            $season = 'autumn';
-        }
+                                $date = date("md");
 
-        if ($date >= '0102' && $date <= '0214') {
-            return 'valentines';
-        }
-        if ($date >= '1015' && $date <= '1031') {
-            return 'halloween';
-        }
-        if ($date >= '1224' && $date <= '1226') {
-            return 'yule';
-        }
-        if ($date >= '1229' || $date <= '0105') {
-            return 'ny';
-        }
+                                if($date<"0321"){
+                                    $season="winter";
+                                }
+                                elseif($date<"0621"){
+                                    $season="spring";
+                                }
+                                elseif($date<"0921"){
+                                    $season="summer";
+                                }
+                                elseif($date<"1221"){
+                                    $season="autumn";
+                                }else{
+                                    $season="winter";
+                                }
 
-        return $season;
-    }
+                                if($date >= "0102" && $date <= "0214"){
+                                    $season = "valentines";
+                                }elseif($date >= "1510" && $date <= "3110"){
+                                    $season = "halloween";
+                                }elseif("1224" <= $date && $date <="1226"){
+                                    $season = "yule";
+                                }elseif("1229"  <= $date && $date <= "0105"){
+                                    $season = "ny";
+                                }
+                              return $season;
+                              }
 }
 
 if(!function_exists("get_selected_season")){
