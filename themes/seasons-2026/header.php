@@ -54,7 +54,7 @@
 <?php
 
 ?>
-<body class="<?php echo $season?>">
+<body class="<?php echo esc_attr($season); ?><?php echo is_category('garden') ? ' garden-category' : ''; ?>">
 <div class="wrapper">
     <header class="top bg-<?php echo $season?>" >
         <div id="search-container" class="search-box-wrapper" style="display: none;">
