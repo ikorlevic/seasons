@@ -535,3 +535,17 @@ function seasons_enqueue_header_weather_styles() {
     wp_enqueue_style('seasons-header-weather', get_template_directory_uri() . '/css/header-weather.css', array(), '1.0');
 }
 add_action('wp_enqueue_scripts', 'seasons_enqueue_header_weather_styles');
+
+/** Editorial reading styles are shared by all standard single posts. */
+function seasons_enqueue_post_editorial_styles() {
+    if (is_singular(array('post', 'recipes_menu'))) {
+        $path = get_template_directory() . '/css/post-editorial.css';
+        wp_enqueue_style(
+            'seasons-post-editorial',
+            get_template_directory_uri() . '/css/post-editorial.css',
+            array(),
+            file_exists($path) ? (string) filemtime($path) : '1.0'
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'seasons_enqueue_post_editorial_styles');
