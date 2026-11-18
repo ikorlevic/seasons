@@ -101,6 +101,56 @@ get_header();
     <?php endif; wp_reset_postdata(); ?>
 
     <?php
+    // Feature an existing seasonal soup first, falling back to another seasonal recipe.
+    // Both category assignments are required to avoid unrelated articles.
+    $recipe_category = get_category_by_slug('recipes');
+    if (!$recipe_category) {
+        $recipe_category = get_category_by_slug('recipe-book');
+    }
+    $featured_recipe = null;
+    if ($season_category && $recipe_category) {
+        $featured_recipe_args = array(
+            'post_type' => 'post',
+            'post_status' => 'publish',
+            'category__and' => array((int) $season_category->term_id, (int) $recipe_category->term_id),
+            'posts_per_page' => 1,
+            'ignore_sticky_posts' => true,
+            'no_found_rows' => true,
+        );
+        $featured_recipe = new WP_Query(array_merge($featured_recipe_args, array('s' => 'soup')));
+        if (!$featured_recipe->have_posts()) {
+            wp_reset_postdata();
+            $featured_recipe = new WP_Query($featured_recipe_args);
+        }
+    }
+    if ($featured_recipe && $featured_recipe->have_posts()) :
+    ?>
+    <section class="seasons-home-section seasons-home-garden-kitchen" aria-labelledby="seasons-garden-kitchen-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading text-center">
+                <span class="seasons-home-eyebrow"><?php esc_html_e('Seasonal Recipe', 'seasons'); ?></span>
+                <h2 id="seasons-garden-kitchen-title"><?php esc_html_e('From Garden to Kitchen', 'seasons'); ?></h2>
+            </div>
+            <?php while ($featured_recipe->have_posts()) : $featured_recipe->the_post(); ?>
+                <article <?php post_class('seasons-featured-recipe'); ?>>
+                    <?php if (has_post_thumbnail()) : ?>
+                        <a class="seasons-featured-recipe-image" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr(get_the_title()); ?>">
+                            <?php the_post_thumbnail('large', array('loading' => 'lazy')); ?>
+                        </a>
+                    <?php endif; ?>
+                    <div class="seasons-featured-recipe-content">
+                        <span class="seasons-home-eyebrow"><?php echo esc_html(ucfirst($active_garden_season)); ?> <?php esc_html_e('Recipe', 'seasons'); ?></span>
+                        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                        <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 36)); ?></p>
+                        <a class="seasons-home-readmore" href="<?php the_permalink(); ?>"><?php esc_html_e('Get the recipe', 'seasons'); ?> &rarr;</a>
+                    </div>
+                </article>
+            <?php endwhile; ?>
+        </div>
+    </section>
+    <?php endif; wp_reset_postdata(); ?>
+
+    <?php
     // Use real WordPress posts; no prototype-only articles or placeholder links.
     $sections = array(
         array('title' => __('From the Recipe Book', 'seasons'), 'intro' => __('Recipes for everyday cooking and seasonal celebrations.', 'seasons'), 'slugs' => array('recipes', 'recipe-book'), 'class' => 'recipes'),
