@@ -9,12 +9,7 @@ get_header();
     <?php get_template_part('templates-part/season-highlights'); ?>
     <?php
     // Holiday skins use their gardening season without changing activation dates.
-    $active_garden_season = current_season();
-    if ($active_garden_season === 'halloween') {
-        $active_garden_season = 'autumn';
-    } elseif (in_array($active_garden_season, array('yule', 'ny', 'valentines'), true)) {
-        $active_garden_season = 'winter';
-    }
+    $active_garden_season = seasons_content_season();
     $season_category = get_category_by_slug($active_garden_season);
     $garden_category = get_category_by_slug('garden');
     // Only posts assigned to BOTH the active season and Garden belong here.
