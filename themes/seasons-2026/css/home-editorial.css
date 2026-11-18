@@ -220,3 +220,32 @@ body.valentines .seasons-home .seasons-explore-winter {
 .seasons-home .seasons-diy-topic { display: inline-block; border: 2px solid var(--accent, #e8a65d); border-radius: 999px; background: #fff; color: var(--text, #29372c); padding: 10px 20px; text-decoration: none; font-weight: 600; transition: transform .2s ease, box-shadow .2s ease; }
 .seasons-home .seasons-diy-topic:hover { transform: translateY(-3px); box-shadow: 0 7px 18px rgba(0,0,0,.12); }
 @media (prefers-reduced-motion: reduce) { .seasons-home .seasons-diy-topic { transition: none; } }
+
+/* Evergreen DIY photographic hero. Image lives alongside the other theme hero images. */
+.seasons-home .seasons-diy-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: clamp(340px, 38vw, 510px);
+    padding: 64px 24px;
+    background: #685746 url('../images/diy-hero.jpg') center 48% / cover no-repeat;
+    color: #fff;
+    isolation: isolate;
+}
+.seasons-home .seasons-diy-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(28, 26, 21, .76), rgba(28, 26, 21, .38) 55%, rgba(28, 26, 21, .08));
+}
+.seasons-diy-hero-inner { width: min(100%, 1160px); margin: 0 auto; }
+.seasons-diy-hero .seasons-home-eyebrow { color: #fff; }
+.seasons-diy-hero h1 { font: 600 clamp(48px, 6vw, 76px)/1.08 Georgia, 'Times New Roman', serif; margin: 12px 0 20px; color: #fff; }
+.seasons-diy-hero p { max-width: 520px; margin: 0; font-size: clamp(17px, 2vw, 21px); line-height: 1.55; color: #fff; }
+.seasons-home .seasons-home-diy-intro { padding-top: 52px; padding-bottom: 52px; }
+.seasons-home-diy-intro .seasons-home-heading h2 { font: 600 clamp(30px, 4vw, 44px)/1.2 Georgia, 'Times New Roman', serif; margin: 10px 0 16px; }
+@media (max-width: 650px) {
+    .seasons-home .seasons-diy-hero { min-height: 320px; padding: 48px 20px; background-position: 43% center; }
+    .seasons-home .seasons-diy-hero::before { background: rgba(28, 26, 21, .55); }
+}
