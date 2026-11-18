@@ -595,3 +595,14 @@ add_action('init', function () {
         'content' => $checklist,
     ));
 });
+
+/* Preview the editorial patterns while editing Gutenberg posts. */
+add_action('enqueue_block_editor_assets', function () {
+    $file = get_template_directory() . '/css/post-editorial.css';
+    wp_enqueue_style(
+        'seasons-editorial-block-editor',
+        get_template_directory_uri() . '/css/post-editorial.css',
+        array(),
+        file_exists($file) ? filemtime($file) : null
+    );
+});
