@@ -259,7 +259,7 @@ get_header();
                         continue;
                     }
                 ?>
-                    <a class="seasons-explore-card seasons-explore-<?php echo esc_attr($slug); ?>" href="<?php echo esc_url(get_category_link($season_term->term_id)); ?>">
+                    <a class="seasons-explore-card seasons-explore-<?php echo esc_attr($slug); ?> <?php echo esc_attr($slug); ?>" href="<?php echo esc_url(get_category_link($season_term->term_id)); ?>">
                         <span class="seasons-explore-card-icon material-symbols-outlined" aria-hidden="true"><?php echo esc_html($details['icon']); ?></span>
                         <span class="seasons-explore-card-label"><?php echo esc_html($details['title']); ?></span>
                         <span class="seasons-explore-card-description"><?php echo esc_html($details['description']); ?></span>
