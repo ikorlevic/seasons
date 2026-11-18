@@ -23,3 +23,14 @@
 .seasons-footer-bottom span { font-family: Georgia, serif; font-style: italic; }
 @media(max-width: 1050px) { .seasons-footer-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 34px; } }
 @media(max-width: 600px) { .seasons-editorial-footer { padding: 48px 20px 26px; } .seasons-footer-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px 18px; } .seasons-footer-brand { grid-column: 1 / -1; } .seasons-footer-bottom { margin-top: 36px; } }
+
+/* Keep footer palette independent of global seasonal anchor and typography rules. */
+body .seasons-editorial-footer { color: #fff; }
+body .seasons-editorial-footer .seasons-footer-logo,
+body .seasons-editorial-footer .seasons-footer-column a,
+body .seasons-editorial-footer .seasons-footer-extra a { color: rgba(255,255,255,.88); font-weight: 400; }
+body .seasons-editorial-footer .seasons-footer-logo { color: #fff; font-weight: 600; }
+body .seasons-editorial-footer a:hover,
+body .seasons-editorial-footer a:focus-visible { color: #fff; text-decoration: underline; }
+body .seasons-editorial-footer .seasons-footer-brand p,
+body .seasons-editorial-footer .seasons-footer-bottom { color: rgba(255,255,255,.78); }
