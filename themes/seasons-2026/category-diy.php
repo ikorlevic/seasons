@@ -12,11 +12,18 @@ $seasons_diy_children = get_categories(array(
 ));
 ?>
 <main id="main-content" class="home seasons-home seasons-garden-archive seasons-category-editorial seasons-category-diy">
+    <section class="seasons-diy-hero" aria-label="<?php esc_attr_e('Hands making a DIY project in a sunlit workshop', 'seasons'); ?>">
+        <div class="seasons-diy-hero-inner">
+            <span class="seasons-home-eyebrow"><?php esc_html_e('Made by Hand', 'seasons'); ?></span>
+            <h1><?php single_cat_title(); ?></h1>
+            <p><?php esc_html_e('Creative projects for the home, garden, and everything in between.', 'seasons'); ?></p>
+        </div>
+    </section>
     <section class="seasons-home-section seasons-home-diy-intro" aria-labelledby="seasons-diy-title">
         <div class="seasons-home-container">
             <div class="seasons-home-heading text-center">
                 <span class="seasons-home-eyebrow"><?php esc_html_e('Make Something', 'seasons'); ?></span>
-                <h1 id="seasons-diy-title"><?php single_cat_title(); ?></h1>
+                <h2 id="seasons-diy-title"><?php esc_html_e('Explore DIY Projects', 'seasons'); ?></h2>
                 <?php if (category_description()) : ?>
                     <div class="seasons-garden-archive-description"><?php echo wp_kses_post(category_description()); ?></div>
                 <?php else : ?>
