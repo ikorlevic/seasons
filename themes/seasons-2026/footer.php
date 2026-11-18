@@ -1,28 +1,63 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: iva
- * Date: 08.04.16.
- * Time: 18:08
+ * Seasonal editorial footer. Existing WordPress menu locations remain supported.
  */
+$footer_season = function_exists('current_season') ? current_season() : 'spring';
+$footer_groups = array(
+    array('title' => __('Garden', 'seasons'), 'categories' => array('grow', 'propagate', 'projects', 'seasonal-tasks', 'garden')),
+    array('title' => __('Recipe Book', 'seasons'), 'categories' => array('family-recipes', 'from-my-kitchen', 'preserving', 'drinks', 'recipes')),
+    array('title' => __('At Home', 'seasons'), 'categories' => array('make', 'decorate', 'celebrate', 'seasonal-living', 'at-home')),
+);
 ?>
-
-<footer>
-	<div class="wrapper">
-        <nav>
-            <?php wp_nav_menu(array("theme_location"=>"footer"))?>
-        </nav>
-	</div>
-    <div class="wrapper wrapper-mid">
-        <?php wp_nav_menu(array("theme_location"=>"footer_mid"))?>
+<footer class="seasons-editorial-footer seasons-footer-<?php echo esc_attr($footer_season); ?>">
+    <div class="seasons-footer-inner">
+        <div class="seasons-footer-grid">
+            <div class="seasons-footer-brand">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="seasons-footer-logo"><?php bloginfo('name'); ?></a>
+                <p><?php esc_html_e('In the garden and at home, through the seasons.', 'seasons'); ?></p>
+            </div>
+            <?php foreach ($footer_groups as $group) : ?>
+                <nav class="seasons-footer-column" aria-label="<?php echo esc_attr($group['title']); ?>">
+                    <h2><?php echo esc_html($group['title']); ?></h2>
+                    <ul>
+                        <?php foreach ($group['categories'] as $slug) :
+                            $category = get_category_by_slug($slug);
+                            if (!$category) { continue; }
+                        ?>
+                            <li><a href="<?php echo esc_url(get_category_link($category->term_id)); ?>"><?php echo esc_html($category->name); ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </nav>
+            <?php endforeach; ?>
+            <nav class="seasons-footer-column" aria-label="<?php esc_attr_e('Seasons', 'seasons'); ?>">
+                <h2><?php esc_html_e('Seasons', 'seasons'); ?></h2>
+                <?php if (has_nav_menu('seasons')) {
+                    wp_nav_menu(array('theme_location' => 'seasons', 'container' => false, 'fallback_cb' => false, 'depth' => 1));
+                } ?>
+            </nav>
+            <nav class="seasons-footer-column" aria-label="<?php esc_attr_e('Information', 'seasons'); ?>">
+                <h2><?php esc_html_e('Information', 'seasons'); ?></h2>
+                <?php if (has_nav_menu('footer')) {
+                    wp_nav_menu(array('theme_location' => 'footer', 'container' => false, 'fallback_cb' => false, 'depth' => 1));
+                } ?>
+            </nav>
+        </div>
+        <?php if (has_nav_menu('footer_mid')) : ?>
+            <nav class="seasons-footer-extra" aria-label="<?php esc_attr_e('Additional links', 'seasons'); ?>">
+                <?php wp_nav_menu(array('theme_location' => 'footer_mid', 'container' => false, 'fallback_cb' => false)); ?>
+            </nav>
+        <?php endif; ?>
+        <?php if (has_nav_menu('footer_bottom')) : ?>
+            <nav class="seasons-footer-extra" aria-label="<?php esc_attr_e('More information', 'seasons'); ?>">
+                <?php wp_nav_menu(array('theme_location' => 'footer_bottom', 'container' => false, 'fallback_cb' => false)); ?>
+            </nav>
+        <?php endif; ?>
+        <div class="seasons-footer-bottom">
+            <small>&copy; <?php echo esc_html(wp_date('Y')); ?> <?php bloginfo('name'); ?></small>
+            <span><?php esc_html_e('In the garden and at home, through the seasons.', 'seasons'); ?></span>
+        </div>
     </div>
-    <div class="wrapper wrapper-bottom">
-        <nav>
-            <?php wp_nav_menu(array("theme_location"=>"footer_bottom"))?>
-        </nav>
-    </div>
-    <small class="copy">&copy; 2019 - <?php echo date('Y') ?> Seasons in garden</small>
-    </footer>
+</footer>
 <?php
 wp_footer();
 ?>
