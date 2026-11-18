@@ -17,9 +17,7 @@ get_header();
 
     <?php if ($area === 'kitchen') :
         // Feature a real recipe post from this category, prioritizing soup and the active season.
-        $season = current_season();
-        if ($season === 'halloween') { $season = 'autumn'; }
-        elseif (in_array($season, array('yule', 'ny', 'valentines'), true)) { $season = 'winter'; }
+        $season = seasons_content_season();
         $recipe_term = get_queried_object();
         $season_term = get_category_by_slug($season);
         $soup_term = get_category_by_slug('soup');
