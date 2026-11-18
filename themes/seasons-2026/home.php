@@ -1,84 +1,102 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: iva
- * Date: 08.04.16.
- * Time: 18:08
+ * Editorial homepage, inspired by the Seasonal Garden Theme prototype.
+ * Keep the existing seasonal hero, highlights and garden-care templates.
  */
-
 get_header();
-
 ?>
-<article class="home">
-    <?php if (have_posts()) : ?>
-        <?php
-        // Start the loop.
-        get_template_part('templates-part/season-highlights', get_post_format());
-
-
-           get_template_part('templates-part/gardencare', get_post_format());
-
-        $i = 0;
-        while (have_posts()) : the_post();
-
-            /*
-             * Include the Post-Format-specific template for the content.
-             * If you want to override this in a child theme, then include a file
-             * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-             */
-            get_template_part('templates-part/content', get_post_format());
-//             if ($i == 0) {
-//                 get_sidebar("banner");
-//                 get_sidebar("features");
-//
-//             }
-
-//             if ($i == 1) {
-//                 echo '</article>';
-//                 echo '<article class="category home">';
-//                 echo '<h2>' . _('In Season') . '</h2>';
-//
-//             }
-//
-//             if ($i == 5) {
-//                 get_sidebar("about");
-//             }
-//             if ($i == 9) {
-//                 ?>
-                <!-- section class="item add">
-                    <h3>Ads by Google</h3>
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins class="adsbygoogle" style="display:flex;" data-ad-format="fluid" data-ad-layout-key="+3y+qc+2d-5d+bk" data-ad-client="ca-pub-6862177376862828" data-ad-slot="8274214683"></ins>
-                </section -->
-                <?php
-//             }
-            $i++;
-
-            // End the loop.
-        endwhile;
-//         get_sidebar("insta-feed");
-        // Previous/next page navigation.
-        /* the_posts_pagination( array(
-             'prev_text'          => __( 'Previous page', 'seasons' ),
-             'next_text'          => __( 'Next page', 'seasons' ),
-             'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'seasons' ) . ' </span>',
-         ) ); */
-        ?>
+<main id="main-content" class="home seasons-home">
+    <?php get_template_part('templates-part/season-highlights'); ?>
+    <?php get_template_part('templates-part/gardencare'); ?>
 
     <?php
-// If no content, include the "No posts found" template.
-    else :
-        get_template_part('template-parts/content', 'none');
+    // Use real WordPress posts; no prototype-only articles or placeholder links.
+    $sections = array(
+        array('title' => __('In the Garden Now', 'seasons'), 'intro' => __("What we're growing, doing and discovering this season.", 'seasons'), 'slugs' => array('garden', 'gardening'), 'class' => 'garden'),
+        array('title' => __('From the Recipe Book', 'seasons'), 'intro' => __('Recipes for everyday cooking and seasonal celebrations.', 'seasons'), 'slugs' => array('recipes', 'recipe-book'), 'class' => 'recipes'),
+        array('title' => __('At Home This Season', 'seasons'), 'intro' => __('Ideas for making the most of the season at home.', 'seasons'), 'slugs' => array('at-home', 'home'), 'class' => 'at-home'),
+    );
 
-    endif;
+    foreach ($sections as $section) :
+        $category = null;
+        foreach ($section['slugs'] as $slug) {
+            $candidate = get_category_by_slug($slug);
+            if ($candidate) {
+                $category = $candidate;
+                break;
+            }
+        }
+        // Never invent category associations: hide sections until a matching category exists.
+        if (!$category) {
+            continue;
+        }
+        $posts = new WP_Query(array(
+            'cat' => (int) $category->term_id,
+            'posts_per_page' => 3,
+            'ignore_sticky_posts' => true,
+        ));
+        if (!$posts->have_posts()) {
+            wp_reset_postdata();
+            continue;
+        }
     ?>
+    <section class="seasons-home-section seasons-home-<?php echo esc_attr($section['class']); ?>" aria-label="<?php echo esc_attr($section['title']); ?>">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading">
+                <h2><?php echo esc_html($section['title']); ?></h2>
+                <p><?php echo esc_html($section['intro']); ?></p>
+            </div>
+            <div class="seasons-home-grid">
+                <?php while ($posts->have_posts()) : $posts->the_post(); ?>
+                    <article <?php post_class('seasons-home-card'); ?>>
+                        <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
+                            <?php endif; ?>
+                            <div class="seasons-home-card-content">
+                                <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
+                                <h3><?php the_title(); ?></h3>
+                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
+                                <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
+                            </div>
+                        </a>
+                    </article>
+                <?php endwhile; ?>
+            </div>
+            <a class="seasons-home-more" href="<?php echo esc_url(get_category_link($category->term_id)); ?>">
+                <?php echo esc_html(sprintf(__('Explore %s', 'seasons'), $category->name)); ?> &rarr;
+            </a>
+        </div>
+    </section>
+    <?php wp_reset_postdata(); endforeach; ?>
 
-</article>
-
+    <section class="seasons-home-section seasons-home-latest" aria-labelledby="seasons-latest-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading">
+                <h2 id="seasons-latest-title"><?php esc_html_e('From Seasons Past & Present', 'seasons'); ?></h2>
+                <p><?php esc_html_e('More stories from the garden, kitchen and home.', 'seasons'); ?></p>
+            </div>
+            <div class="seasons-home-grid">
+                <?php
+                $latest = new WP_Query(array('posts_per_page' => 3, 'ignore_sticky_posts' => true));
+                while ($latest->have_posts()) : $latest->the_post();
+                ?>
+                    <article <?php post_class('seasons-home-card'); ?>>
+                        <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
+                            <?php endif; ?>
+                            <div class="seasons-home-card-content">
+                                <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
+                                <h3><?php the_title(); ?></h3>
+                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
+                                <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
+                            </div>
+                        </a>
+                    </article>
+                <?php endwhile; wp_reset_postdata(); ?>
+            </div>
+        </div>
+    </section>
+</main>
 <?php get_footer(); ?>
-<script>
-//     jQuery(document).ready(function () {
-//         (adsbygoogle = window.adsbygoogle || []).push({});
-//
-//     });
-</script>
