@@ -512,7 +512,7 @@ function season_high($season) {
  */
 function seasons_enqueue_home_editorial_styles() {
     // The Garden archive reuses homepage components and needs their styles too.
-    if (is_home() || is_front_page() || is_category(array('garden', 'recipes', 'home'))) {
+    if (is_home() || is_front_page() || is_category(array('garden', 'recipes', 'home', 'diy', 'diy-projects'))) {
         $stylesheet_path = get_template_directory() . '/css/home-editorial.css';
         wp_enqueue_style(
             'seasons-home-editorial',
