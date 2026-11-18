@@ -59,6 +59,8 @@
 
 /* From My Garden: personal seasonal notes, following the Figma reference. */
 .seasons-home .seasons-home-from-garden { background: #f9ded3; color: #4b2d23; }
+/* Match the warm peach background used by From My Garden. */
+.seasons-home .seasons-home-at-home { background: #f9ded3; }
 .seasons-home-from-garden .seasons-home-heading { margin-bottom: 48px; }
 .seasons-home-from-garden .seasons-home-eyebrow { color: #c54d2b; margin-bottom: 8px; }
 .seasons-home-from-garden .seasons-home-heading h2 { color: #4b2d23; font-size: clamp(36px, 4.2vw, 50px); }
