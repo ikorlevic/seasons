@@ -1,0 +1,122 @@
+.sidebar{
+
+  .widgettitle{
+    position: absolute; top: 0; color:@white;
+    padding: 0.2em 0 0;
+    z-index: 100;
+  }
+  &#news{
+    text-shadow: 0 0 20px #000; color: @white;
+    &.hello{
+      background: url('../../images/news.jpg') no-repeat center;
+      background-size: cover;
+    }
+    h2{ margin: 0; text-align: center; }
+    .widget{
+      background: rgba(0,0,0,0.4); padding: 15px;
+      input{
+        width: 100%;
+        height: 40px;
+        &.av-checkbox {
+          width: 40px;
+          background: #ffffff;
+        }
+      }
+      .indicates-required{
+        float:right;
+      }
+      label{
+        line-height: 2em; text-align: left;
+      }
+    }
+
+  }
+    &#features{
+      padding: 0;
+      background: @white;
+      position: relative;
+      max-width: 22%;
+      display: inline-block;
+      .features-title{
+        position: absolute; top: 0; color:@white;
+        padding: 0.2em 0 0;
+        z-index: 100;
+      }
+
+      p{    margin:0; height: 4em; overflow-style: marquee-line; overflow: hidden;
+      }
+      .features {
+        article {
+          position: relative;
+
+          vertical-align: top;
+          box-sizing: border-box;
+          margin: 5px;
+
+          figure {
+            width: 100%;
+            margin: 0;
+            padding: 0
+          }
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+    }
+
+  &#banner{
+    padding: 2em;
+    background-size: cover;
+    color: @white;
+    background-attachment: fixed;
+    text-shadow: 0 0 4em rgba(0,0,0,1);
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.hello{
+      background: @spring;
+    }
+
+    h2 { margin: 1em 0 0; }
+
+    .banners{ margin: auto;}
+  }
+
+  &#jobs{
+    max-width: 50%;
+    .title{ text-align: center; }
+  }
+}
+
+.summer{
+  .sidebar{
+    &#banner.hello{
+      background: @summer;
+    }
+  }
+}
+
+.autumn{
+  .sidebar{
+    &#banner.hello{
+      background: @autumn;
+      color: #000;
+    }
+  }
+}
+
+.winter{
+  .sidebar{
+    &#banner.hello{
+      background: @winter;
+    }
+
+    &#jobs{
+
+    }
+  }
+}

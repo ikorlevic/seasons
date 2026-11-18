@@ -1,0 +1,75 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  background: #ffffff;
+
+  .wrapper{
+    padding: 0 1em;
+  }
+
+  nav {
+    ul {
+      display: flex;
+      flex-direction: column;
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        display: inline-block;
+
+        a {
+          color: @text;
+        }
+      }
+    }
+  }
+
+  .wrapper-mid {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    padding: 0 1em;
+    position:relative;
+    z-index: 5;
+    text-transform: uppercase;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+  }
+
+  .wrapper-bottom {
+    background: @medium-gray
+  }
+
+  .copy{ padding: 0.5em; }
+}
+
+.spring, .valentines{
+  footer{
+    a{ color: @text }
+    a:hover{ color: @spring; font-weight: normal }
+  }
+}
+
+.summer, .yule{
+  footer{
+    a{ color: @text }
+    a:hover{ color: @summer; font-weight: normal }
+  }
+}
+
+.autumn, .halloween{
+  footer{
+    a{ color: @text }
+    a:hover{ color: @autumn; font-weight: normal }
+  }
+}
+
+.winter, .ny{
+  footer{
+    a{ color: @text }
+    a:hover{ color: @winter; font-weight: normal }
+  }
+}

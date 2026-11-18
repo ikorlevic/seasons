@@ -1,0 +1,16 @@
+[24-May-2021 00:15:00 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home/seasjxqj/public_html/wp-content/themes/seasons-2020/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/seasjxqj/public_html/wp-content/themes/seasons-2020/index.php on line 9
+[25-Feb-2023 10:02:30 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home/seasjxqj/public_html/wp-content/themes/seasons-2020/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/seasjxqj/public_html/wp-content/themes/seasons-2020/index.php on line 9
+[25-Feb-2023 10:02:30 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home/seasjxqj/public_html/wp-content/themes/seasons-2020/archive.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/seasjxqj/public_html/wp-content/themes/seasons-2020/archive.php on line 9
+[25-Feb-2023 10:02:30 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function wp_nav_menu() in /home/seasjxqj/public_html/wp-content/themes/seasons-2020/footer.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/seasjxqj/public_html/wp-content/themes/seasons-2020/footer.php on line 13

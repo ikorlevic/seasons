@@ -1,0 +1,194 @@
+@import "_variables";
+@import "_colors";
+
+header.top{
+  position: sticky; z-index: 5; width: 100%; top: 0; text-align: center; background: rgba(0,0,0,0.7);
+  .toggle{ color: @white;
+    margin: 13px;
+    line-height: 40px;
+    @media(min-width: @medium){  margin: 20px; }
+    span{ float: left; margin-right: 10px; cursor:pointer; }
+  }
+  .socials {
+    display: inline-block;
+    @media(min-width: @large){  display: none; }
+  }
+  nav{
+    ul{
+      list-style-type: none; position: relative; padding: 0 20px;
+      li {
+        padding: 0; line-height: 2em; font-size: (1.5 * @font-size-base);
+        a{ font-weight: bold; text-transform: uppercase; color: @white;
+
+        }
+      }
+    }
+
+    &.menu-left{
+      display: none;
+      width: 100%;
+      @media(min-width: @large){  display: inline-block; width: auto; float: left }
+      text-align: left;
+      ul{
+        li{
+          margin-right: 10px;
+          display: inline-block;
+          &:last-of-type{ margin-right: 0}
+
+        }
+      }
+
+      &.open{
+        display: block;
+      }
+    }
+
+    &.menu-right{
+      display: none;
+      text-align: right;
+      position: absolute;
+      background: rgba(0,0,0,0.7);
+      top: 80px;
+      right: 0;
+      left:0;
+      ul{
+        li{
+          margin-left: 10px;
+          display: inline-block;
+          &:first-of-type{ margin-left: 0}
+        }
+      }
+      &.open{
+        display: block;
+      }
+    }
+
+
+  }
+
+
+  .logo{ display: inline-block; margin-top: 10px; cursor: pointer; max-width: 125px;
+    @media (min-width: @small){
+      max-width: 200px;
+    }
+    @media (min-width: @medium){
+      max-width: 300px;
+    }
+  }
+}
+
+&.menu-top{
+  margin: 20px auto 0;
+  text-transform: uppercase;
+  font-size: @font-size-large;
+  text-align: center;
+  ul{
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    li{ display: inline-block }
+  }
+  &.open{
+    display: block;
+  }
+  a{ text-decoration: none; color: #000000; }
+}
+
+
+.spring, .valentines{
+  header.top{
+    nav{
+      li{
+        a{color:@white;
+        &:hover{color: @spring}
+        }
+      }
+    }
+  }
+}
+
+  &.summer, &.yule{
+    header.top{
+      nav{
+        li{
+          a{color:@white;
+            &:hover{color: @summer;}
+          }
+        }
+      }
+    }
+  }
+  &.autumn, &.halloween{
+    header.top{
+      nav{
+        li{
+          a{color:@white;
+            &:hover{color: @autumn;}
+          }
+
+        }
+      }
+    }
+  }
+
+  &.winter, &.ny{
+    header.top{
+      nav{
+        li{
+          a{color:@white;
+            &:hover{color: @winter;}
+          }
+
+        }
+      }
+    }
+  }
+
+nav{
+  &.mobile-menu{ display: none;
+    &.open{
+      .toggle{ text-align: right; color: @text; }
+      z-index: 6;
+      display: block;
+      position:absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: @white;
+    }
+  ul{ list-style-type: none; }
+  }
+}
+
+.bigone{ width:100%; position: relative; max-height: 1000px;
+  overflow: hidden;
+  img{ width: 100%; height: auto; }
+  .overlay{ text-align: center; position: absolute; top: 30%; bottom:2%; left: 1%; right:1%; color: @white; text-shadow: 0 0 30px rgb(0,0,0);
+    h2{ margin: 5px 0; text-transform: uppercase; }
+    @media(min-width: @medium ){ left: 5%; right: 5%; }
+  }
+}
+
+#search-container{
+  height: 60px;
+  overflow: hidden;
+  &.open{ height: 60px; }
+
+  input{
+    height: 40px; line-height: 40px; width: 66%;
+  }
+  button{ width: 40px; height: 40px; color: #ffffff; padding: 0;margin-top:0;
+    svg{ fill: #ffffff; }
+  }
+  .search-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+.toggle-search.mobile{
+  color: #ffffff; width: 40px; height: 40px; float:left; margin-top: 10px;
+  svg{ fill: #ffffff; }
+}

@@ -1,0 +1,68 @@
+.sidebar{
+    &#features{
+      padding: 15px;
+      background: transparent;
+      .features{ display: inline-block;
+        article{
+          display: inline-block; vertical-align: top;
+          box-sizing: border-box; margin: 5px;
+          @media(min-width: @medium){
+            max-width: 30%
+          }
+          @media(min-width:@large){
+            max-width: 29%;
+          }
+
+          figure{ width: 100%; margin: 0 ; padding: 0}
+          img{ width: 100%; height: auto; }
+        }
+
+      &:first-of-type{
+        @media(min-width:@large){
+          max-width: 76%;
+        }
+      }
+        &:last-of-type{
+          @media(min-width:@large){
+            max-width: 22%;
+            article{ max-width: 100%; }
+          }
+        }
+      }
+
+      img{ height: auto; }
+    }
+
+  &#banner{
+    padding: 2em;
+    margin: 3em 0;
+    background: url('../../images/back2.jpg') no-repeat center;
+    color: @white;
+    background-attachment: fixed;
+    text-shadow: 0 0 4em rgba(0,0,0,1);
+    max-width: 50%;
+    display: inline-block;
+
+    h2 { margin: 1em 0 0; }
+
+    .banners{ margin: auto;}
+  }
+}
+
+.autumn{
+  .sidebar{
+    &#banner{
+      background: url('../../images/autumn.jpg') no-repeat center;
+      background-size: 100%;
+    }
+  }
+}
+
+.winter{
+  .sidebar{
+    &#banner{
+      background: url('../../images/winter-wonderland.png') no-repeat center;
+      background-size: 100%;
+    }
+  }
+}

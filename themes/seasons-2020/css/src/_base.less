@@ -1,0 +1,61 @@
+html {
+  position: relative; margin: 0 !important; padding: 0; }
+body {  margin: 0; padding: 0; font-size: @font-size-base; font-family: Cantarell,sans-serif; color: @text; background: @white; }
+
+h1, .h1 { font-size: @font-size-huge; font-weight: normal }
+h2, .h2 { font-size: @font-size-large; font-weight: normal }
+h3, .h3 { font-size: @font-size-base; font-weight: normal }
+h4, .h4 { font-size: @font-size-small; font-weight: normal }
+
+a{
+  text-decoration: none;
+  &:hover{ font-weight: 800; }
+}
+
+p { font-weight: 400; }
+
+.uppercase{ text-transform: uppercase }
+.capitalize { text-transform: capitalize}
+.lowercase { text-transform: lowercase }
+
+
+button, .button { padding: 10px 20px; margin-top: 5px;}
+
+.spring, .valentines{
+  a{ color: @spring }
+  button,.button,.submit{ color: @white; background: @spring; border: none; }
+}
+
+.summer, .yule{
+  a{ color: @summer }
+  button,.button,.submit{ color: @white; background: @summer; border: none; }
+
+}
+
+.autumn, .halloween{
+  a{ color: @autumn }
+  button,.button,.submit{ color: @white; background: @autumn; border: none; }
+
+}
+
+.winter, .ny{
+  a{ color: @winter }
+  button,.button,.submit{ color: @white; background: @winter; border: none; }
+
+}
+
+.left{
+  float: left !important;
+}
+.right{
+  float: right !important;
+}
+
+.desktop-hide {
+  display: block;
+  @media(min-width: @large){ display: none; }
+}
+.mobile-hide{
+  display: none;
+  @media(min-width: @large){ display: block; }
+}

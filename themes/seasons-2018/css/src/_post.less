@@ -1,0 +1,39 @@
+article.single{
+  padding: 1.5em;
+
+  .related{
+    li{
+      vertical-align: top; display: inline-block; width: 100%;
+
+      @media(min-width: @medium){
+        max-width: 30%
+      }
+
+      @media(min-width: @large){
+        max-width: 20%;
+      }
+
+      img{
+        width: 100%; height: auto;
+      }
+    }
+  }
+
+  .gallery{
+    ul{
+      list-style-type: none; text-align: center; padding: 0;
+
+      li{
+        display: inline-block; max-width: 320px; margin-bottom: 10px;
+
+        img{
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.comment-respond{
+  input.submit{ padding: 0.7em 2em; cursor:pointer }
+}

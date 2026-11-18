@@ -1,0 +1,40 @@
+
+.spring {
+    --primary: #7EC850;
+    --secondary: #FFC857;
+    --accent: #E9B5FF;
+    --background: #F0F9F4;
+    --text: #2D5016;
+    --base-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.summer {
+    --primary: #4ECDC4;
+    --secondary: #F4A300;
+    --accent: #FFD966;
+    --background: #FFFBEA;
+    --text: #6B4423;
+    --base-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.autumn {
+    --primary: #C25C2E;
+    --secondary: #A0413A;
+    --accent: #E8A65D;
+    --background: #FAF4ED;
+    --text: #4A2C1F;
+    --base-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.winter {
+    --primary: #5B9BD5;
+    --secondary: #A8DADC;
+    --accent: #E0F4FF;
+    --background: #F7FBFF;
+    --text: #1D3557;
+    --base-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}

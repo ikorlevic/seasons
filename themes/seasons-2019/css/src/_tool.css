@@ -1,0 +1,60 @@
+.plant-info {
+  border: 1px solid #9c6001;
+  text-align: left;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.plant-info img {
+  float: left;
+  margin-right: 15px;
+}
+/*garden tool*/
+canvas {
+  border: 1px solid #9c6001;
+}
+.objects ul,
+.background ul {
+  list-style-type: none;
+}
+.objects ul li,
+.background ul li {
+  display: inline-block;
+}
+span.surface {
+  cursor: pointer;
+}
+/* colors */
+.color span {
+  cursor: pointer;
+  display: inline-block;
+  width: 30px;
+}
+.brown {
+  background: #A52A2A;
+}
+.maroon {
+  background: #800000;
+}
+.green {
+  background: #008000;
+}
+.olive {
+  background: #808000;
+}
+.silver {
+  background: #c0c0c0;
+}
+.grey {
+  background: #808080;
+}
+.black {
+  background: #000000;
+}
+.white {
+  background: #ffffff;
+  border: 1px solid #777777;
+}
+.orange {
+  background: #ffa500;
+}
+/*# sourceMappingURL=_tool.css.map */

@@ -1,0 +1,118 @@
+html { position:relative; height: 100%; }
+body{
+    font-family: "Raleway", sans-serif;  color: #9c6001;  text-align: center; font-size: 16px; padding-bottom: 35px; margin:0; line-height: 1.5;
+}
+
+.wrapper { max-width: 1200px; margin:0 auto; width:100% }
+
+h1,.h1{ font-family: "Bad Script",cursive; font-weight: 400; }
+h2,.h2{ font-family: "Bad Script",cursive; font-weight: 400; }
+h3,.h3{ font-family: "Bad Script",cursive; font-weight: 400; }
+h4,.h4{ font-family: "Bad Script",cursive; font-weight: 400; }
+
+.spring h2 a,
+.summer h2 a,
+.autumn h2 a,
+.winter h2 a {  text-decoration: none; color: #9c6001; }
+
+.spring h2 a:hover {  color: #e90148; }
+.summer h2 a:hover {  color: #019c0c; }
+.autumn h2 a:hover {  color: #ff9d02; }
+.winter h2 a:hover {  color: #0066ff; }
+
+.spring a { color: #e90148; }
+.summer a { color: #019c0c; }
+.autumn a { color: #ff9d02; }
+.winter a { color: #0066ff; }
+
+header,header .logo{ width: 100% }
+
+h1 span { text-indent:-10000px; overflow:hidden; clear:both; height: 1px; width: 100%; display: block; }
+nav { width:100% }
+nav ul { margin: 0 auto; font-size: 30px; position: relative; padding: 0 0 35px; max-width: 768px; width:100% }
+nav ul li {display:inline-block; }
+nav ul li a { text-decoration: none; }
+.spring nav ul > li > a,
+.summer nav ul > li > a,
+.autumn nav ul > li > a,
+.winter nav ul > li > a { color: #9c6001 }
+
+.spring nav ul > li > a:hover,
+.spring nav ul > li:hover > a { color: #e90148 }
+.summer nav ul > li > a:hover,
+.summer nav ul > li:hover > a { color: #019c0c }
+.autumn nav ul > li > a:hover,
+.autumn nav ul > li:hover > a { color: #ff9d02 }
+.winter nav ul > li > a:hover,
+.winter nav ul > li:hover > a { color: #0066ff }
+
+nav  ul li ul { position:absolute; padding : 0; display: none; left:0; width:100%; font-size: 24px;}
+nav  ul li:hover ul { display: block; }
+nav ul li ul li a:hover { color:#9c6001; }
+
+article,section,p { font-size: 1em; }
+
+/*section.list{vertical-align: top; }*/
+article .item{
+    vertical-align: top; display:inline-block; width: 250px;; margin: 2%; min-height: 250px;
+}
+
+.item p { text-align: justify; }
+.img{
+    width: 250px; height: 250px; overflow: hidden; background: lightcoral
+}
+.img-responsive { width:100%; height:auto; margin: 10px 0;}
+
+article ol {text-align:justify;}
+article ol li {margin: 10px 0;}
+
+footer {
+   text-align: center; width: 100%; height: 35px;
+}
+footer nav { margin: 0 auto; display: inline-block; width:100%;}
+footer nav ul { font-size: 16px; }
+
+
+.plant-info{ border: 1px solid #9c6001; text-align: left; padding: 15px; margin-bottom: 15px; }
+.plant-info img{float:left; margin-right: 15px; }
+/*garden tool*/
+
+canvas { border: 1px solid #9c6001; }
+.objects ul,
+.background ul {list-style-type: none;}
+.objects ul li,
+.background ul li{ display: inline-block }
+span.surface { cursor: pointer; }
+
+
+/* colors */
+
+.color span {cursor: pointer; display: inline-block; width: 30px}
+.brown {background:#A52A2A }
+.maroon{background:#800000 }
+.green{background:#008000 }
+.olive{background:#808000 }
+.silver{background:#c0c0c0 }
+.grey{background:#808080}
+.black{background: #000000}
+.white{background:#ffffff;border:1px solid #9c6001}
+.orange{background:#ffa500; }
+
+/* amazon */
+.amazon-affiliate li { display: inline-block }
+
+.clear{ float:none; clear:both;}
+
+.btn{ border-radius: 5px; padding: 5px; text-decoration: none; color: white; cursor: pointer; background: #008000; }
+.winter .btn, .summer .btn, .spring .btn,.autumn .btn{
+    color: white;
+}
+
+.related {width: 100%; }
+.related ul {list-style-type: none;}
+.related li {margin-right: 10px; float:left;}
+.related .thumb{ float:left; max-width: 65px; margin-right: 10px;}
+.related .thumb img { width: 100% ; height: auto;}
+.related .content {float:left; }
+.related a { text-decoration: none;}
+.related h4 {display:inline;}

@@ -1,0 +1,56 @@
+.gardencare {
+    background: var(--background);
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.gardencare .care {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding: 0;
+}
+
+.gardencare .care section {
+    background: var(--base-bg);
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem var(--shadow);
+    padding: 1rem;
+    display: flex;
+}
+
+.gardencare .care section p {
+    vertical-align: middle;
+}
+
+.gardencare .care section .icon {
+    margin-right: 1rem;
+    color: var(--primary);
+    vertical-align: text-top;
+}
+
+.highlights {
+    padding: 3rem;
+}
+
+.highlights .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.highlights .grid .set {
+}
+
+.highlights .icon {
+    background: var(--accent);
+    color: var(--primary);
+    padding: 0.7rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 3rem;
+}
+
+.highlights .icon span {
+    font-size: 2.8rem;
+}
