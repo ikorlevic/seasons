@@ -92,7 +92,7 @@ get_header();
                             <span class="seasons-garden-note-label seasons-garden-note-<?php echo esc_attr($note_tone); ?>"><?php echo esc_html($note_label); ?></span>
                         <?php endif; ?>
                         <h3><?php the_title(); ?></h3>
-                        <div class="seasons-garden-note-body"><?php echo wp_kses_post(apply_filters('the_content', get_the_content())); ?></div>
+                        <div class="seasons-garden-note-body"><?php echo wpautop(esc_html(wp_strip_all_tags(get_the_content()))); ?></div>
                     </article>
                 <?php endwhile; ?>
             </div>
