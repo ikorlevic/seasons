@@ -13,6 +13,8 @@ get_header();
 <main id="main-content" class="home seasons-home seasons-garden-archive seasons-category-editorial seasons-category-<?php echo esc_attr($area); ?>">
     <?php get_template_part('templates-part/category-seasonal-tips', null, array('area' => $area)); ?>
 
+    <?php get_template_part('templates-part/category-personal-notes', null, array('area' => $area)); ?>
+
     <?php if ($area === 'kitchen') :
         // Feature a real recipe post from this category, prioritizing soup and the active season.
         $season = current_season();
@@ -74,7 +76,6 @@ get_header();
     </section>
     <?php endif; wp_reset_postdata(); endif; ?>
 
-    <?php get_template_part('templates-part/category-personal-notes', null, array('area' => $area)); ?>
 
     <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-category-articles-title">
         <div class="seasons-home-container">
