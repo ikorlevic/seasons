@@ -170,10 +170,41 @@ body.editorial-main-category .moto { min-height: 300px; padding-top: 28px; paddi
 .seasons-category-editorial .seasons-featured-recipe-grid { grid-template-columns: minmax(0, 440px); justify-content: center; }
 @media (max-width: 650px) { body.editorial-main-category .moto { min-height: 240px; } }
 
-/* Article card CTAs: use the garden green rather than the legacy orange link color. */
+/* Editorial links follow the currently active season's primary color. */
+.seasons-home .seasons-home-readmore,
+.seasons-home .seasons-home-more,
+.seasons-home .seasons-home-garden-now .seasons-home-readmore,
+.seasons-home .seasons-home-garden-now .seasons-home-more,
+.seasons-home .seasons-featured-recipe-content .seasons-home-readmore,
 .seasons-home .seasons-home-card a.seasons-home-card-link .seasons-home-readmore,
 .seasons-home .seasons-home-card a.seasons-home-card-link:visited .seasons-home-readmore,
 .seasons-home .seasons-home-card a.seasons-home-card-link:hover .seasons-home-readmore,
 .seasons-home .seasons-home-card a.seasons-home-card-link:focus-visible .seasons-home-readmore {
-    color: #456c45;
+    color: var(--primary);
+}
+
+/* Each Explore card carries its OWN season palette, independent of page season.
+   Explicit values mirror css/src/colors.css to avoid inherited page colors. */
+.seasons-home .seasons-explore-spring {
+    --primary: #7EC850; --secondary: #FFC857; --accent: #E9B5FF; --text: #2D5016;
+}
+.seasons-home .seasons-explore-summer {
+    --primary: #4ECDC4; --secondary: #F4A300; --accent: #FFD966; --text: #6B4423;
+}
+.seasons-home .seasons-explore-autumn {
+    --primary: #C25C2E; --secondary: #A0413A; --accent: #E8A65D; --text: #4A2C1F;
+    --season-hover-text: #fff;
+}
+.seasons-home .seasons-explore-winter {
+    --primary: #5B9BD5; --secondary: #A8DADC; --accent: #E0F4FF; --text: #1D3557;
+}
+.seasons-home a.seasons-explore-card:hover,
+.seasons-home a.seasons-explore-card:focus-visible {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--season-hover-text);
+}
+.seasons-home a.seasons-explore-card:hover .seasons-explore-card-description,
+.seasons-home a.seasons-explore-card:focus-visible .seasons-explore-card-description {
+    color: inherit;
 }
