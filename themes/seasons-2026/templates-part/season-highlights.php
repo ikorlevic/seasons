@@ -30,7 +30,7 @@ $seasonal_tasks = array(
 );
 $tasks = isset($seasonal_tasks[$garden_season]) ? $seasonal_tasks[$garden_season] : $seasonal_tasks['spring'];
 ?>
-<section class="seasons-now" aria-labelledby="seasons-now-title">
+<section class="seasons-now text-center" aria-labelledby="seasons-now-title">
     <div class="seasons-now-inner">
         <header class="seasons-now-heading">
             <span class="seasons-now-eyebrow"><?php esc_html_e('Right Now', 'seasons'); ?></span>
@@ -39,7 +39,7 @@ $tasks = isset($seasonal_tasks[$garden_season]) ? $seasonal_tasks[$garden_season
         </header>
         <div class="seasons-now-grid">
             <?php foreach ($tasks as $task) : ?>
-                <div class="seasons-now-item">
+                <div class="seasons-now-item text-center">
                     <span class="seasons-now-icon material-symbols-outlined" aria-hidden="true"><?php echo esc_html($task['icon']); ?></span>
                     <h3><?php echo esc_html($task['title']); ?></h3>
                     <p><?php echo esc_html($task['description']); ?></p>
