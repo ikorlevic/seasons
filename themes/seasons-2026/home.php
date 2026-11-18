@@ -29,7 +29,7 @@ get_header();
     ?>
     <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-garden-now-title">
         <div class="seasons-home-container">
-            <div class="seasons-home-heading">
+            <div class="seasons-home-heading text-center">
                 <span class="seasons-home-eyebrow"><?php esc_html_e('The Garden', 'seasons'); ?></span>
                 <h2 id="seasons-garden-now-title"><?php esc_html_e('In the Garden Now', 'seasons'); ?></h2>
             </div>
