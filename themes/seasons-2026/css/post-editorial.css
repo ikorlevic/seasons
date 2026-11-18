@@ -155,13 +155,13 @@ body.ny .seasons-post-comments .comment-respond {
 }
 
 /* Editable Gutenberg Pro Tip and Checklist patterns. */
-.seasons-post-body .seasons-editorial-checklist { margin: 2.5em 0; }
-.seasons-post-body .seasons-editorial-checklist > h2 {
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-editorial-checklist { margin: 2.5em 0; }
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-editorial-checklist > h2 {
     padding-bottom: 10px;
     border-bottom: 2px solid var(--primary, #c25c2e);
     margin-bottom: 16px;
 }
-.seasons-post-body .seasons-pro-tip {
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-pro-tip {
     position: relative;
     box-sizing: border-box;
     margin: 1.8em 0;
@@ -171,7 +171,7 @@ body.ny .seasons-post-comments .comment-respond {
     background: color-mix(in srgb, var(--primary, #c25c2e) 9%, #fff);
     color: var(--text, #342f2a);
 }
-.seasons-post-body .seasons-pro-tip::before {
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-pro-tip::before {
     content: "☼";
     position: absolute;
     top: 18px;
@@ -180,16 +180,16 @@ body.ny .seasons-post-comments .comment-respond {
     line-height: 1.3;
     color: var(--primary, #c25c2e);
 }
-.seasons-post-body .seasons-pro-tip p { margin: 0; }
-.seasons-post-body .seasons-pro-tip strong { color: var(--primary, #c25c2e); }
-.seasons-post-body .seasons-checklist-items { list-style: none; padding-left: 0; margin: 22px 0; }
-.seasons-post-body .seasons-checklist-items > li {
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-pro-tip p { margin: 0; }
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-pro-tip strong { color: var(--primary, #c25c2e); }
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-checklist-items { list-style: none; padding-left: 0; margin: 22px 0; }
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-checklist-items > li {
     position: relative;
     list-style: none;
     padding-left: 32px;
     margin: 0 0 12px;
 }
-.seasons-post-body .seasons-checklist-items > li::before {
+:is(.seasons-post-body, .editor-styles-wrapper) .seasons-checklist-items > li::before {
     content: "✓";
     position: absolute;
     left: 0;
@@ -203,12 +203,12 @@ body.ny .seasons-post-comments .comment-respond {
     color: var(--primary, #c25c2e);
     font: 700 11px/1 Arial, sans-serif;
 }
-body.halloween .seasons-post-body .seasons-pro-tip,
-body.ny .seasons-post-body .seasons-pro-tip {
+body.halloween :is(.seasons-post-body, .editor-styles-wrapper) .seasons-pro-tip,
+body.ny :is(.seasons-post-body, .editor-styles-wrapper) .seasons-pro-tip {
     background: color-mix(in srgb, var(--primary, #c25c2e) 15%, #24232a);
     color: #fff;
 }
 @media (max-width: 600px) {
-    .seasons-post-body .seasons-pro-tip { padding: 18px 18px 18px 52px; }
-    .seasons-post-body .seasons-pro-tip::before { left: 17px; }
+    :is(.seasons-post-body, .editor-styles-wrapper) .seasons-pro-tip { padding: 18px 18px 18px 52px; }
+    :is(.seasons-post-body, .editor-styles-wrapper) .seasons-pro-tip::before { left: 17px; }
 }
