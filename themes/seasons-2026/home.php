@@ -16,8 +16,10 @@ get_header();
         $active_garden_season = 'winter';
     }
     $season_category = get_category_by_slug($active_garden_season);
-    $season_post = $season_category ? new WP_Query(array(
-        'cat' => (int) $season_category->term_id,
+    $garden_category = get_category_by_slug('garden');
+    // Only posts assigned to BOTH the active season and Garden belong here.
+    $season_post = ($season_category && $garden_category) ? new WP_Query(array(
+        'category__and' => array((int) $season_category->term_id, (int) $garden_category->term_id),
         'posts_per_page' => 3,
         'orderby' => 'date',
         'order' => 'DESC',
