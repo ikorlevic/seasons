@@ -146,7 +146,7 @@
 .seasons-explore-card-label { display: block; font: 700 18px/1.25 Arial, sans-serif; }
 .seasons-explore-card-description { display: block; font: 500 14px/1.4 Arial, sans-serif; color: inherit; opacity: .85; }
 .seasons-home .seasons-explore-card:hover,
-.seasons-home .seasons-explore-card:focus-visible { background: var(--primary); border-color: var(--secondary); color: var(--season-hover-text); box-shadow: 0 7px 18px rgba(0,0,0,.16); transform: translateY(-3px); }
+.seasons-home .seasons-explore-card:focus-visible { box-shadow: 0 7px 18px rgba(0,0,0,.16); transform: translateY(-3px); }
 .seasons-home .seasons-explore-card:focus-visible { outline: 3px solid #29372c; outline-offset: 3px; }
 @media (max-width: 800px) { .seasons-explore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .seasons-explore-grid { grid-template-columns: 1fr; } }
@@ -198,13 +198,16 @@ body.editorial-main-category .moto { min-height: 300px; padding-top: 28px; paddi
 .seasons-home .seasons-explore-winter {
     --primary: #5B9BD5; --secondary: #A8DADC; --accent: #E0F4FF; --text: #1D3557;
 }
-.seasons-home a.seasons-explore-card:hover,
-.seasons-home a.seasons-explore-card:focus-visible {
-    background-color: var(--primary);
-    border-color: var(--secondary);
+/* Hover/focus only lifts the card; the selected season owns the fill. */
+body.spring .seasons-home .seasons-explore-spring,
+body.summer .seasons-home .seasons-explore-summer,
+body.autumn .seasons-home .seasons-explore-autumn,
+body.winter .seasons-home .seasons-explore-winter,
+body.halloween .seasons-home .seasons-explore-autumn,
+body.yule .seasons-home .seasons-explore-winter,
+body.ny .seasons-home .seasons-explore-winter,
+body.valentines .seasons-home .seasons-explore-winter {
+    background: var(--primary);
     color: var(--season-hover-text);
 }
-.seasons-home a.seasons-explore-card:hover .seasons-explore-card-description,
-.seasons-home a.seasons-explore-card:focus-visible .seasons-explore-card-description {
-    color: inherit;
-}
+
