@@ -43,3 +43,91 @@ body.halloween .seasons-post-body a, body.ny .seasons-post-body a, body.hallowee
 
 /* Links share the theme text color; underline distinguishes them from body copy. */
 .seasons-post-body a, .seasons-post-gallery a, .seasons-post-comments a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* WordPress comments: an open editorial layout, not a card. */
+.seasons-post-comments { color: var(--text, #342f2a); }
+.seasons-post-comments .comments-title,
+.seasons-post-comments .comment-reply-title {
+    font: 600 clamp(26px, 3vw, 34px)/1.25 Georgia, 'Times New Roman', serif;
+    color: inherit;
+    margin: 0 0 24px;
+}
+.seasons-post-comments .comment-list,
+.seasons-post-comments .children { list-style: none; margin: 0; padding: 0; }
+.seasons-post-comments .comment-list { margin-bottom: 48px; }
+.seasons-post-comments .comment-list > li { padding: 24px 0; border-bottom: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 18%, transparent); }
+.seasons-post-comments .children { margin: 18px 0 0 clamp(14px, 4vw, 42px); padding-left: 20px; border-left: 2px solid var(--primary, currentColor); }
+.seasons-post-comments .children li { padding-top: 18px; }
+.seasons-post-comments .comment-body { font-size: 15px; line-height: 1.75; overflow-wrap: anywhere; }
+.seasons-post-comments .comment-author { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-style: normal; font-weight: 700; }
+.seasons-post-comments .comment-author .avatar { border-radius: 50%; margin-right: 6px; }
+.seasons-post-comments .comment-author .says { font-weight: 400; }
+.seasons-post-comments .comment-metadata { margin: 6px 0 14px; font-size: 13px; opacity: .8; }
+.seasons-post-comments .comment-content p { margin: 0 0 14px; }
+.seasons-post-comments .reply { font-size: 13px; font-weight: 700; }
+.seasons-post-comments .comment-navigation { margin: 18px 0; }
+.seasons-post-comments .comment-respond { max-width: 760px; }
+.seasons-post-comments .comment-notes,
+.seasons-post-comments .logged-in-as,
+.seasons-post-comments .comment-form-cookies-consent { font-size: 14px; line-height: 1.6; }
+.seasons-post-comments .comment-notes { margin: 0 0 26px; opacity: .8; }
+.seasons-post-comments .comment-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 24px; }
+.seasons-post-comments .comment-form > p { margin: 0; min-width: 0; }
+.seasons-post-comments .comment-form-comment,
+.seasons-post-comments .comment-form-url,
+.seasons-post-comments .comment-notes,
+.seasons-post-comments .logged-in-as,
+.seasons-post-comments .comment-form-cookies-consent,
+.seasons-post-comments .form-submit { grid-column: 1 / -1; }
+.seasons-post-comments .comment-form label:not(.comment-form-cookies-consent label) { display: block; font-size: 14px; font-weight: 700; margin: 0 0 8px; }
+.seasons-post-comments .comment-form input:not([type="checkbox"]):not([type="submit"]),
+.seasons-post-comments .comment-form textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-height: 48px;
+    padding: 12px 15px;
+    border: 1px solid #b6b9b4;
+    border-radius: 7px;
+    background: #fff;
+    color: #252525;
+    font: 400 16px/1.5 Arial, Helvetica, sans-serif;
+    transition: border-color .15s ease, outline-color .15s ease;
+}
+.seasons-post-comments .comment-form textarea { min-height: 180px; resize: vertical; }
+.seasons-post-comments .comment-form input:focus-visible,
+.seasons-post-comments .comment-form textarea:focus-visible,
+.seasons-post-comments .comment-form .submit:focus-visible,
+.seasons-post-comments a:focus-visible { outline: 3px solid var(--primary, #7a966e); outline-offset: 3px; }
+.seasons-post-comments .comment-form-cookies-consent { display: flex; align-items: flex-start; gap: 10px; }
+.seasons-post-comments .comment-form-cookies-consent input { margin: 4px 0 0; flex: none; accent-color: var(--primary, #54734a); }
+.seasons-post-comments .comment-form-cookies-consent label { font-weight: 400; margin: 0; }
+.seasons-post-comments .form-submit { margin-top: 8px; }
+.seasons-post-comments .comment-form .submit {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 13px 26px;
+    border: 2px solid var(--primary, #54734a);
+    border-radius: 6px;
+    background: var(--primary, #54734a);
+    color: #1b1b1b;
+    font: 700 15px/1.4 Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: filter .15s ease;
+}
+.seasons-post-comments .comment-form .submit:hover { filter: brightness(.92); }
+body.halloween .seasons-post-comments .comment-form .submit,
+body.ny .seasons-post-comments .comment-form .submit { color: #171717; }
+@media (max-width: 600px) {
+    .seasons-post-comments { padding: 28px 10px; }
+    .seasons-post-comments .comment-form { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .seasons-post-comments .comment-form > p { grid-column: 1; }
+    .seasons-post-comments .comment-form .submit { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .seasons-post-comments .comment-form input,
+    .seasons-post-comments .comment-form textarea,
+    .seasons-post-comments .comment-form .submit { transition: none; }
+}
