@@ -10,6 +10,78 @@ get_header();
     <?php get_template_part('templates-part/gardencare'); ?>
 
     <?php
+    /*
+     * From My Garden: posts for the current gardening season.
+     * Supports a season child of Garden, common compound slugs, or posts
+     * assigned both the Garden and season categories.
+     */
+    $active_garden_season = current_season();
+    if ($active_garden_season === 'halloween') {
+        $active_garden_season = 'autumn';
+    } elseif (in_array($active_garden_season, array('yule', 'ny', 'valentines'), true)) {
+        $active_garden_season = 'winter';
+    }
+    $garden_parent = get_category_by_slug('garden');
+    if (!$garden_parent) {
+        $garden_parent = get_category_by_slug('gardening');
+    }
+    $garden_season_categories = array();
+    if ($garden_parent) {
+        $garden_children = get_categories(array('child_of' => $garden_parent->term_id, 'hide_empty' => false));
+        foreach ($garden_children as $garden_child) {
+            if ($garden_child->slug === $active_garden_season ||
+                $garden_child->slug === 'garden-' . $active_garden_season ||
+                $garden_child->slug === $active_garden_season . '-garden') {
+                $garden_season_categories[] = (int) $garden_child->term_id;
+            }
+        }
+    }
+    foreach (array('garden-' . $active_garden_season, $active_garden_season . '-garden') as $garden_slug) {
+        $garden_category = get_category_by_slug($garden_slug);
+        if ($garden_category) {
+            $garden_season_categories[] = (int) $garden_category->term_id;
+        }
+    }
+    $garden_season_categories = array_values(array_unique($garden_season_categories));
+    $garden_query_args = array('posts_per_page' => 3, 'ignore_sticky_posts' => true);
+    if ($garden_season_categories) {
+        $garden_query_args['category__in'] = $garden_season_categories;
+    } elseif ($garden_parent && ($season_category = get_category_by_slug($active_garden_season))) {
+        $garden_query_args['category__and'] = array((int) $garden_parent->term_id, (int) $season_category->term_id);
+    } else {
+        $garden_query_args = null; // Never silently show posts from the wrong season.
+    }
+    $garden_posts = $garden_query_args ? new WP_Query($garden_query_args) : null;
+    if ($garden_posts && $garden_posts->have_posts()) :
+    ?>
+    <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading">
+                <h2 id="seasons-from-garden-title"><?php esc_html_e('From My Garden', 'seasons'); ?></h2>
+                <p><?php echo esc_html(sprintf(__('Stories and discoveries from the %s garden.', 'seasons'), $active_garden_season)); ?></p>
+            </div>
+            <div class="seasons-home-grid">
+                <?php while ($garden_posts->have_posts()) : $garden_posts->the_post(); ?>
+                    <article <?php post_class('seasons-home-card'); ?>>
+                        <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
+                            <?php endif; ?>
+                            <div class="seasons-home-card-content">
+                                <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
+                                <h3><?php the_title(); ?></h3>
+                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
+                                <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
+                            </div>
+                        </a>
+                    </article>
+                <?php endwhile; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; wp_reset_postdata(); ?>
+
+    <?php
     // Use real WordPress posts; no prototype-only articles or placeholder links.
     $sections = array(
         array('title' => __('In the Garden Now', 'seasons'), 'intro' => __("What we're growing, doing and discovering this season.", 'seasons'), 'slugs' => array('garden', 'gardening'), 'class' => 'garden'),
