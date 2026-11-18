@@ -47,19 +47,19 @@ get_header();
     <?php endif; wp_reset_postdata(); ?>
 
     <?php
-    // Personal seasonal notes; these are editorial tips, not a post feed.
-    $garden_notes = array(
-        'autumn' => array(
-            array('label' => 'What I Learned', 'title' => 'Tulip Bulbs', 'text' => 'I plant tulip bulbs in November rather than September. Later planting means much less risk from tulip fire, and they flower just as beautifully.', 'tone' => 'green'),
-            array('label' => 'From My Garden', 'title' => 'Autumn Leaves', 'text' => 'I stopped raking leaves off the borders entirely. The worms appreciate the cover and they break down completely by spring — free mulch.', 'tone' => 'teal'),
-            array('label' => 'Good to Know', 'title' => 'Storing Dahlias', 'text' => 'Dahlias stored in dry compost kept far better last winter than the ones I stored bare. The compost stops them shrivelling through the cold months.', 'tone' => 'blue'),
-            array('label' => "I'd Do This Differently", 'title' => 'Winter Structure', 'text' => 'I used to cut back everything in autumn. Now I leave seed heads and grasses until late February. Better for wildlife, and much more interesting through winter.', 'tone' => 'orange'),
-        ),
-    );
-    // Other seasons can supply their own notes without displaying autumn advice out of season.
-    $garden_notes = apply_filters('seasons_garden_notes', $garden_notes, $active_garden_season);
-    $current_garden_notes = isset($garden_notes[$active_garden_season]) ? $garden_notes[$active_garden_season] : array();
-    if ($current_garden_notes) :
+    // Load up to six editable notes for the current gardening season.
+    $garden_notes = new WP_Query(array(
+        'post_type' => 'garden_note',
+        'post_status' => 'publish',
+        'posts_per_page' => 6,
+        'meta_query' => array(array(
+            'key' => '_seasons_note_season',
+            'value' => $active_garden_season,
+        )),
+        'orderby' => array('menu_order' => 'ASC', 'date' => 'DESC'),
+        'ignore_sticky_posts' => true,
+    ));
+    if ($garden_notes->have_posts()) :
     ?>
     <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
         <div class="seasons-home-container">
@@ -69,17 +69,25 @@ get_header();
                 <p><?php esc_html_e("Things I've learned growing through the seasons.", 'seasons'); ?></p>
             </div>
             <div class="seasons-garden-notes-grid">
-                <?php foreach ($current_garden_notes as $note) : ?>
+                <?php while ($garden_notes->have_posts()) : $garden_notes->the_post();
+                    $note_label = get_post_meta(get_the_ID(), '_seasons_note_label', true);
+                    $note_tone = get_post_meta(get_the_ID(), '_seasons_note_tone', true);
+                    if (!in_array($note_tone, array('green', 'teal', 'blue', 'orange'), true)) {
+                        $note_tone = 'green';
+                    }
+                ?>
                     <article class="seasons-garden-note">
-                        <span class="seasons-garden-note-label seasons-garden-note-<?php echo esc_attr($note['tone']); ?>"><?php echo esc_html($note['label']); ?></span>
-                        <h3><?php echo esc_html($note['title']); ?></h3>
-                        <p><?php echo esc_html($note['text']); ?></p>
+                        <?php if ($note_label) : ?>
+                            <span class="seasons-garden-note-label seasons-garden-note-<?php echo esc_attr($note_tone); ?>"><?php echo esc_html($note_label); ?></span>
+                        <?php endif; ?>
+                        <h3><?php the_title(); ?></h3>
+                        <div class="seasons-garden-note-body"><?php echo wp_kses_post(apply_filters('the_content', get_the_content())); ?></div>
                     </article>
-                <?php endforeach; ?>
+                <?php endwhile; ?>
             </div>
         </div>
     </section>
-    <?php endif; ?>
+    <?php endif; wp_reset_postdata(); ?>
 
     <?php
     // Use real WordPress posts; no prototype-only articles or placeholder links.
