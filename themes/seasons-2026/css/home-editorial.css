@@ -211,3 +211,12 @@ body.valentines .seasons-home .seasons-explore-winter {
     color: #fff;
 }
 
+
+/* Evergreen DIY landing page reuses the editorial section and article-card styles. */
+.seasons-home .seasons-home-diy-intro { background: #fff; }
+.seasons-home-diy-intro .seasons-home-heading { max-width: 760px; margin: 0 auto; }
+.seasons-home-diy-intro .seasons-home-heading h1 { font: 600 clamp(34px, 4vw, 48px)/1.2 Georgia, 'Times New Roman', serif; margin: 10px 0 16px; }
+.seasons-diy-topics { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.seasons-home .seasons-diy-topic { display: inline-block; border: 2px solid var(--accent, #e8a65d); border-radius: 999px; background: #fff; color: var(--text, #29372c); padding: 10px 20px; text-decoration: none; font-weight: 600; transition: transform .2s ease, box-shadow .2s ease; }
+.seasons-home .seasons-diy-topic:hover { transform: translateY(-3px); box-shadow: 0 7px 18px rgba(0,0,0,.12); }
+@media (prefers-reduced-motion: reduce) { .seasons-home .seasons-diy-topic { transition: none; } }
