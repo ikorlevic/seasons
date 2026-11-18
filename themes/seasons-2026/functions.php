@@ -8,6 +8,22 @@
 
 require_once get_template_directory() . '/inc/season-taxonomy.php';
 
+/**
+ * Map holiday visual themes to the four editorial content seasons.
+ * Keep holiday styling separate from category/taxonomy queries.
+ */
+function seasons_content_season($skin = null) {
+    $skin = $skin === null ? current_season() : $skin;
+    if ($skin === 'halloween') {
+        return 'autumn';
+    }
+    if (in_array($skin, array('yule', 'ny', 'valentines'), true)) {
+        return 'winter';
+    }
+    return $skin;
+}
+
+
 if(!function_exists("current_season")){
     function current_season() {
                                 $season="spring";
