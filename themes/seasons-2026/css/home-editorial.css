@@ -46,3 +46,18 @@
 .seasons-home .seasons-home-card-link:hover .seasons-home-readmore { text-decoration: underline; }
 @media(max-width:800px) { .seasons-home .seasons-highlights-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media(max-width:560px) { .seasons-home .seasons-highlights-grid { grid-template-columns: 1fr; gap: 14px; } .seasons-home .seasons-highlight { padding: 26px 22px; } }
+
+/* Figma reference: four clean seasonal tasks, not article cards. */
+.seasons-now { background: #fff; padding: 58px 24px 76px; color: #4a2e23; text-align: center; }
+.seasons-now-inner { max-width: 1240px; margin: 0 auto; }
+.seasons-now-heading { margin-bottom: 58px; }
+.seasons-now-eyebrow { display: block; color: #b84f2d; font: 500 12px/1.5 Arial,sans-serif; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+.seasons-now-heading h2 { color: #4a2e23; font: 700 clamp(34px,4vw,50px)/1.15 Georgia,'Times New Roman',serif; margin: 0 0 10px; }
+.seasons-now-heading p { font: 400 17px/1.6 Arial,sans-serif; color: #a89a95; margin: 0; }
+.seasons-now-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 34px; align-items: start; }
+.seasons-now-item { text-align: center; min-width: 0; }
+.seasons-now-icon { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: #eea65d; color: #4a2e23; font-size: 35px; margin-bottom: 20px; }
+.seasons-now-item h3 { color: #4a2e23; font: 700 17px/1.4 Georgia,'Times New Roman',serif; margin: 0 0 8px; }
+.seasons-now-item p { color: #a89a95; font: 400 14px/1.65 Arial,sans-serif; margin: 0 auto; max-width: 285px; }
+@media(max-width:760px) { .seasons-now-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 36px 22px; } .seasons-now-heading { margin-bottom: 38px; } }
+@media(max-width:480px) { .seasons-now { padding: 48px 18px 56px; } .seasons-now-grid { grid-template-columns: 1fr; gap: 32px; } .seasons-now-icon { width: 72px; height: 72px; } }
