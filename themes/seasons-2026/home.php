@@ -47,42 +47,39 @@ get_header();
     <?php endif; wp_reset_postdata(); ?>
 
     <?php
-    // From My Garden is the latest content from the Garden category, not the season category.
-    $garden_category = get_category_by_slug('garden');
-    $garden_posts = $garden_category ? new WP_Query(array(
-        'cat' => (int) $garden_category->term_id,
-        'posts_per_page' => 3,
-        'ignore_sticky_posts' => true,
-    )) : null;
-    if ($garden_posts && $garden_posts->have_posts()) :
+    // Personal seasonal notes; these are editorial tips, not a post feed.
+    $garden_notes = array(
+        'autumn' => array(
+            array('label' => 'What I Learned', 'title' => 'Tulip Bulbs', 'text' => 'I plant tulip bulbs in November rather than September. Later planting means much less risk from tulip fire, and they flower just as beautifully.', 'tone' => 'green'),
+            array('label' => 'From My Garden', 'title' => 'Autumn Leaves', 'text' => 'I stopped raking leaves off the borders entirely. The worms appreciate the cover and they break down completely by spring — free mulch.', 'tone' => 'teal'),
+            array('label' => 'Good to Know', 'title' => 'Storing Dahlias', 'text' => 'Dahlias stored in dry compost kept far better last winter than the ones I stored bare. The compost stops them shrivelling through the cold months.', 'tone' => 'blue'),
+            array('label' => "I'd Do This Differently", 'title' => 'Winter Structure', 'text' => 'I used to cut back everything in autumn. Now I leave seed heads and grasses until late February. Better for wildlife, and much more interesting through winter.', 'tone' => 'orange'),
+        ),
+    );
+    // Other seasons can supply their own notes without displaying autumn advice out of season.
+    $garden_notes = apply_filters('seasons_garden_notes', $garden_notes, $active_garden_season);
+    $current_garden_notes = isset($garden_notes[$active_garden_season]) ? $garden_notes[$active_garden_season] : array();
+    if ($current_garden_notes) :
     ?>
     <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
         <div class="seasons-home-container">
             <div class="seasons-home-heading">
+                <span class="seasons-home-eyebrow"><?php esc_html_e('Personal Notes', 'seasons'); ?></span>
                 <h2 id="seasons-from-garden-title"><?php esc_html_e('From My Garden', 'seasons'); ?></h2>
-                <p><?php esc_html_e('The latest stories and discoveries from my garden.', 'seasons'); ?></p>
+                <p><?php esc_html_e("Things I've learned growing through the seasons.", 'seasons'); ?></p>
             </div>
-            <div class="seasons-home-grid">
-                <?php while ($garden_posts->have_posts()) : $garden_posts->the_post(); ?>
-                    <article <?php post_class('seasons-home-card'); ?>>
-                        <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
-                            <?php endif; ?>
-                            <div class="seasons-home-card-content">
-                                <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
-                                <h3><?php the_title(); ?></h3>
-                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
-                                <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
-                            </div>
-                        </a>
+            <div class="seasons-garden-notes-grid">
+                <?php foreach ($current_garden_notes as $note) : ?>
+                    <article class="seasons-garden-note">
+                        <span class="seasons-garden-note-label seasons-garden-note-<?php echo esc_attr($note['tone']); ?>"><?php echo esc_html($note['label']); ?></span>
+                        <h3><?php echo esc_html($note['title']); ?></h3>
+                        <p><?php echo esc_html($note['text']); ?></p>
                     </article>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </div>
-            <a class="seasons-home-more" href="<?php echo esc_url(get_category_link($garden_category->term_id)); ?>"><?php esc_html_e('Explore the Garden', 'seasons'); ?> &rarr;</a>
         </div>
     </section>
-    <?php endif; wp_reset_postdata(); ?>
+    <?php endif; ?>
 
     <?php
     // Use real WordPress posts; no prototype-only articles or placeholder links.
