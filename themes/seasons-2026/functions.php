@@ -505,3 +505,17 @@ function season_high($season) {
         }
     }
 }
+/**
+ * Editorial homepage styles. Loaded only for the posts index.
+ */
+function seasons_enqueue_home_editorial_styles() {
+    if (is_home()) {
+        wp_enqueue_style(
+            'seasons-home-editorial',
+            get_template_directory_uri() . '/css/home-editorial.css',
+            array(),
+            '1.0'
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'seasons_enqueue_home_editorial_styles');
