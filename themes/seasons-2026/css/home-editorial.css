@@ -37,6 +37,8 @@
 /* Figma reference: four clean seasonal tasks, not article cards. */
 .seasons-now { background: #fff; padding: 58px 24px 76px; color: #4a2e23; }
 .seasons-now-inner { max-width: 1240px; margin: 0 auto; }
+/* Keep checklist text centered even when legacy theme selectors override utilities. */
+.seasons-now.text-center, .seasons-now-item.text-center { text-align: center; }
 .seasons-now-heading { margin-bottom: 58px; }
 .seasons-now-eyebrow { display: block; color: #b84f2d; font: 500 12px/1.5 Arial,sans-serif; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
 .seasons-now-heading h2 { color: #4a2e23; font: 700 clamp(34px,4vw,50px)/1.15 Georgia,'Times New Roman',serif; margin: 0 0 10px; }
