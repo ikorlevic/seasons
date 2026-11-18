@@ -102,3 +102,9 @@
 .seasons-garden-note .seasons-garden-note-body p:last-child { margin-bottom: 0; }
 @media (max-width: 850px) { .seasons-home-from-garden .seasons-garden-notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 650px) { .seasons-home-from-garden .seasons-garden-notes-grid { grid-template-columns: 1fr; } }
+
+/* In the Garden Now: three latest seasonal articles, matching editorial cards. */
+.seasons-home-garden-now .seasons-garden-now-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.seasons-home-garden-now .seasons-home-more { color: #a35e35; }
+@media (max-width: 800px) { .seasons-home-garden-now .seasons-garden-now-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .seasons-home-garden-now .seasons-garden-now-grid { grid-template-columns: 1fr; } }
