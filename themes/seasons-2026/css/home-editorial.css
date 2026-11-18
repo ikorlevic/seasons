@@ -43,7 +43,7 @@
 .seasons-now-heading p { font: 400 17px/1.6 Arial,sans-serif; color: #a89a95; margin: 0; }
 .seasons-now-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 34px; align-items: start; }
 .seasons-now-item { min-width: 0; }
-.seasons-now-icon { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; background: #eea65d; color: #4a2e23; font-size: 35px; margin-bottom: 20px; }
+.seasons-now-icon { width: 80px; height: 80px; border-radius: 50%; background: #eea65d; color: #4a2e23; font-size: 35px; margin-bottom: 20px; }
 .seasons-now-item h3 { color: #4a2e23; font: 700 17px/1.4 Georgia,'Times New Roman',serif; margin: 0 0 8px; }
 .seasons-now-item p { color: #a89a95; font: 400 14px/1.65 Arial,sans-serif; margin: 0 auto; max-width: 285px; }
 @media(max-width:760px) { .seasons-now-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 36px 22px; } .seasons-now-heading { margin-bottom: 38px; } }
