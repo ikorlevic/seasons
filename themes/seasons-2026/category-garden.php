@@ -7,12 +7,7 @@ get_header();
 ?>
 <main id="main-content" class="home seasons-home seasons-garden-archive">
     <?php
-    $active_garden_season = current_season();
-    if ($active_garden_season === 'halloween') {
-        $active_garden_season = 'autumn';
-    } elseif (in_array($active_garden_season, array('yule', 'ny', 'valentines'), true)) {
-        $active_garden_season = 'winter';
-    }
+    $active_garden_season = seasons_content_season();
     ?>
     <?php get_template_part('templates-part/category-seasonal-tips', null, array('area' => 'garden')); ?>
     <?php get_template_part('templates-part/category-personal-notes', null, array('area' => 'garden')); ?>
