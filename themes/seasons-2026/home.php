@@ -18,7 +18,9 @@ get_header();
     $season_category = get_category_by_slug($active_garden_season);
     $season_post = $season_category ? new WP_Query(array(
         'cat' => (int) $season_category->term_id,
-        'posts_per_page' => 1,
+        'posts_per_page' => 3,
+        'orderby' => 'date',
+        'order' => 'DESC',
         'ignore_sticky_posts' => true,
     )) : null;
     if ($season_post && $season_post->have_posts()) :
@@ -29,19 +31,26 @@ get_header();
                 <span class="seasons-home-eyebrow"><?php esc_html_e('The Garden', 'seasons'); ?></span>
                 <h2 id="seasons-garden-now-title"><?php esc_html_e('In the Garden Now', 'seasons'); ?></h2>
             </div>
-            <?php while ($season_post->have_posts()) : $season_post->the_post(); ?>
-                <article <?php post_class('seasons-home-season-feature'); ?>>
-                    <?php if (has_post_thumbnail()) : ?>
-                        <a class="seasons-home-season-image" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('large', array('loading' => 'lazy')); ?></a>
-                    <?php endif; ?>
-                    <div class="seasons-home-season-content">
-                        <span class="seasons-home-card-meta"><?php echo esc_html($active_garden_season); ?></span>
-                        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                        <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 36)); ?></p>
-                        <a class="seasons-home-readmore" href="<?php the_permalink(); ?>"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</a>
-                    </div>
-                </article>
-            <?php endwhile; ?>
+            <div class="seasons-home-grid seasons-garden-now-grid">
+                <?php while ($season_post->have_posts()) : $season_post->the_post(); ?>
+                    <article <?php post_class('seasons-home-card'); ?>>
+                        <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
+                            <?php endif; ?>
+                            <div class="seasons-home-card-content">
+                                <span class="seasons-home-card-meta"><?php echo esc_html(ucfirst($active_garden_season)); ?></span>
+                                <h3><?php the_title(); ?></h3>
+                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
+                                <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
+                            </div>
+                        </a>
+                    </article>
+                <?php endwhile; ?>
+            </div>
+            <a class="seasons-home-more" href="<?php echo esc_url(get_category_link($season_category->term_id)); ?>">
+                <?php esc_html_e('Explore the season', 'seasons'); ?> &rarr;
+            </a>
         </div>
     </section>
     <?php endif; wp_reset_postdata(); ?>
