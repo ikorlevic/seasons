@@ -79,7 +79,7 @@ get_header();
                 <h2 id="seasons-from-garden-title"><?php esc_html_e('From My Garden', 'seasons'); ?></h2>
                 <p><?php esc_html_e("Things I've learned growing through the seasons.", 'seasons'); ?></p>
             </div>
-            <div class="seasons-garden-notes-grid">
+            <div class="seasons-garden-notes-grid seasons-garden-notes-count-<?php echo esc_attr((string) $garden_notes->post_count); ?>">
                 <?php while ($garden_notes->have_posts()) : $garden_notes->the_post();
                     $note_label = get_post_meta(get_the_ID(), '_seasons_note_label', true);
                     $note_tone = get_post_meta(get_the_ID(), '_seasons_note_tone', true);
