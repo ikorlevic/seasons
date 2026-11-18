@@ -14,7 +14,10 @@
   $actualSeason = current_season();
   $season = $actualSeason;
 
-  if(is_home()) {
+  // Garden is a content category, not a seasonal skin.
+  if (is_category('garden')) {
+      $season = $actualSeason;
+  } elseif(is_home()) {
       $season = $actualSeason;
   } else {
         $obj = get_queried_object();
