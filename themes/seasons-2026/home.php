@@ -238,5 +238,37 @@ get_header();
             </div>
         </div>
     </section>
+    <?php
+    // The four gardening seasons only; holiday skins are intentionally excluded.
+    $explore_seasons = array(
+        'spring' => array('title' => __('Spring', 'seasons'), 'description' => __('Fresh starts and new growth.', 'seasons')),
+        'summer' => array('title' => __('Summer', 'seasons'), 'description' => __('Long days and abundant gardens.', 'seasons')),
+        'autumn' => array('title' => __('Autumn', 'seasons'), 'description' => __('Harvests, warm colors and preparation.', 'seasons')),
+        'winter' => array('title' => __('Winter', 'seasons'), 'description' => __('Quiet moments and plans for spring.', 'seasons')),
+    );
+    ?>
+    <section class="seasons-home-section seasons-home-explore" aria-labelledby="seasons-explore-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading text-center">
+                <span class="seasons-home-eyebrow"><?php esc_html_e('Through the Year', 'seasons'); ?></span>
+                <h2 id="seasons-explore-title"><?php esc_html_e('Explore the Seasons', 'seasons'); ?></h2>
+                <p><?php esc_html_e('Find inspiration for every season in the garden and at home.', 'seasons'); ?></p>
+            </div>
+            <div class="seasons-explore-grid">
+                <?php foreach ($explore_seasons as $slug => $details) :
+                    $season_term = get_category_by_slug($slug);
+                    if (!$season_term) {
+                        continue;
+                    }
+                ?>
+                    <a class="seasons-explore-card seasons-explore-<?php echo esc_attr($slug); ?>" href="<?php echo esc_url(get_category_link($season_term->term_id)); ?>">
+                        <span class="seasons-explore-card-label"><?php echo esc_html($details['title']); ?></span>
+                        <span class="seasons-explore-card-description"><?php echo esc_html($details['description']); ?></span>
+                        <span class="seasons-explore-card-link"><?php esc_html_e('Explore season', 'seasons'); ?> &rarr;</span>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
 </main>
 <?php get_footer(); ?>
