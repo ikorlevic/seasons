@@ -164,3 +164,8 @@
 /* Keep the photographic seasonal hero on Garden, but give the content priority. */
 body.garden-category .moto { min-height: 300px; padding-top: 28px; padding-bottom: 28px; }
 @media (max-width: 650px) { body.garden-category .moto { min-height: 240px; } }
+
+/* Main category landing pages share the Garden editorial system, not subcategories. */
+body.editorial-main-category .moto { min-height: 300px; padding-top: 28px; padding-bottom: 28px; }
+.seasons-category-editorial .seasons-featured-recipe-grid { grid-template-columns: minmax(0, 440px); justify-content: center; }
+@media (max-width: 650px) { body.editorial-main-category .moto { min-height: 240px; } }
