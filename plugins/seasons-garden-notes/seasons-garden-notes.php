@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Seasons Garden Notes
  * Description: Editable, season-specific personal gardening tips for the From My Garden homepage section.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires PHP: 7.4
  * Text Domain: seasons
  */
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) { exit; }
  * Editable seasonal personal notes: Appearance is controlled by the theme,
  * while each card is managed under Garden Notes in WordPress admin.
  */
-function seasons_register_garden_notes() {
+function sgn_plugin_register_garden_notes() {
     register_post_type('garden_note', array(
         'labels' => array(
             'name' => __('Garden Notes', 'seasons'),
@@ -28,15 +28,15 @@ function seasons_register_garden_notes() {
         'show_in_rest' => true,
     ));
 }
-add_action('init', 'seasons_register_garden_notes');
+add_action('init', 'sgn_plugin_register_garden_notes');
 
-function seasons_garden_note_meta_box() {
-    add_meta_box('seasons_garden_note_details', __('Garden Note Details', 'seasons'), 'seasons_render_garden_note_meta_box', 'garden_note', 'normal', 'high');
+function sgn_plugin_garden_note_meta_box() {
+    add_meta_box('seasons_garden_note_details', __('Garden Note Details', 'seasons'), 'sgn_plugin_render_garden_note_meta_box', 'garden_note', 'normal', 'high');
 }
-add_action('add_meta_boxes', 'seasons_garden_note_meta_box');
+add_action('add_meta_boxes', 'sgn_plugin_garden_note_meta_box');
 
-function seasons_render_garden_note_meta_box($post) {
-    wp_nonce_field('seasons_save_garden_note', 'seasons_garden_note_nonce');
+function sgn_plugin_render_garden_note_meta_box($post) {
+    wp_nonce_field('sgn_plugin_save_garden_note', 'seasons_garden_note_nonce');
     $season = get_post_meta($post->ID, '_seasons_note_season', true);
     $label = get_post_meta($post->ID, '_seasons_note_label', true);
     $tone = get_post_meta($post->ID, '_seasons_note_tone', true);
@@ -53,9 +53,9 @@ function seasons_render_garden_note_meta_box($post) {
     echo '</select></p><p>' . esc_html__('Use the title for the card heading and the main editor for its tip. Order cards using the Order field in Page Attributes. Up to six published notes per season appear on the homepage.', 'seasons') . '</p>';
 }
 
-function seasons_save_garden_note($post_id) {
+function sgn_plugin_save_garden_note($post_id) {
     if (!isset($_POST['seasons_garden_note_nonce']) ||
-        !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['seasons_garden_note_nonce'])), 'seasons_save_garden_note') ||
+        !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['seasons_garden_note_nonce'])), 'sgn_plugin_save_garden_note') ||
         (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) ||
         !current_user_can('edit_post', $post_id)) {
         return;
@@ -76,4 +76,4 @@ function seasons_save_garden_note($post_id) {
         }
     }
 }
-add_action('save_post_garden_note', 'seasons_save_garden_note');
+add_action('save_post_garden_note', 'sgn_plugin_save_garden_note');
