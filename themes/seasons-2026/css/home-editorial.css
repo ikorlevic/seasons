@@ -23,3 +23,14 @@
 @media (max-width: 800px) { .seasons-home-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; } }
 @media (max-width: 560px) { .seasons-home-grid { grid-template-columns: 1fr; } .seasons-home-section { padding: 48px 18px; } }
 @media (prefers-reduced-motion: reduce) { .seasons-home-card, .seasons-home-card-image img { transition: none; } }
+
+/* Native, keyboard-accessible season selector. */
+.moto .season-selector { position: relative; z-index: 5; display: inline-block; }
+.moto .season-selector-details { position: relative; }
+.moto .season-selector-trigger { display: inline-block; cursor: pointer; list-style: none; }
+.moto .season-selector-trigger::-webkit-details-marker { display: none; }
+.moto .season-selector-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: max-content; min-width: 180px; max-width: min(90vw, 300px); padding: 10px 16px; border-radius: 14px; background: #fffaf2; box-shadow: 0 10px 32px rgba(0,0,0,.18); text-align: left; }
+.moto .season-selector-menu ul { list-style: none; padding: 0; margin: 0; }
+.moto .season-selector-menu li { margin: 0; padding: 0; }
+.moto .season-selector-menu a { display: block; padding: 8px 10px; color: #29372c; text-decoration: none; }
+.moto .season-selector-menu a:hover, .moto .season-selector-menu a:focus-visible { background: #e9efe4; border-radius: 8px; }
