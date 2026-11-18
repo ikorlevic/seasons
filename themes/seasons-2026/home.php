@@ -125,29 +125,7 @@ get_header();
     }
     if ($featured_recipe && $featured_recipe->have_posts()) :
     ?>
-    <section class="seasons-home-section seasons-home-garden-kitchen" aria-labelledby="seasons-garden-kitchen-title">
-        <div class="seasons-home-container">
-            <div class="seasons-home-heading text-center">
-                <span class="seasons-home-eyebrow"><?php esc_html_e('Seasonal Recipe', 'seasons'); ?></span>
-                <h2 id="seasons-garden-kitchen-title"><?php esc_html_e('From Garden to Kitchen', 'seasons'); ?></h2>
-            </div>
-            <?php while ($featured_recipe->have_posts()) : $featured_recipe->the_post(); ?>
-                <article <?php post_class('seasons-featured-recipe'); ?>>
-                    <?php if (has_post_thumbnail()) : ?>
-                        <a class="seasons-featured-recipe-image" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr(get_the_title()); ?>">
-                            <?php the_post_thumbnail('large', array('loading' => 'lazy')); ?>
-                        </a>
-                    <?php endif; ?>
-                    <div class="seasons-featured-recipe-content">
-                        <span class="seasons-home-eyebrow"><?php echo esc_html(ucfirst($active_garden_season)); ?> <?php esc_html_e('Recipe', 'seasons'); ?></span>
-                        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                        <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 36)); ?></p>
-                        <a class="seasons-home-readmore" href="<?php the_permalink(); ?>"><?php esc_html_e('Get the recipe', 'seasons'); ?> &rarr;</a>
-                    </div>
-                </article>
-            <?php endwhile; ?>
-        </div>
-    </section>
+    <?php get_template_part('templates-part/featured-seasonal-recipe', null, array('query' => $featured_recipe, 'season' => $active_garden_season)); ?>
     <?php endif; wp_reset_postdata(); ?>
 
     <?php
