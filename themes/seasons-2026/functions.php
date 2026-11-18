@@ -6,6 +6,8 @@
  * Time: 19:04
  */
 
+require_once get_template_directory() . '/inc/season-taxonomy.php';
+
 if(!function_exists("current_season")){
     function current_season() {
                                 $season="spring";
