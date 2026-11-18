@@ -11,9 +11,9 @@ get_header();
 
     <?php
     /*
-     * From My Garden: posts for the current gardening season.
-     * Supports a season child of Garden, common compound slugs, or posts
-     * assigned both the Garden and season categories.
+     * From My Garden uses the current season category directly.
+     * Holiday themes retain their existing activation logic and fall back
+     * to the corresponding gardening season for article selection.
      */
     $active_garden_season = current_season();
     if ($active_garden_season === 'halloween') {
@@ -21,36 +21,14 @@ get_header();
     } elseif (in_array($active_garden_season, array('yule', 'ny', 'valentines'), true)) {
         $active_garden_season = 'winter';
     }
-    $garden_parent = get_category_by_slug('garden');
-    if (!$garden_parent) {
-        $garden_parent = get_category_by_slug('gardening');
-    }
-    $garden_season_categories = array();
-    if ($garden_parent) {
-        $garden_children = get_categories(array('child_of' => $garden_parent->term_id, 'hide_empty' => false));
-        foreach ($garden_children as $garden_child) {
-            if ($garden_child->slug === $active_garden_season ||
-                $garden_child->slug === 'garden-' . $active_garden_season ||
-                $garden_child->slug === $active_garden_season . '-garden') {
-                $garden_season_categories[] = (int) $garden_child->term_id;
-            }
-        }
-    }
-    foreach (array('garden-' . $active_garden_season, $active_garden_season . '-garden') as $garden_slug) {
-        $garden_category = get_category_by_slug($garden_slug);
-        if ($garden_category) {
-            $garden_season_categories[] = (int) $garden_category->term_id;
-        }
-    }
-    $garden_season_categories = array_values(array_unique($garden_season_categories));
-    $garden_query_args = array('posts_per_page' => 3, 'ignore_sticky_posts' => true);
-    if ($garden_season_categories) {
-        $garden_query_args['category__in'] = $garden_season_categories;
-    } elseif ($garden_parent && ($season_category = get_category_by_slug($active_garden_season))) {
-        $garden_query_args['category__and'] = array((int) $garden_parent->term_id, (int) $season_category->term_id);
-    } else {
-        $garden_query_args = null; // Never silently show posts from the wrong season.
-    }
+    $season_category = get_category_by_slug($active_garden_season);
+    $garden_query_args = $season_category
+        ? array(
+            'cat' => (int) $season_category->term_id,
+            'posts_per_page' => 3,
+            'ignore_sticky_posts' => true,
+        )
+        : null;
     $garden_posts = $garden_query_args ? new WP_Query($garden_query_args) : null;
     if ($garden_posts && $garden_posts->have_posts()) :
     ?>
