@@ -1,0 +1,25 @@
+/* Figma-inspired editorial homepage; scoped to avoid altering article/archive layouts. */
+.seasons-home { background: #fbf8f1; color: #29372c; }
+.seasons-home-section { padding: clamp(48px, 7vw, 90px) 24px; }
+.seasons-home-section:nth-of-type(even) { background: #fff; }
+.seasons-home-container { max-width: 1160px; margin: 0 auto; }
+.seasons-home-heading { margin-bottom: 32px; }
+.seasons-home-heading h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 600; font-size: clamp(30px, 4vw, 46px); line-height: 1.15; margin: 0 0 12px; }
+.seasons-home-heading p { margin: 0; font-size: 17px; opacity: .75; }
+.seasons-home-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.seasons-home-card { min-width: 0; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 6px 26px rgba(28,45,30,.09); transition: transform .2s ease, box-shadow .2s ease; }
+.seasons-home-card:hover { transform: translateY(-4px); box-shadow: 0 12px 34px rgba(28,45,30,.14); }
+.seasons-home-card-link { color: inherit; text-decoration: none; display: block; height: 100%; }
+.seasons-home-card-image { aspect-ratio: 16 / 10; overflow: hidden; background: #e6e9df; }
+.seasons-home-card-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.seasons-home-card:hover img { transform: scale(1.035); }
+.seasons-home-card-content { padding: 24px; }
+.seasons-home-card-meta { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .65; }
+.seasons-home-card h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1.3; margin: 10px 0; }
+.seasons-home-card p { font-size: 14px; line-height: 1.7; opacity: .8; margin: 0 0 20px; }
+.seasons-home-readmore, .seasons-home-more { color: #456c45; font-weight: 700; }
+.seasons-home-more { display: inline-block; margin-top: 26px; }
+.seasons-home a:focus-visible { outline: 3px solid #456c45; outline-offset: 3px; }
+@media (max-width: 800px) { .seasons-home-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; } }
+@media (max-width: 560px) { .seasons-home-grid { grid-template-columns: 1fr; } .seasons-home-section { padding: 48px 18px; } }
+@media (prefers-reduced-motion: reduce) { .seasons-home-card, .seasons-home-card-image img { transition: none; } }
