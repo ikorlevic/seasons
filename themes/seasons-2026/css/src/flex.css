@@ -3,6 +3,10 @@
     display: flex;
 }
 
+.d-inline-flex {
+    display: inline-flex;
+}
+
 .jcsb {
     justify-content: space-between;
 }
