@@ -100,7 +100,7 @@
 }
 
 /* From Garden to Kitchen: one editorial seasonal recipe feature. */
-.seasons-home .seasons-home-garden-kitchen { background: #fff9f1; }
+.seasons-home .seasons-home-garden-kitchen { background: #fff; }
 .seasons-home-garden-kitchen .seasons-home-heading { margin-bottom: 34px; }
 .seasons-featured-recipe { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 5vw, 64px); }
 .seasons-featured-recipe-image { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 20px; background: #e9e5dc; }
