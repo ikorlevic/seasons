@@ -14,8 +14,8 @@ $seasons_diy_children = get_categories(array(
 <main id="main-content" class="home seasons-home seasons-garden-archive seasons-category-editorial seasons-category-diy">
     <section class="seasons-diy-hero" aria-label="<?php esc_attr_e('Hands making a DIY project in a sunlit workshop', 'seasons'); ?>">
         <div class="seasons-diy-hero-inner">
-            <span class="seasons-home-eyebrow"><?php esc_html_e('Made by Hand', 'seasons'); ?></span>
-            <h1><?php single_cat_title(); ?></h1>
+            <h1 class="bolder title"><?php single_cat_title(); ?></h1>
+            <h2 class="title italic"><?php esc_html_e('Made by Hand', 'seasons'); ?></h2>
             <p><?php esc_html_e('Creative projects for the home, garden, and everything in between.', 'seasons'); ?></p>
         </div>
     </section>
