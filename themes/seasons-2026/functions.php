@@ -509,8 +509,8 @@ function season_high($season) {
  * Editorial homepage styles. Loaded only for the posts index.
  */
 function seasons_enqueue_home_editorial_styles() {
-    // The posts index and a configured static front page can both use this layout.
-    if (is_home() || is_front_page()) {
+    // The Garden archive reuses homepage components and needs their styles too.
+    if (is_home() || is_front_page() || is_category('garden')) {
         $stylesheet_path = get_template_directory() . '/css/home-editorial.css';
         wp_enqueue_style(
             'seasons-home-editorial',
