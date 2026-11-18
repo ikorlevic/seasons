@@ -14,6 +14,9 @@
     <h2 class="title italic"><?php echo season_moto($season) ?></h3>
     <p><?php echo season_desc($season) ?>
     </p>
+<div class="weather">
+    <?php echo pdsweather_display() ?>
+    </div>
 <div class="season-selector">
     <?php if (has_nav_menu('seasons')) : ?>
         <details class="season-selector-details">
