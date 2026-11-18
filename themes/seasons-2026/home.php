@@ -7,22 +7,8 @@ get_header();
 ?>
 <main id="main-content" class="home seasons-home">
     <?php get_template_part('templates-part/season-highlights'); ?>
-    <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-garden-now-title">
-        <div class="seasons-home-container">
-            <div class="seasons-home-heading">
-                <span class="seasons-home-eyebrow"><?php esc_html_e('The Garden', 'seasons'); ?></span>
-                <h2 id="seasons-garden-now-title"><?php esc_html_e('In the Garden Now', 'seasons'); ?></h2>
-            </div>
-            <?php get_template_part('templates-part/gardencare'); ?>
-        </div>
-    </section>
-
     <?php
-    /*
-     * From My Garden uses the current season category directly.
-     * Holiday themes retain their existing activation logic and fall back
-     * to the corresponding gardening season for article selection.
-     */
+    // Holiday skins use their gardening season without changing activation dates.
     $active_garden_season = current_season();
     if ($active_garden_season === 'halloween') {
         $active_garden_season = 'autumn';
@@ -30,21 +16,51 @@ get_header();
         $active_garden_season = 'winter';
     }
     $season_category = get_category_by_slug($active_garden_season);
-    $garden_query_args = $season_category
-        ? array(
-            'cat' => (int) $season_category->term_id,
-            'posts_per_page' => 3,
-            'ignore_sticky_posts' => true,
-        )
-        : null;
-    $garden_posts = $garden_query_args ? new WP_Query($garden_query_args) : null;
+    $season_post = $season_category ? new WP_Query(array(
+        'cat' => (int) $season_category->term_id,
+        'posts_per_page' => 1,
+        'ignore_sticky_posts' => true,
+    )) : null;
+    if ($season_post && $season_post->have_posts()) :
+    ?>
+    <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-garden-now-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading">
+                <span class="seasons-home-eyebrow"><?php esc_html_e('The Garden', 'seasons'); ?></span>
+                <h2 id="seasons-garden-now-title"><?php esc_html_e('In the Garden Now', 'seasons'); ?></h2>
+            </div>
+            <?php while ($season_post->have_posts()) : $season_post->the_post(); ?>
+                <article <?php post_class('seasons-home-season-feature'); ?>>
+                    <?php if (has_post_thumbnail()) : ?>
+                        <a class="seasons-home-season-image" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('large', array('loading' => 'lazy')); ?></a>
+                    <?php endif; ?>
+                    <div class="seasons-home-season-content">
+                        <span class="seasons-home-card-meta"><?php echo esc_html($active_garden_season); ?></span>
+                        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                        <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 36)); ?></p>
+                        <a class="seasons-home-readmore" href="<?php the_permalink(); ?>"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</a>
+                    </div>
+                </article>
+            <?php endwhile; ?>
+        </div>
+    </section>
+    <?php endif; wp_reset_postdata(); ?>
+
+    <?php
+    // From My Garden is the latest content from the Garden category, not the season category.
+    $garden_category = get_category_by_slug('garden');
+    $garden_posts = $garden_category ? new WP_Query(array(
+        'cat' => (int) $garden_category->term_id,
+        'posts_per_page' => 3,
+        'ignore_sticky_posts' => true,
+    )) : null;
     if ($garden_posts && $garden_posts->have_posts()) :
     ?>
     <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
         <div class="seasons-home-container">
             <div class="seasons-home-heading">
                 <h2 id="seasons-from-garden-title"><?php esc_html_e('From My Garden', 'seasons'); ?></h2>
-                <p><?php echo esc_html(sprintf(__('Stories and discoveries from the %s garden.', 'seasons'), $active_garden_season)); ?></p>
+                <p><?php esc_html_e('The latest stories and discoveries from my garden.', 'seasons'); ?></p>
             </div>
             <div class="seasons-home-grid">
                 <?php while ($garden_posts->have_posts()) : $garden_posts->the_post(); ?>
@@ -63,6 +79,7 @@ get_header();
                     </article>
                 <?php endwhile; ?>
             </div>
+            <a class="seasons-home-more" href="<?php echo esc_url(get_category_link($garden_category->term_id)); ?>"><?php esc_html_e('Explore the Garden', 'seasons'); ?> &rarr;</a>
         </div>
     </section>
     <?php endif; wp_reset_postdata(); ?>
