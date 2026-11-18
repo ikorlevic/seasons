@@ -24,7 +24,7 @@
             <?php wp_nav_menu(array(
                 'theme_location' => 'seasons',
                 'container' => 'nav',
-                'container_class' => 'pill-menu season-selector-menu',
+                'container_class' => 'pill-menu season-selector-menu text-left',
                 'container_aria_label' => __('Choose a season', 'seasons'),
                 'fallback_cb' => false,
             )); ?>
