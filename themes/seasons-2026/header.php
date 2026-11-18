@@ -73,7 +73,7 @@
         </nav>
 
         <?php if (function_exists('pdsweather_display')) : ?>
-            <div class="seasons-header-weather" aria-label="<?php esc_attr_e('Current weather', 'seasons'); ?>">
+            <div class="seasons-header-weather d-inline-flex align-center jcc" aria-label="<?php esc_attr_e('Current weather', 'seasons'); ?>">
                 <?php echo pdsweather_display(); ?>
             </div>
         <?php endif; ?>
