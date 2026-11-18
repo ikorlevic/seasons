@@ -108,3 +108,12 @@
 .seasons-home-garden-now .seasons-home-more { color: #a35e35; }
 @media (max-width: 800px) { .seasons-home-garden-now .seasons-garden-now-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .seasons-home-garden-now .seasons-garden-now-grid { grid-template-columns: 1fr; } }
+
+/* Keep Garden article copy readable despite legacy theme link/text colors. */
+.seasons-home .seasons-home-garden-now .seasons-home-card,
+.seasons-home .seasons-home-garden-now .seasons-home-card-content { color: #4b2d23; }
+.seasons-home .seasons-home-garden-now .seasons-home-card h3,
+.seasons-home .seasons-home-garden-now .seasons-home-card h3 a { color: #4b2d23; }
+.seasons-home .seasons-home-garden-now .seasons-home-card p { color: #766e67; opacity: 1; }
+.seasons-home .seasons-home-garden-now .seasons-home-card-meta { color: #b45b38; opacity: 1; }
+.seasons-home .seasons-home-garden-now .seasons-home-readmore { color: #456c45; }
