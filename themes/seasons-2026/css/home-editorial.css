@@ -123,9 +123,7 @@
 .seasons-home-explore .seasons-home-heading p { color: #626262; opacity: 1; font-size: 18px; }
 .seasons-explore-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .seasons-home .seasons-explore-card {
-    --season-border: #e8d5ed;
-    --season-text: #305127;
-    --season-hover: #527c48;
+    --season-hover-text: var(--text);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -135,23 +133,20 @@
     min-width: 0;
     min-height: 166px;
     padding: 24px 14px;
-    border: 2px solid var(--season-border);
+    border: 2px solid var(--accent);
     border-radius: 17px;
     background: #fff;
-    color: var(--season-text);
+    color: var(--text);
     text-decoration: none;
     box-shadow: 0 3px 5px rgba(0,0,0,.1);
     transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
-.seasons-home .seasons-explore-spring { --season-border: #e6a6ff; --season-text: #305127; --season-hover: #60884f; }
-.seasons-home .seasons-explore-summer { --season-border: #ffd04b; --season-text: #714622; --season-hover: #ba862e; }
-.seasons-home .seasons-explore-autumn { --season-border: #c15a30; --season-text: #9a4a29; --season-hover: #c15a30; }
-.seasons-home .seasons-explore-winter { --season-border: #d3efff; --season-text: #203d61; --season-hover: #517a9b; }
+.seasons-home .seasons-explore-autumn { --season-hover-text: #fff; }
 .seasons-explore-card-icon { display: block; font-size: 38px; line-height: 1; font-weight: 400; }
 .seasons-explore-card-label { display: block; font: 700 18px/1.25 Arial, sans-serif; }
 .seasons-explore-card-description { display: block; font: 500 14px/1.4 Arial, sans-serif; color: inherit; opacity: .85; }
 .seasons-home .seasons-explore-card:hover,
-.seasons-home .seasons-explore-card:focus-visible { background: var(--season-hover); border-color: var(--season-hover); color: #fff; box-shadow: 0 7px 18px rgba(0,0,0,.16); transform: translateY(-3px); }
+.seasons-home .seasons-explore-card:focus-visible { background: var(--secondary); border-color: var(--secondary); color: var(--season-hover-text); box-shadow: 0 7px 18px rgba(0,0,0,.16); transform: translateY(-3px); }
 .seasons-home .seasons-explore-card:focus-visible { outline: 3px solid #29372c; outline-offset: 3px; }
 @media (max-width: 800px) { .seasons-explore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .seasons-explore-grid { grid-template-columns: 1fr; } }
