@@ -117,3 +117,10 @@
 .seasons-home .seasons-home-garden-now .seasons-home-card p { color: #766e67; opacity: 1; }
 .seasons-home .seasons-home-garden-now .seasons-home-card-meta { color: #b45b38; opacity: 1; }
 .seasons-home .seasons-home-garden-now .seasons-home-readmore { color: #456c45; }
+
+/* Garden Notes: four cards use a balanced 2×2 grid; all other counts up to six use three columns. */
+@media (min-width: 851px) {
+    .seasons-home-from-garden .seasons-garden-notes-count-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
