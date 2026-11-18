@@ -509,12 +509,14 @@ function season_high($season) {
  * Editorial homepage styles. Loaded only for the posts index.
  */
 function seasons_enqueue_home_editorial_styles() {
-    if (is_home()) {
+    // The posts index and a configured static front page can both use this layout.
+    if (is_home() || is_front_page()) {
+        $stylesheet_path = get_template_directory() . '/css/home-editorial.css';
         wp_enqueue_style(
             'seasons-home-editorial',
             get_template_directory_uri() . '/css/home-editorial.css',
             array(),
-            '1.0'
+            file_exists($stylesheet_path) ? (string) filemtime($stylesheet_path) : '1.1'
         );
     }
 }
