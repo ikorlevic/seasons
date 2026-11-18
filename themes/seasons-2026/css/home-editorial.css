@@ -208,6 +208,6 @@ body.yule .seasons-home .seasons-explore-winter,
 body.ny .seasons-home .seasons-explore-winter,
 body.valentines .seasons-home .seasons-explore-winter {
     background: var(--primary);
-    color: var(--season-hover-text);
+    color: #fff;
 }
 
