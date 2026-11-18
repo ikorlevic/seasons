@@ -133,7 +133,7 @@
     min-width: 0;
     min-height: 166px;
     padding: 24px 14px;
-    border: 2px solid var(--secondary);
+    border: 2px solid var(--accent);
     border-radius: 17px;
     background: #fff;
     color: var(--text);
