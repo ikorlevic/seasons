@@ -40,7 +40,7 @@ $tasks = isset($seasonal_tasks[$garden_season]) ? $seasonal_tasks[$garden_season
         <div class="seasons-now-grid">
             <?php foreach ($tasks as $task) : ?>
                 <div class="seasons-now-item text-center">
-                    <span class="seasons-now-icon material-symbols-outlined" aria-hidden="true"><?php echo esc_html($task['icon']); ?></span>
+                    <span class="seasons-now-icon material-symbols-outlined d-inline-flex align-center jcc" aria-hidden="true"><?php echo esc_html($task['icon']); ?></span>
                     <h3><?php echo esc_html($task['title']); ?></h3>
                     <p><?php echo esc_html($task['description']); ?></p>
                 </div>
