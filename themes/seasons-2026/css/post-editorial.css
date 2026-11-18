@@ -131,3 +131,25 @@ body.ny .seasons-post-comments .comment-form .submit { color: #171717; }
     .seasons-post-comments .comment-form textarea,
     .seasons-post-comments .comment-form .submit { transition: none; }
 }
+
+/* The reply form is a distinct, softly framed surface; article content stays borderless. */
+.seasons-post-comments .comment-respond {
+    box-sizing: border-box;
+    max-width: 760px;
+    margin: 30px auto 0;
+    padding: clamp(24px, 4vw, 42px);
+    border: 1px solid rgba(60, 65, 55, .12);
+    border-radius: 18px;
+    background: #f8f8f5;
+    box-shadow: 0 8px 28px rgba(20, 30, 20, .055);
+}
+.seasons-post-comments .comment-respond .comment-reply-title { margin-bottom: 18px; }
+body.halloween .seasons-post-comments .comment-respond,
+body.ny .seasons-post-comments .comment-respond {
+    background: #34323b;
+    border-color: rgba(255, 255, 255, .15);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
+}
+@media (max-width: 600px) {
+    .seasons-post-comments .comment-respond { padding: 22px 18px; border-radius: 14px; }
+}
