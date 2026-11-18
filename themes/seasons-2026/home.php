@@ -7,7 +7,7 @@ get_header();
 ?>
 <main id="main-content" class="home seasons-home">
     <?php get_template_part('templates-part/season-highlights'); ?>
-    <?php get_template_part('templates-part/gardencare'); ?>
+    <?php // The legacy garden-care sidebar is intentionally not rendered here; it created an empty block before From My Garden. ?>
 
     <?php
     /*
