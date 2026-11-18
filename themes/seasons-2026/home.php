@@ -1,7 +1,7 @@
 <?php
 /**
  * Editorial homepage, inspired by the Seasonal Garden Theme prototype.
- * Keep the existing seasonal hero, highlights and garden-care templates.
+ * Keep the existing seasonal hero and seasonal highlights; garden notes are plugin-managed.
  */
 get_header();
 ?>
