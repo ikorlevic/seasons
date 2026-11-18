@@ -549,3 +549,49 @@ function seasons_enqueue_post_editorial_styles() {
     }
 }
 add_action('wp_enqueue_scripts', 'seasons_enqueue_post_editorial_styles');
+
+
+/**
+ * Editorial Gutenberg patterns: editable core blocks, no custom plugin required.
+ */
+add_action('init', function () {
+    if (!function_exists('register_block_pattern')) {
+        return;
+    }
+
+    register_block_pattern_category('seasons-editorial', array(
+        'label' => __('Seasons Editorial', 'seasons'),
+    ));
+
+    $tip = '<!-- wp:group {"className":"seasons-pro-tip","layout":{"type":"constrained"}} -->'
+        . '<div class="wp-block-group seasons-pro-tip">'
+        . '<!-- wp:paragraph {"className":"seasons-pro-tip-text"} -->'
+        . '<p class="seasons-pro-tip-text"><strong>Pro Tip:</strong> ' . esc_html__('Add your helpful advice here.', 'seasons') . '</p>'
+        . '<!-- /wp:paragraph -->'
+        . '</div><!-- /wp:group -->';
+
+    register_block_pattern('seasons/editorial-pro-tip', array(
+        'title' => __('Pro Tip', 'seasons'),
+        'description' => __('A seasonal tip box with editable text.', 'seasons'),
+        'categories' => array('seasons-editorial'),
+        'content' => $tip,
+    ));
+
+    $checklist = '<!-- wp:group {"className":"seasons-editorial-checklist","layout":{"type":"constrained"}} -->'
+        . '<div class="wp-block-group seasons-editorial-checklist">'
+        . '<!-- wp:heading {"level":2} --><h2>' . esc_html__('Your Seasonal Checklist', 'seasons') . '</h2><!-- /wp:heading -->'
+        . '<!-- wp:paragraph --><p>' . esc_html__('Introduce the tasks and why they matter.', 'seasons') . '</p><!-- /wp:paragraph -->'
+        . $tip
+        . '<!-- wp:list {"className":"seasons-checklist-items"} -->'
+        . '<ul class="seasons-checklist-items"><!-- wp:list-item --><li>' . esc_html__('First task', 'seasons') . '</li><!-- /wp:list-item -->'
+        . '<!-- wp:list-item --><li>' . esc_html__('Second task', 'seasons') . '</li><!-- /wp:list-item -->'
+        . '<!-- wp:list-item --><li>' . esc_html__('Third task', 'seasons') . '</li><!-- /wp:list-item --></ul><!-- /wp:list -->'
+        . '</div><!-- /wp:group -->';
+
+    register_block_pattern('seasons/editorial-checklist', array(
+        'title' => __('Seasonal Checklist', 'seasons'),
+        'description' => __('An editable checklist with an optional Pro Tip block.', 'seasons'),
+        'categories' => array('seasons-editorial'),
+        'content' => $checklist,
+    ));
+});
