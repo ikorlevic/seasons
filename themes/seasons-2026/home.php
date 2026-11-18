@@ -7,7 +7,15 @@ get_header();
 ?>
 <main id="main-content" class="home seasons-home">
     <?php get_template_part('templates-part/season-highlights'); ?>
-    <?php // The legacy garden-care sidebar is intentionally not rendered here; it created an empty block before From My Garden. ?>
+    <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-garden-now-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading">
+                <span class="seasons-home-eyebrow"><?php esc_html_e('The Garden', 'seasons'); ?></span>
+                <h2 id="seasons-garden-now-title"><?php esc_html_e('In the Garden Now', 'seasons'); ?></h2>
+            </div>
+            <?php get_template_part('templates-part/gardencare'); ?>
+        </div>
+    </section>
 
     <?php
     /*
@@ -62,7 +70,6 @@ get_header();
     <?php
     // Use real WordPress posts; no prototype-only articles or placeholder links.
     $sections = array(
-        array('title' => __('In the Garden Now', 'seasons'), 'intro' => __("What we're growing, doing and discovering this season.", 'seasons'), 'slugs' => array('garden', 'gardening'), 'class' => 'garden'),
         array('title' => __('From the Recipe Book', 'seasons'), 'intro' => __('Recipes for everyday cooking and seasonal celebrations.', 'seasons'), 'slugs' => array('recipes', 'recipe-book'), 'class' => 'recipes'),
         array('title' => __('At Home This Season', 'seasons'), 'intro' => __('Ideas for making the most of the season at home.', 'seasons'), 'slugs' => array('at-home', 'home'), 'class' => 'at-home'),
     );
