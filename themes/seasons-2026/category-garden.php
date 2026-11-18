@@ -14,48 +14,8 @@ get_header();
         $active_garden_season = 'winter';
     }
     ?>
-    <?php
-    // Load up to six editable notes for the current gardening season.
-    $garden_notes = new WP_Query(array(
-        'post_type' => 'garden_note',
-        'post_status' => 'publish',
-        'posts_per_page' => 6,
-        'meta_query' => array(array(
-            'key' => '_seasons_note_season',
-            'value' => $active_garden_season,
-        )),
-        'orderby' => array('menu_order' => 'ASC', 'date' => 'DESC'),
-        'ignore_sticky_posts' => true,
-    ));
-    if ($garden_notes->have_posts()) :
-    ?>
-    <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
-        <div class="seasons-home-container">
-            <div class="seasons-home-heading">
-                <span class="seasons-home-eyebrow"><?php esc_html_e('Personal Notes', 'seasons'); ?></span>
-                <h2 id="seasons-from-garden-title"><?php esc_html_e('From My Garden', 'seasons'); ?></h2>
-                <p><?php esc_html_e("Things I've learned growing through the seasons.", 'seasons'); ?></p>
-            </div>
-            <div class="seasons-garden-notes-grid seasons-garden-notes-count-<?php echo esc_attr((string) $garden_notes->post_count); ?>">
-                <?php while ($garden_notes->have_posts()) : $garden_notes->the_post();
-                    $note_label = get_post_meta(get_the_ID(), '_seasons_note_label', true);
-                    $note_tone = get_post_meta(get_the_ID(), '_seasons_note_tone', true);
-                    if (!in_array($note_tone, array('green', 'teal', 'blue', 'orange'), true)) {
-                        $note_tone = 'green';
-                    }
-                ?>
-                    <article class="seasons-garden-note">
-                        <?php if ($note_label) : ?>
-                            <span class="seasons-garden-note-label seasons-garden-note-<?php echo esc_attr($note_tone); ?>"><?php echo esc_html($note_label); ?></span>
-                        <?php endif; ?>
-                        <h3><?php the_title(); ?></h3>
-                        <div class="seasons-garden-note-body"><?php echo wpautop(esc_html(wp_strip_all_tags(get_the_content()))); ?></div>
-                    </article>
-                <?php endwhile; ?>
-            </div>
-        </div>
-    </section>
-    <?php endif; wp_reset_postdata(); ?>
+    <?php get_template_part('templates-part/category-seasonal-tips', null, array('area' => 'garden')); ?>
+    <?php get_template_part('templates-part/category-personal-notes', null, array('area' => 'garden')); ?>
 
     <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="garden-archive-title">
         <div class="seasons-home-container">
