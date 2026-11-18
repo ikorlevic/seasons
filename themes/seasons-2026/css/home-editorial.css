@@ -98,3 +98,18 @@
     .seasons-garden-notes-grid.seasons-garden-notes-count-4 { grid-template-columns: 1fr; }
     .seasons-home-from-garden .seasons-home-heading { margin-bottom: 30px; }
 }
+
+/* From Garden to Kitchen: one editorial seasonal recipe feature. */
+.seasons-home .seasons-home-garden-kitchen { background: #fff9f1; }
+.seasons-home-garden-kitchen .seasons-home-heading { margin-bottom: 34px; }
+.seasons-featured-recipe { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 5vw, 64px); }
+.seasons-featured-recipe-image { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 20px; background: #e9e5dc; }
+.seasons-featured-recipe-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.seasons-featured-recipe-content { min-width: 0; }
+.seasons-featured-recipe-content h3 { font: 600 clamp(28px, 3.5vw, 42px)/1.2 Georgia, 'Times New Roman', serif; margin: 12px 0 20px; }
+.seasons-home .seasons-featured-recipe-content h3 a { color: #4b2d23; text-decoration: none; }
+.seasons-home .seasons-featured-recipe-content h3 a:hover { text-decoration: underline; }
+.seasons-featured-recipe-content p { color: #766e67; font-size: 16px; line-height: 1.75; margin: 0 0 24px; }
+.seasons-home .seasons-featured-recipe-content .seasons-home-readmore { color: #456c45; text-decoration: none; }
+.seasons-home .seasons-featured-recipe-content .seasons-home-readmore:hover { text-decoration: underline; }
+@media (max-width: 700px) { .seasons-featured-recipe { grid-template-columns: 1fr; } }
