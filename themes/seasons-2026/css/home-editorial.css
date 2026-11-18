@@ -34,3 +34,15 @@
 .moto .season-selector-menu li { margin: 0; padding: 0; }
 .moto .season-selector-menu a { display: block; padding: 8px 10px; color: #29372c; text-decoration: none; }
 .moto .season-selector-menu a:hover, .moto .season-selector-menu a:focus-visible { background: #e9efe4; border-radius: 8px; }
+
+/* Seasonal highlights: editorial tiles, preserving existing season_high() content. */
+.seasons-home .seasons-highlights { background: #f2f0e8; text-align: left; }
+.seasons-home .seasons-highlights-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; }
+.seasons-home .seasons-highlight { padding: 32px 28px; border: 1px solid rgba(67,89,63,.12); border-radius: 20px; background: rgba(255,255,255,.72); text-align: left; min-width: 0; }
+.seasons-home .seasons-highlight-icon { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin-bottom: 22px; border-radius: 50%; background: #e5eadf; color: #4b6c4a; font-size: 28px; }
+.seasons-home .seasons-highlight h3 { font: 600 clamp(20px,2vw,26px)/1.25 Georgia,'Times New Roman',serif; color: #29372c; margin: 0 0 12px; }
+.seasons-home .seasons-highlight p { font-size: 15px; line-height: 1.7; color: #566053; margin: 0; }
+.seasons-home .seasons-highlight p a { color: #456c45; text-decoration: underline; }
+.seasons-home .seasons-home-card-link:hover .seasons-home-readmore { text-decoration: underline; }
+@media(max-width:800px) { .seasons-home .seasons-highlights-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:560px) { .seasons-home .seasons-highlights-grid { grid-template-columns: 1fr; gap: 14px; } .seasons-home .seasons-highlight { padding: 26px 22px; } }
