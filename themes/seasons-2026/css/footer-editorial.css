@@ -18,8 +18,8 @@
 .seasons-editorial-footer a { color: rgba(255,255,255,.84); text-decoration: none; font-size: 14px; line-height: 1.5; }
 .seasons-editorial-footer a:hover, .seasons-editorial-footer a:focus-visible { color: #fff; text-decoration: underline; }
 .seasons-footer-extra { margin-top: 26px; }
-.seasons-footer-extra ul { display: flex; gap: 12px 24px; flex-wrap: wrap; }
-.seasons-footer-bottom { border-top: 1px solid rgba(255,255,255,.2); padding-top: 26px; margin-top: 48px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: rgba(255,255,255,.72); }
+.seasons-footer-extra ul { gap: 12px 24px; flex-wrap: wrap; }
+.seasons-footer-bottom { border-top: 1px solid rgba(255,255,255,.2); padding-top: 26px; margin-top: 48px; gap: 16px; flex-wrap: wrap; font-size: 12px; color: rgba(255,255,255,.72); }
 .seasons-footer-bottom span { font-family: Georgia, serif; font-style: italic; }
 @media(max-width: 1050px) { .seasons-footer-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 34px; } }
 @media(max-width: 600px) { .seasons-editorial-footer { padding: 48px 20px 26px; } .seasons-footer-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px 18px; } .seasons-footer-brand { grid-column: 1 / -1; } .seasons-footer-bottom { margin-top: 36px; } }
