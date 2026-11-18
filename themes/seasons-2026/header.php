@@ -6,8 +6,6 @@
  * Time: 18:07
  */
 
- ini_set("display_errors",1);
-
 // use util\SeasonsIndicator;
 //   include get_template_directory().'/util/SeasonsIndicator.php';
 //   $seasonsIndicator = new SeasonsIndicator();
@@ -30,7 +28,7 @@
     <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="alternate" href="http://prood-os.com<?php echo parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH); ?>" hreflang="en" />
+    
     <meta http-equiv="content-language" content="en">
     <meta name="msvalidate.01" content="6740AAFC7566B4907FF1CAB0449ACECF" />
 <!--    <title>--><?php //echo wp_title()?><!--</title>-->
@@ -47,9 +45,7 @@
             enable_page_level_ads: true
         });
     </script>
-    <style>
-        html, body{ padding:0; margin: 0; font-family: Arial, Helvetica, sans-serif; }
-        body article{ display:none; }</style>
+    <style>html, body { padding:0; margin:0; font-family:Arial, Helvetica, sans-serif; }</style>
     <?php wp_head();?>
 </head>
 <?php
