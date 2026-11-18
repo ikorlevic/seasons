@@ -4,3 +4,37 @@
 .header-main .seasons-header-weather img { max-height: 24px; width: auto; }
 .header-main .seasons-header-weather .pdsweather-city, .header-main .seasons-header-weather .pdsweather-feels-like, .header-main .seasons-header-weather .pdsweather-description, .header-main .seasons-header-weather .pdsweather-aqi, .header-main .seasons-header-weather .pdsweather-uv { display: none; }
 @media (max-width: 650px) { .header-main .seasons-header-weather { padding: 5px 9px; max-width: 115px; font-size: 12px; } }
+
+/* Editorial top navigation: override legacy oversized menu rules without changing the hero. */
+header.top { background: #fffaf5; box-shadow: 0 1px 8px rgba(48,36,27,.09); }
+header.top .header-main {
+    min-height: 84px;
+    padding: 12px clamp(18px, 3vw, 48px);
+    gap: clamp(14px, 2vw, 30px);
+    justify-content: space-between;
+}
+header.top .header-main > h2 {
+    margin: 0;
+    flex: 0 0 auto;
+    font: 600 clamp(20px, 2vw, 27px)/1.2 Georgia, 'Times New Roman', serif;
+    color: #4b2d23;
+    cursor: pointer;
+}
+header.top .menu-top {
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1.4;
+    flex: 0 1 auto;
+    min-width: 0;
+}
+header.top .menu-top ul { margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 28px; }
+header.top .menu-top ul li { font-size: inherit; line-height: inherit; margin: 0; }
+header.top .menu-top ul li a { color: #4b2d23; font-weight: 600; letter-spacing: .08em; }
+header.top .menu-top ul li a:hover, header.top .menu-top ul li a:focus-visible { color: #a35e35; }
+header.top .header-main .toggle.right { flex: 0 0 auto; cursor: pointer; }
+header.top .header-main .toggle.right svg { display: block; width: 30px; height: 30px; }
+@media (max-width: 760px) {
+    header.top .header-main { flex-wrap: wrap; justify-content: space-between; }
+    header.top .menu-top { order: 3; flex: 1 0 100%; }
+    header.top .menu-top ul { gap: 8px 18px; }
+}
