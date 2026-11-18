@@ -15,7 +15,7 @@
   $season = $actualSeason;
 
   // Garden is a content category, not a seasonal skin.
-  if (is_category('garden')) {
+  if (is_category(array('garden', 'recipe-book', 'recipes', 'at-home'))) {
       $season = $actualSeason;
   } elseif(is_home()) {
       $season = $actualSeason;
