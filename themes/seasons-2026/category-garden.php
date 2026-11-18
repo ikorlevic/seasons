@@ -6,7 +6,6 @@
 get_header();
 ?>
 <main id="main-content" class="home seasons-home seasons-garden-archive">
-    <?php get_template_part('templates-part/season-highlights'); ?>
     <?php
     $active_garden_season = current_season();
     if ($active_garden_season === 'halloween') {
@@ -15,41 +14,6 @@ get_header();
         $active_garden_season = 'winter';
     }
     ?>
-    <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="garden-archive-title">
-        <div class="seasons-home-container">
-            <div class="seasons-home-heading text-center">
-                <span class="seasons-home-eyebrow"><?php esc_html_e('The Garden', 'seasons'); ?></span>
-                <h1 id="garden-archive-title"><?php single_cat_title(); ?></h1>
-                <?php if (category_description()) : ?>
-                    <div class="seasons-garden-archive-description"><?php echo wp_kses_post(category_description()); ?></div>
-                <?php endif; ?>
-            </div>
-            <?php if (have_posts()) : ?>
-                <div class="seasons-home-grid seasons-garden-now-grid">
-                    <?php while (have_posts()) : the_post(); ?>
-                        <article <?php post_class('seasons-home-card'); ?>>
-                            <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
-                                <?php endif; ?>
-                                <div class="seasons-home-card-content">
-                                    <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
-                                    <h3><?php the_title(); ?></h3>
-                                    <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
-                                    <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
-                                </div>
-                            </a>
-                        </article>
-                    <?php endwhile; ?>
-                </div>
-                <nav class="seasons-garden-pagination" aria-label="<?php esc_attr_e('Garden posts pagination', 'seasons'); ?>">
-                    <?php the_posts_pagination(array('mid_size' => 2, 'prev_text' => __('Previous', 'seasons'), 'next_text' => __('Next', 'seasons'))); ?>
-                </nav>
-            <?php else : ?>
-                <p><?php esc_html_e('No garden posts found yet.', 'seasons'); ?></p>
-            <?php endif; ?>
-        </div>
-    </section>
     <?php
     // Load up to six editable notes for the current gardening season.
     $garden_notes = new WP_Query(array(
@@ -93,6 +57,41 @@ get_header();
     </section>
     <?php endif; wp_reset_postdata(); ?>
 
+    <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="garden-archive-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading text-center">
+                <span class="seasons-home-eyebrow"><?php esc_html_e('The Garden', 'seasons'); ?></span>
+                <h1 id="garden-archive-title"><?php single_cat_title(); ?></h1>
+                <?php if (category_description()) : ?>
+                    <div class="seasons-garden-archive-description"><?php echo wp_kses_post(category_description()); ?></div>
+                <?php endif; ?>
+            </div>
+            <?php if (have_posts()) : ?>
+                <div class="seasons-home-grid seasons-garden-now-grid">
+                    <?php while (have_posts()) : the_post(); ?>
+                        <article <?php post_class('seasons-home-card'); ?>>
+                            <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
+                                <?php endif; ?>
+                                <div class="seasons-home-card-content">
+                                    <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
+                                    <h3><?php the_title(); ?></h3>
+                                    <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
+                                    <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
+                                </div>
+                            </a>
+                        </article>
+                    <?php endwhile; ?>
+                </div>
+                <nav class="seasons-garden-pagination" aria-label="<?php esc_attr_e('Garden posts pagination', 'seasons'); ?>">
+                    <?php the_posts_pagination(array('mid_size' => 2, 'prev_text' => __('Previous', 'seasons'), 'next_text' => __('Next', 'seasons'))); ?>
+                </nav>
+            <?php else : ?>
+                <p><?php esc_html_e('No garden posts found yet.', 'seasons'); ?></p>
+            <?php endif; ?>
+        </div>
+    </section>
     <?php
     // The four gardening seasons only; holiday skins are intentionally excluded.
     $explore_seasons = array(
@@ -100,7 +99,8 @@ get_header();
         'summer' => array('title' => __('Summer', 'seasons'), 'description' => __('Abundance & Vitality', 'seasons'), 'icon' => 'sunny'),
         'autumn' => array('title' => __('Fall', 'seasons'), 'description' => __('Harvest & Transition', 'seasons'), 'icon' => 'eco'),
         'winter' => array('title' => __('Winter', 'seasons'), 'description' => __('Rest & Planning', 'seasons'), 'icon' => 'ac_unit'),
-    );    ?>
+    );
+    ?>
     <section class="seasons-home-section seasons-home-explore" aria-labelledby="seasons-explore-title">
         <div class="seasons-home-container">
             <div class="seasons-home-heading text-center">
