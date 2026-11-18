@@ -160,3 +160,7 @@
 .seasons-garden-pagination .nav-links { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; }
 .seasons-garden-pagination .page-numbers { display: inline-block; padding: 9px 14px; border-radius: 8px; background: #fff; color: #456c45; text-decoration: none; }
 .seasons-garden-pagination .page-numbers.current { background: #456c45; color: #fff; }
+
+/* Keep the photographic seasonal hero on Garden, but give the content priority. */
+body.garden-category .moto { min-height: 300px; padding-top: 28px; padding-bottom: 28px; }
+@media (max-width: 650px) { body.garden-category .moto { min-height: 240px; } }
