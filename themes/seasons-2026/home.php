@@ -74,10 +74,7 @@ get_header();
     <?php
     // Feature an existing seasonal soup first, falling back to another seasonal recipe.
     // Both category assignments are required to avoid unrelated articles.
-    $recipe_category = get_category_by_slug('recipes');
-    if (!$recipe_category) {
-        $recipe_category = get_category_by_slug('recipe-book');
-    }
+    $recipe_category = seasons_first_category(array('recipes', 'recipe-book'));
     $featured_recipe = null;
     if ($season_category && $recipe_category) {
         $featured_recipe_args = array(
@@ -107,14 +104,7 @@ get_header();
     );
 
     foreach ($sections as $section) :
-        $category = null;
-        foreach ($section['slugs'] as $slug) {
-            $candidate = get_category_by_slug($slug);
-            if ($candidate) {
-                $category = $candidate;
-                break;
-            }
-        }
+        $category = seasons_first_category($section['slugs']);
         // Never invent category associations: hide sections until a matching category exists.
         if (!$category) {
             continue;
