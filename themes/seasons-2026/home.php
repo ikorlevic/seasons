@@ -63,20 +63,8 @@ get_header();
                 <p><?php esc_html_e("Things I've learned growing through the seasons.", 'seasons'); ?></p>
             </div>
             <div class="seasons-garden-notes-grid seasons-garden-notes-count-<?php echo esc_attr((string) $garden_notes->post_count); ?>">
-                <?php while ($garden_notes->have_posts()) : $garden_notes->the_post();
-                    $note_label = get_post_meta(get_the_ID(), '_seasons_note_label', true);
-                    $note_tone = get_post_meta(get_the_ID(), '_seasons_note_tone', true);
-                    if (!in_array($note_tone, array('green', 'teal', 'blue', 'orange'), true)) {
-                        $note_tone = 'green';
-                    }
-                ?>
-                    <article class="seasons-garden-note">
-                        <?php if ($note_label) : ?>
-                            <span class="seasons-garden-note-label seasons-garden-note-<?php echo esc_attr($note_tone); ?>"><?php echo esc_html($note_label); ?></span>
-                        <?php endif; ?>
-                        <h3><?php the_title(); ?></h3>
-                        <div class="seasons-garden-note-body"><?php echo wpautop(esc_html(wp_strip_all_tags(get_the_content()))); ?></div>
-                    </article>
+                <?php while ($garden_notes->have_posts()) : $garden_notes->the_post(); ?>
+                    <?php get_template_part('templates-part/personal-note-card'); ?>
                 <?php endwhile; ?>
             </div>
         </div>
