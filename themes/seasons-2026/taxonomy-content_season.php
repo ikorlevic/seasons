@@ -5,23 +5,18 @@
  */
 get_header();
 $seasons_term = get_queried_object();
-$seasons_title = $seasons_term instanceof WP_Term ? $seasons_term->name : __('Season', 'seasons');
 $seasons_description = term_description();
 ?>
 <main id="main-content" class="home seasons-home seasons-category-editorial seasons-season-archive">
-    <section class="seasons-home-section seasons-season-archive-intro" aria-labelledby="seasons-season-archive-title">
+    <?php if ($seasons_description) : ?>
+    <section class="seasons-home-section seasons-season-archive-intro" aria-label="<?php esc_attr_e('About this season', 'seasons'); ?>">
         <div class="seasons-home-container">
             <div class="seasons-home-heading text-center">
-                <span class="seasons-home-eyebrow"><?php esc_html_e('Explore the Seasons', 'seasons'); ?></span>
-                <h1 id="seasons-season-archive-title"><?php echo esc_html($seasons_title); ?></h1>
-                <?php if ($seasons_description) : ?>
-                    <div class="seasons-season-archive-description"><?php echo wp_kses_post($seasons_description); ?></div>
-                <?php else : ?>
-                    <p><?php echo esc_html(sprintf(__('Ideas and inspiration for %s across the garden, kitchen, home and DIY.', 'seasons'), $seasons_title)); ?></p>
-                <?php endif; ?>
+                <div class="seasons-season-archive-description"><?php echo wp_kses_post($seasons_description); ?></div>
             </div>
         </div>
     </section>
+    <?php endif; ?>
     <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-season-stories-title">
         <div class="seasons-home-container">
             <div class="seasons-home-heading text-center">
