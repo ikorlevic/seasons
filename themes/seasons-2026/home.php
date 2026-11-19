@@ -42,17 +42,7 @@ get_header();
 
     <?php
     // Load up to six editable notes for the current gardening season.
-    $garden_notes = new WP_Query(array(
-        'post_type' => 'garden_note',
-        'post_status' => 'publish',
-        'posts_per_page' => 6,
-        'meta_query' => array(array(
-            'key' => '_seasons_note_season',
-            'value' => $active_garden_season,
-        )),
-        'orderby' => array('menu_order' => 'ASC', 'date' => 'DESC'),
-        'ignore_sticky_posts' => true,
-    ));
+    $garden_notes = seasons_personal_notes_query('garden_note', $active_garden_season);
     if ($garden_notes->have_posts()) :
     ?>
     <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
