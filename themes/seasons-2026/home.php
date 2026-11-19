@@ -10,11 +10,16 @@ get_header();
     <?php
     // Holiday skins use their gardening season without changing activation dates.
     $active_garden_season = seasons_content_season();
-    $season_category = get_category_by_slug($active_garden_season);
+    $season_term = get_term_by('slug', $active_garden_season, 'content_season');
     $garden_category = get_category_by_slug('garden');
-    // Only posts assigned to BOTH the active season and Garden belong here.
-    $season_post = ($season_category && $garden_category) ? new WP_Query(array(
-        'category__and' => array((int) $season_category->term_id, (int) $garden_category->term_id),
+    // Only Garden posts assigned to the active editorial season belong here.
+    $season_post = ($season_term && $garden_category) ? new WP_Query(array(
+        'cat' => (int) $garden_category->term_id,
+        'tax_query' => array(array(
+            'taxonomy' => 'content_season',
+            'field' => 'term_id',
+            'terms' => array((int) $season_term->term_id),
+        )),
         'posts_per_page' => 3,
         'orderby' => 'date',
         'order' => 'DESC',
@@ -33,7 +38,7 @@ get_header();
                     <?php get_template_part('templates-part/editorial-post-card', null, array('meta' => ucfirst($active_garden_season))); ?>
                 <?php endwhile; ?>
             </div>
-            <a class="seasons-home-more" href="<?php echo esc_url(get_category_link($season_category->term_id)); ?>">
+            <a class="seasons-home-more" href="<?php echo esc_url(get_term_link($season_term)); ?>">
                 <?php esc_html_e('Explore the season', 'seasons'); ?> &rarr;
             </a>
         </div>
@@ -66,11 +71,16 @@ get_header();
     // Both category assignments are required to avoid unrelated articles.
     $recipe_category = seasons_first_category(array('recipes', 'recipe-book'));
     $featured_recipe = null;
-    if ($season_category && $recipe_category) {
+    if ($season_term && $recipe_category) {
         $featured_recipe_args = array(
             'post_type' => 'post',
             'post_status' => 'publish',
-            'category__and' => array((int) $season_category->term_id, (int) $recipe_category->term_id),
+            'cat' => (int) $recipe_category->term_id,
+            'tax_query' => array(array(
+                'taxonomy' => 'content_season',
+                'field' => 'term_id',
+                'terms' => array((int) $season_term->term_id),
+            )),
             'posts_per_page' => 1,
             'ignore_sticky_posts' => true,
             'no_found_rows' => true,
