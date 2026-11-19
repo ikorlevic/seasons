@@ -9,7 +9,9 @@ $headings = array(
 if (!isset($headings[$area]) || !function_exists('sst_get_tips')) {
     return;
 }
-$season = seasons_content_season();
+$season = isset($args['season']) && in_array($args['season'], array('spring', 'summer', 'autumn', 'winter'), true)
+    ? $args['season']
+    : seasons_content_season();
 $tips = sst_get_tips($area, $season);
 if (!$tips->have_posts()) {
     wp_reset_postdata();
