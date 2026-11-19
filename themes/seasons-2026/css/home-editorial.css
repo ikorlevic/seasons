@@ -141,7 +141,6 @@
     box-shadow: 0 3px 5px rgba(0,0,0,.1);
     transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
-.seasons-home .seasons-explore-autumn { --season-hover-text: #fff; }
 .seasons-explore-card-icon { display: block; font-size: 38px; line-height: 1; font-weight: 400; }
 .seasons-explore-card-label { display: block; font: 700 18px/1.25 Arial, sans-serif; }
 .seasons-explore-card-description { display: block; font: 500 14px/1.4 Arial, sans-serif; color: inherit; opacity: .85; }
