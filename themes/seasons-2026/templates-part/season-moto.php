@@ -16,15 +16,13 @@
   if (is_tax('content_season')) {
       $hero_images = array(
           'spring' => 'spring.jpg',
+          'summer' => 'back1.jpg',
           'autumn' => 'autumn.jpg',
           'winter' => 'winter.png',
       );
       if (isset($hero_images[$season])) {
           $hero_url = get_theme_file_uri('images/' . $hero_images[$season]);
           $archive_hero_style = 'background-image: linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16)), url("' . esc_url($hero_url) . '");';
-      } elseif ($season === 'summer') {
-          // No summer photograph is currently committed to the theme.
-          $archive_hero_style = 'background-image: linear-gradient(130deg, #247f72, #83bda2 60%, #f1d68c);';
       }
   }
 ?>
