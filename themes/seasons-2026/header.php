@@ -77,12 +77,6 @@
             <?php wp_nav_menu(array( 'theme_location' => 'header_top',"container_class"=>"navigation" ))?>
         </nav>
 
-        <?php if (function_exists('pdsweather_display')) : ?>
-            <div class="seasons-header-weather d-inline-flex align-center jcc" aria-label="<?php esc_attr_e('Current weather', 'seasons'); ?>">
-                <?php echo pdsweather_display(); ?>
-            </div>
-        <?php endif; ?>
-
         <div class="toggle right" rel="#search-container">
             <svg width="43" height="43" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M31.0367 15.9441C31.0367 24.1568 24.503 30.7835 16.4812 30.7835C8.45936 30.7835 1.92566 24.1568 1.92566 15.9441C1.92566 7.73129 8.45936 1.10455 16.4812 1.10455C24.503 1.10455 31.0367 7.73129 31.0367 15.9441Z" stroke="black" stroke-width="2"/>
