@@ -446,6 +446,9 @@ nav.mobile-menu ul {
 .moto.summer {
     background-image: linear-gradient(130deg, rgba(10, 74, 67, .50), rgba(26, 106, 84, .20)),
         url("../../images/summer.png");
+    /* Keep the flowers framed consistently within the hero rather than the viewport. */
+    background-attachment: scroll;
+    background-position: center 30%;
 }
 .moto.autumn {
     background-image: linear-gradient(130deg, rgba(83, 39, 20, .50), rgba(122, 62, 24, .18)),
