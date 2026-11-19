@@ -583,3 +583,114 @@ nav.mobile-menu ul {
 @media (min-width: 768px) {
     header.top nav.menu-top { display: block; }
 }
+
+
+/* Figma seasonal hero controls: selector and weather as paired glass pills. */
+.seasons-hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 1.5rem;
+}
+
+.seasons-hero-actions .season-selector,
+.seasons-hero-actions .seasons-hero-weather {
+    flex: 0 0 auto;
+}
+
+.seasons-hero-actions .season-selector-details {
+    position: relative;
+}
+
+.seasons-hero-actions .season-selector-trigger,
+.seasons-hero-actions .seasons-hero-weather {
+    box-sizing: border-box;
+    min-height: 43px;
+    border: 1px solid rgba(255,255,255,.42);
+    border-radius: 999px;
+    background: rgba(255,255,255,.23);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.seasons-hero-actions .season-selector-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 11px 19px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.seasons-hero-actions .season-selector-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.seasons-hero-actions .season-selector-trigger::before {
+    content: "♧";
+    font-size: 17px;
+    line-height: 1;
+}
+
+.seasons-hero-actions .season-selector-trigger::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+}
+
+.seasons-hero-actions .seasons-hero-weather {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 15px;
+    white-space: nowrap;
+}
+
+.seasons-hero-actions .seasons-hero-weather,
+.seasons-hero-actions .seasons-hero-weather * {
+    color: #fff;
+}
+
+.seasons-hero-actions .seasons-hero-weather > * {
+    margin: 0;
+}
+
+.seasons-hero-actions .seasons-hero-weather img,
+.seasons-hero-actions .seasons-hero-weather svg {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    max-width: 20px;
+}
+
+.seasons-hero-actions .season-selector-menu {
+    top: calc(100% + 7px);
+    left: 0;
+    width: max-content;
+    min-width: 125px;
+}
+
+@media (max-width: 767px) {
+    .seasons-hero-actions {
+        gap: 10px;
+        margin-top: 1rem;
+        padding: 0 12px;
+    }
+    .seasons-hero-actions .season-selector-trigger,
+    .seasons-hero-actions .seasons-hero-weather {
+        min-height: 42px;
+        font-size: 13px;
+    }
+}
