@@ -27,9 +27,7 @@ get_header();
                         <?php get_template_part('templates-part/editorial-post-card', null, array()); ?>
                     <?php endwhile; ?>
                 </div>
-                <nav class="seasons-garden-pagination" aria-label="<?php esc_attr_e('Garden posts pagination', 'seasons'); ?>">
-                    <?php the_posts_pagination(array('mid_size' => 2, 'prev_text' => __('Previous', 'seasons'), 'next_text' => __('Next', 'seasons'))); ?>
-                </nav>
+                <?php get_template_part('templates-part/editorial-pagination', null, array('label' => __('Garden posts pagination', 'seasons'))); ?>
             <?php else : ?>
                 <p><?php esc_html_e('No garden posts found yet.', 'seasons'); ?></p>
             <?php endif; ?>
