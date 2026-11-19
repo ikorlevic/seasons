@@ -33,7 +33,6 @@
 .seasons-post-gallery p { font-size: 14px; }
 .seasons-post-comments { margin-top: 40px; background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: clamp(22px, 5vw, 52px); color: var(--text, #342f2a); }
 .seasons-post-comments input:not([type=submit]), .seasons-post-comments textarea { max-width: 100%; }
-.seasons-post-comments a { color: var(--text, #342f2a); }
 body.halloween .seasons-post-page, body.ny .seasons-post-page { background: #24232a; --text: #fff; }
 body.halloween .seasons-post-article, body.ny .seasons-post-article, body.halloween .seasons-post-comments, body.ny .seasons-post-comments { background: transparent; color: #fff; }
 body.halloween .seasons-post-meta, body.ny .seasons-post-meta, body.halloween .seasons-post-summary, body.ny .seasons-post-summary, body.halloween .seasons-post-featured figcaption, body.ny .seasons-post-featured figcaption, body.halloween .seasons-post-body figcaption, body.ny .seasons-post-body figcaption { color: var(--text); }
@@ -43,7 +42,6 @@ body.halloween .seasons-post-body a, body.ny .seasons-post-body a, body.hallowee
 
 
 /* WordPress comments: an open editorial layout, not a card. */
-.seasons-post-comments { color: var(--text, #342f2a); }
 .seasons-post-comments .comments-title,
 .seasons-post-comments .comment-reply-title {
     font: 600 clamp(26px, 3vw, 34px)/1.25 Georgia, 'Times New Roman', serif;
@@ -64,7 +62,6 @@ body.halloween .seasons-post-body a, body.ny .seasons-post-body a, body.hallowee
 .seasons-post-comments .comment-content p { margin: 0 0 14px; }
 .seasons-post-comments .reply { font-size: 13px; font-weight: 700; }
 .seasons-post-comments .comment-navigation { margin: 18px 0; }
-.seasons-post-comments .comment-respond { max-width: 760px; }
 .seasons-post-comments .comment-notes,
 .seasons-post-comments .logged-in-as,
 .seasons-post-comments .comment-form-cookies-consent { font-size: 14px; line-height: 1.6; }
