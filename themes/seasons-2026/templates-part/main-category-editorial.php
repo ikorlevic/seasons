@@ -19,7 +19,7 @@ get_header();
         // Feature a real recipe post from this category, prioritizing soup and the active season.
         $season = seasons_content_season();
         $recipe_term = get_queried_object();
-        $season_term = get_category_by_slug($season);
+        $season_term = get_term_by('slug', $season, 'content_season');
         $soup_term = seasons_first_category(array('soup', 'soups'));
         $base = array(
             'post_type' => 'post',
@@ -29,19 +29,27 @@ get_header();
             'orderby' => 'date',
             'category__in' => array((int) $recipe_term->term_id),
         );
-        $filters = array();
-        if ($season_term && $soup_term) { $filters[] = array((int) $season_term->term_id, (int) $soup_term->term_id); }
-        if ($season_term) { $filters[] = array((int) $season_term->term_id); }
-        $filters[] = array();
         $candidates = array();
-        foreach ($filters as $extra) {
-            $query_args = $base;
-            if ($extra) {
-                $query_args['category__and'] = array_merge(array((int) $recipe_term->term_id), $extra);
-                unset($query_args['category__in']);
+        if ($season_term && !is_wp_error($season_term)) {
+            $seasonal = $base;
+            $seasonal['tax_query'] = array(array(
+                'taxonomy' => 'content_season',
+                'field' => 'term_id',
+                'terms' => array((int) $season_term->term_id),
+            ));
+            if ($soup_term) {
+                $seasonal_soup = $seasonal;
+                $seasonal_soup['category__and'] = array(
+                    (int) $recipe_term->term_id,
+                    (int) $soup_term->term_id,
+                );
+                unset($seasonal_soup['category__in']);
+                $candidates[] = $seasonal_soup;
             }
-            $candidates[] = $query_args;
+            $candidates[] = $seasonal;
         }
+        // Preserve the category landing page's existing evergreen fallback.
+        $candidates[] = $base;
         $featured = seasons_first_matching_query($candidates);
         if ($featured) :
     ?>
