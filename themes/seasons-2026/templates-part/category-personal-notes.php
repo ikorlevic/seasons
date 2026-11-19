@@ -12,12 +12,7 @@ $config = array(
 if (!isset($config[$area]) || !post_type_exists($config[$area]['type'])) {
     return;
 }
-$season = current_season();
-if ($season === 'halloween') {
-    $season = 'autumn';
-} elseif (in_array($season, array('yule', 'ny', 'valentines'), true)) {
-    $season = 'winter';
-}
+$season = seasons_content_season();
 $notes = new WP_Query(array(
     'post_type' => $config[$area]['type'],
     'post_status' => 'publish',
