@@ -71,7 +71,9 @@
         <!-- img alt="Seasons In Garden" onclick="window.location='<?php echo esc_url(home_url("/"))?>'" class="logo" src="<?php echo get_template_directory_uri()?>/images/logo/logo-<?php echo $season?>.svg" alt="Seasons in the garden, works and all" -->
         <h2 onclick="window.location='<?php echo esc_url(home_url("/"))?>'">Seasons in Garden</h2>
 
-        <nav class="menu-top " >
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="primary-site-navigation" aria-label="<?php esc_attr_e('Open menu', 'seasons'); ?>" onclick="var nav=document.getElementById('primary-site-navigation'); var open=this.getAttribute('aria-expanded')!=='true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); this.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); nav.classList.toggle('open',open);"><span class="mobile-nav-toggle-icon" aria-hidden="true"></span></button>
+
+        <nav class="menu-top" id="primary-site-navigation" aria-label="<?php esc_attr_e('Primary navigation', 'seasons'); ?>">
             <?php wp_nav_menu(array( 'theme_location' => 'header_top',"container_class"=>"navigation" ))?>
         </nav>
 
