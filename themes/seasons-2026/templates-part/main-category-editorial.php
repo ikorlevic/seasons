@@ -20,8 +20,7 @@ get_header();
         $season = seasons_content_season();
         $recipe_term = get_queried_object();
         $season_term = get_category_by_slug($season);
-        $soup_term = get_category_by_slug('soup');
-        if (!$soup_term) { $soup_term = get_category_by_slug('soups'); }
+        $soup_term = seasons_first_category(array('soup', 'soups'));
         $base = array(
             'post_type' => 'post',
             'post_status' => 'publish',
