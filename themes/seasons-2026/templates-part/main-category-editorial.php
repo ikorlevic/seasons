@@ -29,21 +29,20 @@ get_header();
             'orderby' => 'date',
             'category__in' => array((int) $recipe_term->term_id),
         );
-        $featured = null;
         $filters = array();
         if ($season_term && $soup_term) { $filters[] = array((int) $season_term->term_id, (int) $soup_term->term_id); }
         if ($season_term) { $filters[] = array((int) $season_term->term_id); }
         $filters[] = array();
+        $candidates = array();
         foreach ($filters as $extra) {
             $query_args = $base;
             if ($extra) {
                 $query_args['category__and'] = array_merge(array((int) $recipe_term->term_id), $extra);
                 unset($query_args['category__in']);
             }
-            $candidate = new WP_Query($query_args);
-            if ($candidate->have_posts()) { $featured = $candidate; break; }
-            wp_reset_postdata();
+            $candidates[] = $query_args;
         }
+        $featured = seasons_first_matching_query($candidates);
         if ($featured) :
     ?>
     <?php get_template_part('templates-part/featured-seasonal-recipe', null, array('query' => $featured, 'season' => $season)); ?>
