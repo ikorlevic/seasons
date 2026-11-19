@@ -31,19 +31,7 @@ $seasons_description = term_description();
             <?php if (have_posts()) : ?>
                 <div class="seasons-home-grid seasons-garden-now-grid">
                     <?php while (have_posts()) : the_post(); ?>
-                        <article <?php post_class('seasons-home-card'); ?>>
-                            <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
-                                <?php endif; ?>
-                                <div class="seasons-home-card-content">
-                                    <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
-                                    <h3><?php the_title(); ?></h3>
-                                    <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
-                                    <span class="seasons-home-readmore"><?php esc_html_e('Read more', 'seasons'); ?> &rarr;</span>
-                                </div>
-                            </a>
-                        </article>
+                        <?php get_template_part('templates-part/editorial-post-card', null, array('readmore' => __('Read more', 'seasons'))); ?>
                     <?php endwhile; ?>
                 </div>
                 <nav class="seasons-garden-pagination" aria-label="<?php esc_attr_e('Seasonal articles pagination', 'seasons'); ?>">
