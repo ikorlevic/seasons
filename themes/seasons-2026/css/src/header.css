@@ -438,21 +438,20 @@ nav.mobile-menu ul {
 
 
 
-/* Editorial season archives follow the selected season, not today's visual skin.
-   Override the legacy autumn-only hero image on these archives alone. */
-body.content-season-archive.spring .moto {
+/* Hero imagery follows the season class on the hero itself, independent of body classes. */
+.moto.spring {
     background-image: linear-gradient(130deg, rgba(23, 70, 41, .52), rgba(73, 131, 75, .22)),
         url("../../images/spring.jpg");
 }
-body.content-season-archive.summer .moto {
+.moto.summer {
     background-image: linear-gradient(130deg, rgba(10, 74, 67, .50), rgba(26, 106, 84, .20)),
         url("../../images/back.jpg");
 }
-body.content-season-archive.autumn .moto {
+.moto.autumn {
     background-image: linear-gradient(130deg, rgba(83, 39, 20, .50), rgba(122, 62, 24, .18)),
         url("../../images/autumn.jpg");
 }
-body.content-season-archive.winter .moto {
+.moto.winter {
     background-image: linear-gradient(130deg, rgba(21, 56, 85, .55), rgba(58, 99, 135, .22)),
         url("../../images/winter.png");
 }
