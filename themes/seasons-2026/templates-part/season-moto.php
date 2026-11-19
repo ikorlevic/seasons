@@ -22,7 +22,10 @@
       );
       if (isset($hero_images[$season])) {
           $hero_url = get_theme_file_uri('images/' . $hero_images[$season]);
-          $archive_hero_style = 'background-image: linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16)), url("' . esc_url($hero_url) . '");';
+          $hero_overlay = $season === 'winter'
+              ? 'linear-gradient(130deg, rgba(25, 58, 89, .43), rgba(89, 135, 166, .22))'
+              : 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
+          $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
       }
   }
 ?>
