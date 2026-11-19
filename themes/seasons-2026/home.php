@@ -30,7 +30,7 @@ get_header();
             </div>
             <div class="seasons-home-grid seasons-garden-now-grid">
                 <?php while ($season_post->have_posts()) : $season_post->the_post(); ?>
-                    <?php get_template_part('templates-part/editorial-post-card', null, array('meta' => ucfirst($active_garden_season), )); ?>
+                    <?php get_template_part('templates-part/editorial-post-card', null, array('meta' => ucfirst($active_garden_season))); ?>
                 <?php endwhile; ?>
             </div>
             <a class="seasons-home-more" href="<?php echo esc_url(get_category_link($season_category->term_id)); ?>">
