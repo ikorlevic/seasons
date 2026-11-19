@@ -5,18 +5,10 @@
  */
 get_header();
 $seasons_term = get_queried_object();
-$seasons_description = term_description();
+$archive_season = $seasons_term instanceof WP_Term ? $seasons_term->slug : seasons_content_season();
 ?>
 <main id="main-content" class="home seasons-home seasons-category-editorial seasons-season-archive">
-    <?php if ($seasons_description) : ?>
-    <section class="seasons-home-section seasons-season-archive-intro" aria-label="<?php esc_attr_e('About this season', 'seasons'); ?>">
-        <div class="seasons-home-container">
-            <div class="seasons-home-heading text-center">
-                <div class="seasons-season-archive-description"><?php echo wp_kses_post($seasons_description); ?></div>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
+    <?php get_template_part('templates-part/category-seasonal-tips', null, array('area' => 'garden', 'season' => $archive_season)); ?>
     <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-season-stories-title">
         <div class="seasons-home-container">
             <div class="seasons-home-heading text-center">
