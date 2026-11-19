@@ -60,7 +60,7 @@
         </details>
     </div>
     <?php if (function_exists('pdsweather_display')) : ?>
-        <div class="weather seasons-hero-weather" aria-label="<?php esc_attr_e('Current weather', 'seasons'); ?>">
+        <div class="seasons-hero-weather" aria-label="<?php esc_attr_e('Current weather', 'seasons'); ?>">
             <?php echo pdsweather_display(); ?>
         </div>
     <?php endif; ?>
