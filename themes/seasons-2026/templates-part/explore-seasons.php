@@ -1,7 +1,7 @@
 <?php
 /**
  * Shared Explore All Seasons section.
- * Legacy category links remain in place until taxonomy migration.
+ * Links point to the cross-category content_season archives.
  */
 $description = isset($args['description'])
     ? $args['description']
@@ -21,10 +21,12 @@ $explore_seasons = array(
         </div>
         <div class="seasons-explore-grid">
             <?php foreach ($explore_seasons as $slug => $details) :
-                $season_term = get_category_by_slug($slug);
-                if (!$season_term) { continue; }
+                $season_term = get_term_by('slug', $slug, 'content_season');
+                if (!$season_term || is_wp_error($season_term)) { continue; }
+                $season_url = get_term_link($season_term);
+                if (is_wp_error($season_url)) { continue; }
             ?>
-                <a class="seasons-explore-card seasons-explore-<?php echo esc_attr($slug); ?> <?php echo esc_attr($slug); ?>" href="<?php echo esc_url(get_category_link($season_term->term_id)); ?>">
+                <a class="seasons-explore-card seasons-explore-<?php echo esc_attr($slug); ?> <?php echo esc_attr($slug); ?>" href="<?php echo esc_url($season_url); ?>">
                     <span class="seasons-explore-card-icon material-symbols-outlined" aria-hidden="true"><?php echo esc_html($details['icon']); ?></span>
                     <span class="seasons-explore-card-label"><?php echo esc_html($details['title']); ?></span>
                     <span class="seasons-explore-card-description"><?php echo esc_html($details['description']); ?></span>
