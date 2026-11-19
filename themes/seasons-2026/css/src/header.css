@@ -442,11 +442,11 @@ nav.mobile-menu ul {
    Override the legacy autumn-only hero image on these archives alone. */
 body.content-season-archive.spring .moto {
     background-image: linear-gradient(130deg, rgba(23, 70, 41, .52), rgba(73, 131, 75, .22)),
-        linear-gradient(145deg, #497f55, #b7d6a1 60%, #e8dca7);
+        url("../../images/spring.jpg");
 }
 body.content-season-archive.summer .moto {
     background-image: linear-gradient(130deg, rgba(10, 74, 67, .50), rgba(26, 106, 84, .20)),
-        linear-gradient(145deg, #1d8077, #7bc2a4 58%, #f3d78b);
+        url("../../images/back.jpg");
 }
 body.content-season-archive.autumn .moto {
     background-image: linear-gradient(130deg, rgba(83, 39, 20, .50), rgba(122, 62, 24, .18)),
@@ -454,5 +454,5 @@ body.content-season-archive.autumn .moto {
 }
 body.content-season-archive.winter .moto {
     background-image: linear-gradient(130deg, rgba(21, 56, 85, .55), rgba(58, 99, 135, .22)),
-        linear-gradient(145deg, #345e7b, #93b7c9 58%, #dbeaf0);
+        url("../../images/winter.png");
 }
