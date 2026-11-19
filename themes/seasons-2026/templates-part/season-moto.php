@@ -50,15 +50,19 @@
         <h2 class="title italic"><?php echo esc_html(season_moto($season)); ?></h2>
         <p><?php echo wp_kses_post(season_desc($season)); ?></p>
     <?php endif; ?>
-<div class="weather">
-    <?php echo pdsweather_display() ?>
+<div class="seasons-hero-actions">
+    <div class="season-selector">
+        <details class="season-selector-details">
+            <summary class="pill season-selector-trigger"><?php echo esc_html(ucfirst($season)); ?></summary>
+            <nav class="pill-menu season-selector-menu text-left" aria-label="<?php esc_attr_e('Choose a season', 'seasons'); ?>">
+                <?php seasons_render_taxonomy_navigation(); ?>
+            </nav>
+        </details>
     </div>
-<div class="season-selector">
-    <details class="season-selector-details">
-        <summary class="pill season-selector-trigger"><?php echo esc_html(ucfirst($season)); ?></summary>
-        <nav class="pill-menu season-selector-menu text-left" aria-label="<?php esc_attr_e('Choose a season', 'seasons'); ?>">
-            <?php seasons_render_taxonomy_navigation(); ?>
-        </nav>
-    </details>
+    <?php if (function_exists('pdsweather_display')) : ?>
+        <div class="weather seasons-hero-weather" aria-label="<?php esc_attr_e('Current weather', 'seasons'); ?>">
+            <?php echo pdsweather_display(); ?>
+        </div>
+    <?php endif; ?>
 </div>
 </div>
