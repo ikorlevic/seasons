@@ -445,7 +445,7 @@ nav.mobile-menu ul {
 }
 .moto.summer {
     background-image: linear-gradient(130deg, rgba(10, 74, 67, .50), rgba(26, 106, 84, .20)),
-        url("../../images/back1.jpg");
+        url("../../images/summer.png");
 }
 .moto.autumn {
     background-image: linear-gradient(130deg, rgba(83, 39, 20, .50), rgba(122, 62, 24, .18)),
