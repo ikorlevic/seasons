@@ -124,6 +124,24 @@ function get_selected_season($obj) {
             return in_array($obj->slug, $legacy_seasons, true) ? $obj->slug : current_season();
         }
     }
+    if ($obj instanceof WP_Post) {
+        $terms = get_the_terms($obj->ID, 'content_season');
+        if ($terms && !is_wp_error($terms)) {
+            $active = seasons_content_season();
+            foreach ($terms as $term) {
+                if ($term->slug === $active) {
+                    return current_season();
+                }
+            }
+            foreach (array('spring', 'summer', 'autumn', 'winter') as $slug) {
+                foreach ($terms as $term) {
+                    if ($term->slug === $slug) {
+                        return $slug;
+                    }
+                }
+            }
+        }
+    }
     return current_season();
 }
 
