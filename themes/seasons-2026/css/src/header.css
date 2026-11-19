@@ -694,3 +694,52 @@ nav.mobile-menu ul {
         font-size: 13px;
     }
 }
+
+
+/* Keep the weather plugin's own block layout from breaking the hero pill row. */
+.moto .seasons-hero-actions {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: auto;
+    max-width: calc(100% - 24px);
+}
+
+.moto .seasons-hero-actions > .season-selector,
+.moto .seasons-hero-actions > .seasons-hero-weather {
+    width: auto !important;
+    min-width: 0;
+    flex: 0 0 auto;
+}
+
+.moto .seasons-hero-actions > .seasons-hero-weather {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px;
+    margin: 0 !important;
+    padding: 10px 16px !important;
+}
+
+.moto .seasons-hero-weather > *,
+.moto .seasons-hero-weather > * > * {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    width: auto;
+    margin: 0;
+}
+
+.moto .seasons-hero-weather p,
+.moto .seasons-hero-weather span {
+    margin: 0;
+    white-space: nowrap;
+    line-height: 1.25;
+}
+
+@media (max-width: 380px) {
+    .moto .seasons-hero-actions { gap: 8px; }
+    .moto .seasons-hero-actions .season-selector-trigger { padding: 10px 13px; }
+    .moto .seasons-hero-actions > .seasons-hero-weather { padding: 10px 12px !important; }
+}
