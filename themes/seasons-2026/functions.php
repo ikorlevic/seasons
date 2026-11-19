@@ -39,6 +39,25 @@ function seasons_first_category($slugs) {
 }
 
 
+/**
+ * Fetch editable personal notes for an editorial area and content season.
+ * Notes use post meta until their own storage is migrated.
+ */
+function seasons_personal_notes_query($post_type, $season, $limit = 6) {
+    return new WP_Query(array(
+        'post_type' => $post_type,
+        'post_status' => 'publish',
+        'posts_per_page' => $limit,
+        'meta_query' => array(array(
+            'key' => '_seasons_note_season',
+            'value' => $season,
+        )),
+        'orderby' => array('menu_order' => 'ASC', 'date' => 'DESC'),
+        'ignore_sticky_posts' => true,
+    ));
+}
+
+
 if(!function_exists("current_season")){
     function current_season() {
                                 $season="spring";
