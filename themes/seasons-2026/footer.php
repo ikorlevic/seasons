@@ -31,9 +31,7 @@ $footer_groups = array(
             <?php endforeach; ?>
             <nav class="seasons-footer-column" aria-label="<?php esc_attr_e('Seasons', 'seasons'); ?>">
                 <h2><?php esc_html_e('Seasons', 'seasons'); ?></h2>
-                <?php if (has_nav_menu('seasons')) {
-                    wp_nav_menu(array('theme_location' => 'seasons', 'container' => false, 'fallback_cb' => false, 'depth' => 1));
-                } ?>
+                <?php seasons_render_taxonomy_navigation(); ?>
             </nav>
             <nav class="seasons-footer-column" aria-label="<?php esc_attr_e('Information', 'seasons'); ?>">
                 <h2><?php esc_html_e('Information', 'seasons'); ?></h2>
