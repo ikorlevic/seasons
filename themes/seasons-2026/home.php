@@ -12,6 +12,10 @@ get_header();
     $active_garden_season = seasons_content_season();
     $season_term = get_term_by('slug', $active_garden_season, 'content_season');
     $garden_category = get_category_by_slug('garden');
+    $season_archive_url = $season_term ? get_term_link($season_term) : null;
+    if (is_wp_error($season_archive_url)) {
+        $season_archive_url = null;
+    }
     // Only Garden posts assigned to the active editorial season belong here.
     $season_post = ($season_term && $garden_category) ? new WP_Query(array(
         'cat' => (int) $garden_category->term_id,
@@ -38,9 +42,11 @@ get_header();
                     <?php get_template_part('templates-part/editorial-post-card', null, array('meta' => ucfirst($active_garden_season))); ?>
                 <?php endwhile; ?>
             </div>
-            <a class="seasons-home-more" href="<?php echo esc_url(get_term_link($season_term)); ?>">
+            <?php if ($season_archive_url) : ?>
+            <a class="seasons-home-more" href="<?php echo esc_url($season_archive_url); ?>">
                 <?php esc_html_e('Explore the season', 'seasons'); ?> &rarr;
             </a>
+            <?php endif; ?>
         </div>
     </section>
     <?php endif; wp_reset_postdata(); ?>
