@@ -52,9 +52,7 @@ $seasons_diy_children = get_categories(array(
                         <?php get_template_part('templates-part/editorial-post-card', null, array('readmore' => __('Explore the project', 'seasons'))); ?>
                     <?php endwhile; ?>
                 </div>
-                <nav class="seasons-garden-pagination" aria-label="<?php esc_attr_e('DIY project pagination', 'seasons'); ?>">
-                    <?php the_posts_pagination(array('mid_size' => 2, 'prev_text' => __('Previous', 'seasons'), 'next_text' => __('Next', 'seasons'))); ?>
-                </nav>
+                <?php get_template_part('templates-part/editorial-pagination', null, array('label' => __('DIY project pagination', 'seasons'))); ?>
             <?php else : ?>
                 <p><?php esc_html_e('DIY projects are coming soon.', 'seasons'); ?></p>
             <?php endif; ?>
