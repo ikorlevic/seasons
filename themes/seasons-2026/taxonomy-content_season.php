@@ -34,9 +34,7 @@ $seasons_description = term_description();
                         <?php get_template_part('templates-part/editorial-post-card', null, array('readmore' => __('Read more', 'seasons'))); ?>
                     <?php endwhile; ?>
                 </div>
-                <nav class="seasons-garden-pagination" aria-label="<?php esc_attr_e('Seasonal articles pagination', 'seasons'); ?>">
-                    <?php the_posts_pagination(array('mid_size' => 2, 'prev_text' => __('Previous', 'seasons'), 'next_text' => __('Next', 'seasons'))); ?>
-                </nav>
+                <?php get_template_part('templates-part/editorial-pagination', null, array('label' => __('Seasonal articles pagination', 'seasons'))); ?>
             <?php else : ?>
                 <p class="text-center"><?php esc_html_e('Seasonal stories are coming soon.', 'seasons'); ?></p>
             <?php endif; ?>
