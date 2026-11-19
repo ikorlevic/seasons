@@ -30,19 +30,7 @@ get_header();
             </div>
             <div class="seasons-home-grid seasons-garden-now-grid">
                 <?php while ($season_post->have_posts()) : $season_post->the_post(); ?>
-                    <article <?php post_class('seasons-home-card'); ?>>
-                        <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
-                            <?php endif; ?>
-                            <div class="seasons-home-card-content">
-                                <span class="seasons-home-card-meta"><?php echo esc_html(ucfirst($active_garden_season)); ?></span>
-                                <h3><?php the_title(); ?></h3>
-                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
-                                <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
-                            </div>
-                        </a>
-                    </article>
+                    <?php get_template_part('templates-part/editorial-post-card', null, array('meta' => ucfirst($active_garden_season), )); ?>
                 <?php endwhile; ?>
             </div>
             <a class="seasons-home-more" href="<?php echo esc_url(get_category_link($season_category->term_id)); ?>">
@@ -161,19 +149,7 @@ get_header();
             </div>
             <div class="seasons-home-grid">
                 <?php while ($posts->have_posts()) : $posts->the_post(); ?>
-                    <article <?php post_class('seasons-home-card'); ?>>
-                        <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
-                            <?php endif; ?>
-                            <div class="seasons-home-card-content">
-                                <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
-                                <h3><?php the_title(); ?></h3>
-                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
-                                <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
-                            </div>
-                        </a>
-                    </article>
+                    <?php get_template_part('templates-part/editorial-post-card', null, array()); ?>
                 <?php endwhile; ?>
             </div>
             <a class="seasons-home-more" href="<?php echo esc_url(get_category_link($category->term_id)); ?>">
@@ -194,19 +170,7 @@ get_header();
                 $latest = new WP_Query(array('posts_per_page' => 3, 'ignore_sticky_posts' => true));
                 while ($latest->have_posts()) : $latest->the_post();
                 ?>
-                    <article <?php post_class('seasons-home-card'); ?>>
-                        <a class="seasons-home-card-link" href="<?php the_permalink(); ?>">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <div class="seasons-home-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy')); ?></div>
-                            <?php endif; ?>
-                            <div class="seasons-home-card-content">
-                                <span class="seasons-home-card-meta"><?php echo esc_html(get_the_date()); ?></span>
-                                <h3><?php the_title(); ?></h3>
-                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
-                                <span class="seasons-home-readmore"><?php esc_html_e('Read the story', 'seasons'); ?> &rarr;</span>
-                            </div>
-                        </a>
-                    </article>
+                    <?php get_template_part('templates-part/editorial-post-card', null, array()); ?>
                 <?php endwhile; wp_reset_postdata(); ?>
             </div>
         </div>
