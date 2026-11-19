@@ -466,3 +466,120 @@ nav.mobile-menu ul {
 @media (max-width: 650px) {
     .moto.winter { background-position: 56% 26%; }
 }
+
+
+/* Responsive primary navigation: keep the desktop layout unchanged. */
+.mobile-nav-toggle {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    header.top .header-main {
+        position: relative;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.65rem 1rem;
+    }
+
+    header.top .header-main > h2 {
+        flex: 1 1 auto;
+        min-width: 0;
+        margin: 0;
+        font-size: clamp(1.15rem, 5vw, 1.55rem);
+        line-height: 1.3;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    header.top .header-main > .toggle.left {
+        display: none;
+    }
+
+    .mobile-nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        order: 2;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        border-radius: 6px;
+        background: transparent !important;
+        color: #333 !important;
+        cursor: pointer;
+    }
+
+    .mobile-nav-toggle-icon,
+    .mobile-nav-toggle-icon::before,
+    .mobile-nav-toggle-icon::after {
+        display: block;
+        width: 23px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+    }
+
+    .mobile-nav-toggle-icon { position: relative; }
+    .mobile-nav-toggle-icon::before,
+    .mobile-nav-toggle-icon::after {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+    .mobile-nav-toggle-icon::before { top: -7px; }
+    .mobile-nav-toggle-icon::after { top: 7px; }
+
+    header.top .header-main > .toggle.right {
+        order: 3;
+        flex: 0 0 44px;
+        justify-content: center;
+    }
+    header.top .header-main > .toggle.right svg {
+        width: 27px;
+        height: 27px;
+    }
+
+    header.top .header-main > .seasons-header-weather {
+        order: 5;
+        width: 100%;
+        justify-content: center;
+    }
+
+    header.top nav.menu-top {
+        display: none;
+        order: 4;
+        flex: 0 0 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0.5rem 0;
+        border-top: 1px solid #e7e7e7;
+        text-align: left;
+    }
+
+    header.top nav.menu-top.open { display: block; }
+
+    header.top nav.menu-top ul {
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
+
+    header.top nav.menu-top ul li {
+        display: block;
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.35;
+    }
+
+    header.top nav.menu-top ul li a {
+        display: block;
+        padding: 0.7rem 0.4rem;
+        color: #444;
+    }
+}
+
+@media (min-width: 768px) {
+    header.top nav.menu-top { display: block; }
+}
