@@ -743,3 +743,86 @@ nav.mobile-menu ul {
     .moto .seasons-hero-actions .season-selector-trigger { padding: 10px 13px; }
     .moto .seasons-hero-actions > .seasons-hero-weather { padding: 10px 12px !important; }
 }
+
+
+/* Weather plugin emits .weather > i.wi + .conditions > .current > .deg.
+   Reset its block/position rules only inside the seasonal hero. */
+.moto .seasons-hero-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    gap: 12px;
+}
+
+.moto .seasons-hero-actions > .seasons-hero-weather {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 43px;
+    margin: 0 !important;
+    padding: 10px 16px !important;
+    background: rgba(255,255,255,.23) !important;
+    border: 1px solid rgba(255,255,255,.42) !important;
+    border-radius: 999px !important;
+}
+
+.moto .seasons-hero-weather .weather[data-theme] {
+    position: static !important;
+    inset: auto !important;
+    float: none !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+}
+
+.moto .seasons-hero-weather .weather[data-theme] > i.wi {
+    position: static !important;
+    display: inline-block !important;
+    float: none !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    font-size: 19px !important;
+    line-height: 1 !important;
+    color: #fff !important;
+}
+
+.moto .seasons-hero-weather .weather[data-theme] .conditions,
+.moto .seasons-hero-weather .weather[data-theme] .current {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    line-height: 1.2 !important;
+}
+
+.moto .seasons-hero-weather .weather[data-theme] .deg {
+    display: inline !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    white-space: nowrap !important;
+}
