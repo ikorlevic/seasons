@@ -109,25 +109,41 @@ if(!function_exists("current_season")){
                               }
 }
 
-if(!function_exists("get_selected_season")){
+/**
+ * Resolve the visual season for a taxonomy archive or legacy content page.
+ * Editorial taxonomy archives use their own season; unrelated pages retain
+ * the currently active visual skin.
+ */
 function get_selected_season($obj) {
-$season = "";
-        if($obj->taxonomy === 'category') {
-            $season = $obj->slug;
-        } else {
-              $categories = get_the_category($obj->term_id);
-
-
-              $cat = $categories[0];
-              $slug = $cat->slug;
-
-              $par = get_category_parents($cat->term_id);
-//               print_r($par);
-              $season = str_replace("recipes-", "", $slug);
+    if ($obj instanceof WP_Term) {
+        if ($obj->taxonomy === 'content_season') {
+            return $obj->slug;
         }
-    return $season;
-
+        if ($obj->taxonomy === 'category') {
+            $legacy_seasons = array('spring', 'summer', 'autumn', 'winter', 'halloween', 'yule', 'ny', 'valentines');
+            return in_array($obj->slug, $legacy_seasons, true) ? $obj->slug : current_season();
+        }
+    }
+    return current_season();
 }
+
+/** Render navigation links from the authoritative editorial season taxonomy. */
+function seasons_render_taxonomy_navigation($class = '') {
+    $labels = array('spring' => __('Spring', 'seasons'), 'summer' => __('Summer', 'seasons'), 'autumn' => __('Fall', 'seasons'), 'winter' => __('Winter', 'seasons'));
+    echo '<ul class="' . esc_attr($class) . '">';
+    foreach ($labels as $slug => $label) {
+        $term = get_term_by('slug', $slug, 'content_season');
+        if (!$term || is_wp_error($term)) {
+            continue;
+        }
+        $url = get_term_link($term);
+        if (is_wp_error($url)) {
+            continue;
+        }
+        $current = is_tax('content_season', $slug);
+        echo '<li class="menu-item' . ($current ? ' current-menu-item' : '') . '"><a href="' . esc_url($url) . '"' . ($current ? ' aria-current="page"' : '') . '>' . esc_html($label) . '</a></li>';
+    }
+    echo '</ul>';
 }
 
 if(!function_exists("seasons_setup")){
