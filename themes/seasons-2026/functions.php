@@ -58,6 +58,23 @@ function seasons_personal_notes_query($post_type, $season, $limit = 6) {
 }
 
 
+/**
+ * Return the first non-empty query from ordered query argument candidates.
+ * Used for editorial featured posts with progressive fallbacks.
+ *
+ * Callers retain responsibility for wp_reset_postdata() after rendering.
+ */
+function seasons_first_matching_query($query_candidates) {
+    foreach ($query_candidates as $query_args) {
+        $query = new WP_Query($query_args);
+        if ($query->have_posts()) {
+            return $query;
+        }
+    }
+    return null;
+}
+
+
 if(!function_exists("current_season")){
     function current_season() {
                                 $season="spring";
