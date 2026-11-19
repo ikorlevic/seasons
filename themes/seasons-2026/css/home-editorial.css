@@ -257,3 +257,41 @@ body.valentines .seasons-home .seasons-explore-winter {
 .seasons-season-archive-intro .seasons-home-heading { max-width: 800px; margin: 0 auto; }
 .seasons-season-archive-intro .seasons-home-heading h1 { font: 600 clamp(38px, 5vw, 58px)/1.15 Georgia, 'Times New Roman', serif; margin: 8px 0 16px; }
 .seasons-season-archive-description { font-size: 17px; line-height: 1.7; }
+
+
+/* Season archive editorial palette follows the selected taxonomy term.
+   The shared homepage components otherwise retain autumn-specific hardcoded colors. */
+body.content-season-archive .seasons-season-archive {
+    background: var(--background);
+    color: var(--text);
+}
+body.content-season-archive .seasons-season-archive .seasons-now {
+    background: var(--base-bg);
+    color: var(--text);
+}
+body.content-season-archive .seasons-season-archive .seasons-now-eyebrow,
+body.content-season-archive .seasons-season-archive .seasons-now-heading h2,
+body.content-season-archive .seasons-season-archive .seasons-now-item h3 {
+    color: var(--text);
+}
+body.content-season-archive .seasons-season-archive .seasons-now-heading p,
+body.content-season-archive .seasons-season-archive .seasons-now-item p {
+    color: var(--text);
+    opacity: .75;
+}
+body.content-season-archive .seasons-season-archive .seasons-now .seasons-now-icon {
+    background: var(--accent);
+    color: var(--text);
+}
+body.content-season-archive .seasons-season-archive .seasons-home-garden-now {
+    background: var(--background);
+    color: var(--text);
+}
+body.content-season-archive .seasons-season-archive .seasons-home-eyebrow,
+body.content-season-archive .seasons-season-archive .seasons-home-readmore,
+body.content-season-archive .seasons-season-archive .seasons-home-more {
+    color: var(--text);
+}
+body.content-season-archive .seasons-season-archive .seasons-home-card {
+    background: var(--base-bg);
+}
