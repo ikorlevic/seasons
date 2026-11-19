@@ -24,6 +24,21 @@ function seasons_content_season($skin = null) {
 }
 
 
+/**
+ * Find the first existing category from an ordered list of legacy slugs.
+ * Keep these fallbacks until content reorganization is complete.
+ */
+function seasons_first_category($slugs) {
+    foreach ($slugs as $slug) {
+        $category = get_category_by_slug($slug);
+        if ($category) {
+            return $category;
+        }
+    }
+    return null;
+}
+
+
 if(!function_exists("current_season")){
     function current_season() {
                                 $season="spring";
