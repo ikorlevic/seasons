@@ -16,7 +16,7 @@
   if (is_tax('content_season')) {
       $hero_images = array(
           'spring' => 'spring.jpg',
-          'summer' => 'back1.jpg',
+          'summer' => 'summer.png',
           'autumn' => 'autumn.jpg',
           'winter' => 'winter.png',
       );
