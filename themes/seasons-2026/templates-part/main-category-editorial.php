@@ -65,9 +65,7 @@ get_header();
                         <?php get_template_part('templates-part/editorial-post-card', null, array('readmore' => ($area === 'kitchen' ? __('Read the recipe', 'seasons') : __('Read the story', 'seasons')))); ?>
                     <?php endwhile; ?>
                 </div>
-                <nav class="seasons-garden-pagination" aria-label="<?php esc_attr_e('Category posts pagination', 'seasons'); ?>">
-                    <?php the_posts_pagination(array('mid_size' => 2, 'prev_text' => __('Previous', 'seasons'), 'next_text' => __('Next', 'seasons'))); ?>
-                </nav>
+                <?php get_template_part('templates-part/editorial-pagination', null, array('label' => __('Category posts pagination', 'seasons'))); ?>
             <?php else : ?>
                 <p><?php esc_html_e('No posts found yet.', 'seasons'); ?></p>
             <?php endif; ?>
