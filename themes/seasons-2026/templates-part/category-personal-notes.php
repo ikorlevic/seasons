@@ -13,14 +13,7 @@ if (!isset($config[$area]) || !post_type_exists($config[$area]['type'])) {
     return;
 }
 $season = seasons_content_season();
-$notes = new WP_Query(array(
-    'post_type' => $config[$area]['type'],
-    'post_status' => 'publish',
-    'posts_per_page' => 6,
-    'meta_query' => array(array('key' => '_seasons_note_season', 'value' => $season)),
-    'orderby' => array('menu_order' => 'ASC', 'date' => 'DESC'),
-    'ignore_sticky_posts' => true,
-));
+$notes = seasons_personal_notes_query($config[$area]['type'], $season);
 if (!$notes->have_posts()) {
     wp_reset_postdata();
     return;
@@ -35,7 +28,7 @@ if (!$notes->have_posts()) {
         </div>
         <div class="seasons-garden-notes-grid seasons-garden-notes-count-<?php echo esc_attr((string) $notes->post_count); ?>">
             <?php while ($notes->have_posts()) : $notes->the_post(); ?>
-                    <?php get_template_part('templates-part/personal-note-card'); ?>
+                <?php get_template_part('templates-part/personal-note-card'); ?>
             <?php endwhile; ?>
         </div>
     </div>
