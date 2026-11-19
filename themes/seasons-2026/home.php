@@ -75,11 +75,10 @@ get_header();
             'ignore_sticky_posts' => true,
             'no_found_rows' => true,
         );
-        $featured_recipe = new WP_Query(array_merge($featured_recipe_args, array('s' => 'soup')));
-        if (!$featured_recipe->have_posts()) {
-            wp_reset_postdata();
-            $featured_recipe = new WP_Query($featured_recipe_args);
-        }
+        $featured_recipe = seasons_first_matching_query(array(
+            array_merge($featured_recipe_args, array('s' => 'soup')),
+            $featured_recipe_args,
+        ));
     }
     if ($featured_recipe && $featured_recipe->have_posts()) :
     ?>
