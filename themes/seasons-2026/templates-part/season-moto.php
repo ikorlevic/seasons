@@ -11,8 +11,24 @@
         $obj = get_queried_object();
         $season = get_selected_season($obj);
   }
+  // Set archive hero imagery directly so the legacy autumn CSS cannot override it.
+  $archive_hero_style = '';
+  if (is_tax('content_season')) {
+      $hero_images = array(
+          'spring' => 'spring.jpg',
+          'autumn' => 'autumn.jpg',
+          'winter' => 'winter.png',
+      );
+      if (isset($hero_images[$season])) {
+          $hero_url = get_theme_file_uri('images/' . $hero_images[$season]);
+          $archive_hero_style = 'background-image: linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16)), url("' . esc_url($hero_url) . '");';
+      } elseif ($season === 'summer') {
+          // No summer photograph is currently committed to the theme.
+          $archive_hero_style = 'background-image: linear-gradient(130deg, #247f72, #83bda2 60%, #f1d68c);';
+      }
+  }
 ?>
-<div class="moto text-center d-flex jcc align-center flex-column <?php echo esc_attr($season); ?>" >
+<div class="moto text-center d-flex jcc align-center flex-column <?php echo esc_attr($season); ?>"<?php if ($archive_hero_style) : ?> style="<?php echo esc_attr($archive_hero_style); ?>"<?php endif; ?>>
     <?php if (is_tax('content_season')) :
         $season_copy = array(
             'spring' => array('subtitle' => __('Awakening & Renewal', 'seasons'), 'description' => __('New growth, fresh ideas, and inspiration for the garden, kitchen, and home.', 'seasons')),
