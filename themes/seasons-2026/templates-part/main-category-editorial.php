@@ -16,8 +16,10 @@ get_header();
     <?php get_template_part('templates-part/category-personal-notes', null, array('area' => $area)); ?>
 
     <?php if ($area === 'kitchen') :
-        // Feature a real recipe post, with an autumn editorial pick and seasonal fallbacks.
-        $season = seasons_content_season();
+        // Keep the Recipe Book's featured dish paired with its seasonal hero.
+        // Holiday picks use the visual skin; ordinary seasons use editorial season.
+        $skin = current_season();
+        $season = seasons_content_season($skin);
         $recipe_term = get_queried_object();
         $season_term = get_term_by('slug', $season, 'content_season');
         $soup_term = seasons_first_category(array('soup', 'soups'));
@@ -30,14 +32,27 @@ get_header();
             'category__in' => array((int) $recipe_term->term_id),
         );
         $candidates = array();
-        // Pair the autumn Recipe Book hero with the original turkey-roll recipe.
-        // Resolve by slug rather than a site-specific numeric post ID.
-        if ($season === 'autumn') {
-            $autumn_pick = get_page_by_path('turkey-breast-roll-with-mushroom-filling', OBJECT, 'post');
-            if ($autumn_pick && $autumn_pick->post_status === 'publish') {
-                $autumn_feature = $base;
-                $autumn_feature['post__in'] = array((int) $autumn_pick->ID);
-                $candidates[] = $autumn_feature;
+
+        // A missing or unpublished editorial pick falls back to seasonal content.
+        // No separate Easter skin; the carrot menu and soup belong to spring.
+        // Yule currently uses the winter pick until a Christmas recipe is chosen.
+        $hero_recipe_slugs = array(
+            'spring' => 'parchment-baked-carrot-soup',
+            'summer' => 'berrylicious-cupcakes-recipe',
+            'autumn' => 'turkey-breast-roll-with-mushroom-filling',
+            'winter' => 'parsnip-soup-winter-revisited',
+            'valentines' => 'cheesecake-raspberries-white-sparkling-wine-perfect-pairing',
+            'mayday' => 'may-wine-touch-of-elderflower',
+            'halloween' => 'boo-licious-pizza-for-halloween',
+            'ny' => 'new-year-cocktail-party-with-taste-of-oranges',
+        );
+        $pick_skin = isset($hero_recipe_slugs[$skin]) ? $skin : $season;
+        if (isset($hero_recipe_slugs[$pick_skin])) {
+            $pick = get_page_by_path($hero_recipe_slugs[$pick_skin], OBJECT, 'post');
+            if ($pick && $pick->post_status === 'publish') {
+                $featured_pick = $base;
+                $featured_pick['post__in'] = array((int) $pick->ID);
+                $candidates[] = $featured_pick;
             }
         }
         if ($season_term && !is_wp_error($season_term)) {
