@@ -16,7 +16,7 @@ get_header();
     <?php get_template_part('templates-part/category-personal-notes', null, array('area' => $area)); ?>
 
     <?php if ($area === 'kitchen') :
-        // Feature a real recipe post from this category, prioritizing soup and the active season.
+        // Feature a real recipe post, with an autumn editorial pick and seasonal fallbacks.
         $season = seasons_content_season();
         $recipe_term = get_queried_object();
         $season_term = get_term_by('slug', $season, 'content_season');
@@ -30,6 +30,16 @@ get_header();
             'category__in' => array((int) $recipe_term->term_id),
         );
         $candidates = array();
+        // Pair the autumn Recipe Book hero with the original turkey-roll recipe.
+        // Resolve by slug rather than a site-specific numeric post ID.
+        if ($season === 'autumn') {
+            $autumn_pick = get_page_by_path('turkey-breast-roll-with-mushroom-filling', OBJECT, 'post');
+            if ($autumn_pick && $autumn_pick->post_status === 'publish') {
+                $autumn_feature = $base;
+                $autumn_feature['post__in'] = array((int) $autumn_pick->ID);
+                $candidates[] = $autumn_feature;
+            }
+        }
         if ($season_term && !is_wp_error($season_term)) {
             $seasonal = $base;
             $seasonal['tax_query'] = array(array(
