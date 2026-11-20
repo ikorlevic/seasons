@@ -46,6 +46,23 @@ get_header();
             'halloween' => 'boo-licious-pizza-for-halloween',
             'ny' => 'new-year-cocktail-party-with-taste-of-oranges',
         );
+        // Short editorial celebrations; they do not create new global visual skins.
+        // These dates can be refined once the site's celebration calendar is finalized.
+        $month_day = wp_date('md');
+        $special_recipe_slug = '';
+        if ($skin === 'summer' && $month_day >= '0620' && $month_day <= '0622') {
+            $special_recipe_slug = 'white-chocolate-truffles-cherries';
+        } elseif ($skin === 'summer' && $month_day >= '0801' && $month_day <= '0807') {
+            $special_recipe_slug = 'celebrating-harvest-with-bread-platter';
+        }
+        if ($special_recipe_slug) {
+            $special_pick = get_page_by_path($special_recipe_slug, OBJECT, 'post');
+            if ($special_pick && $special_pick->post_status === 'publish') {
+                $special_feature = $base;
+                $special_feature['post__in'] = array((int) $special_pick->ID);
+                $candidates[] = $special_feature;
+            }
+        }
         $pick_skin = isset($hero_recipe_slugs[$skin]) ? $skin : $season;
         if (isset($hero_recipe_slugs[$pick_skin])) {
             $pick = get_page_by_path($hero_recipe_slugs[$pick_skin], OBJECT, 'post');
