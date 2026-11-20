@@ -11,74 +11,67 @@
         $obj = get_queried_object();
         $season = get_selected_season($obj);
   }
-  // Set archive hero imagery directly so the legacy autumn CSS cannot override it.
+  // Every visual skin has a hero slot in each editorial area. Local images
+  // take priority; selected original site photographs provide safe fallbacks.
   $archive_hero_style = '';
-  // Recipe Book and At Home have their own seasonal photography.
-  // Fall back to the existing shared hero until an image is uploaded.
-  if (is_category(array('recipes', 'home'))) {
-      $hero_prefix = is_category('recipes') ? 'recipe-book' : 'at-home';
-      $hero_file = $hero_prefix . '-' . $season . ($hero_prefix === 'recipe-book' && $season === 'autumn' ? '.png' : '.jpg');
-      if (file_exists(get_theme_file_path('images/' . $hero_file))) {
-          $hero_url = get_theme_file_uri('images/' . $hero_file);
-          $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
-          $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
-      }
-  }
-  // Use an existing Recipe Book photograph for summer unless a local
-  // recipe-book-summer.jpg has been supplied.
-  if (is_category('recipes') && $season === 'summer' && !$archive_hero_style) {
-      $summer_recipe_image = 'https://seasonsingarden.com/wp-content/uploads/2018/05/berrylicious-cupcakes-crate-small.jpg';
-      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
-      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($summer_recipe_image) . '");';
-  }
-  // New Year is a distinct visual skin within winter: celebrate at home.
-  // An at-home-ny.jpg in the theme can override this media-library image.
-  if (is_category('home') && $season === 'ny') {
-      $new_year_image = 'https://seasonsingarden.com/wp-content/uploads/2018/09/good-drink-in-good-company.jpg';
-      $new_year_file = 'images/at-home-ny.jpg';
-      if (file_exists(get_theme_file_path($new_year_file))) {
-          $new_year_image = get_theme_file_uri($new_year_file);
-      }
-      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
-      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($new_year_image) . '");';
-  }
-  // Winter At Home: use the site's original Christmas table photograph
-  // unless a dedicated at-home-winter.jpg is uploaded to the theme.
-  if (is_category('home') && $season === 'winter' && !$archive_hero_style) {
-      $winter_home_image = 'https://seasonsingarden.com/wp-content/uploads/2018/12/orange-setting-1.jpg';
-      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
-      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($winter_home_image) . '");';
-  }
-  // Special holiday images are optional. Keep the editorial content in its
-  // regular season, and fall back to the spring photograph when no asset exists.
-  $holiday_hero = in_array($season, array('mayday', 'may4'), true);
-  if ($holiday_hero) {
-      $area = is_category('recipes') ? 'recipe-book' : (is_category('home') ? 'at-home' : 'garden');
-      // May the Fourth is a Garden-only visual; other sections stay spring.
-      $special_image = ($season === 'may4' && $area !== 'garden') ? '' : 'images/' . $area . '-' . $season . '.jpg';
-      $fallback_image = 'images/spring.jpg';
-      $hero_image = ($special_image && file_exists(get_theme_file_path($special_image)))
-          ? $special_image : $fallback_image;
-      $hero_url = get_theme_file_uri($hero_image);
-      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
-      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
-  }
-
-  // Existing holiday photography; a local category-specific JPG always wins.
-  $holiday_photos = array(
-      'recipes' => array(
+  $area = is_category('recipes') ? 'recipe-book' : (is_category('home') ? 'at-home' : 'garden');
+  $editorial_season = seasons_content_season($season);
+  $base_images = array(
+      'spring' => 'spring.jpg',
+      'summer' => 'summer.png',
+      'autumn' => 'autumn.jpg',
+      'winter' => 'winter.png',
+  );
+  $photo_fallbacks = array(
+      'recipe-book' => array(
+          'summer' => 'https://seasonsingarden.com/wp-content/uploads/2018/05/berrylicious-cupcakes-crate-small.jpg',
+          'spring' => 'https://seasonsingarden.com/wp-content/uploads/2020/03/pistachio-cake.jpg',
           'ny' => 'https://seasonsingarden.com/wp-content/uploads/2019/01/citrus-cocktail-party.jpg',
       ),
-      'home' => array(
+      'at-home' => array(
+          'winter' => 'https://seasonsingarden.com/wp-content/uploads/2018/12/orange-setting-1.jpg',
           'yule' => 'https://seasonsingarden.com/wp-content/uploads/2018/12/orange-setting-1.jpg',
+          'ny' => 'https://seasonsingarden.com/wp-content/uploads/2018/09/good-drink-in-good-company.jpg',
       ),
   );
-  foreach ($holiday_photos as $category_slug => $photos) {
-      if (is_category($category_slug) && isset($photos[$season]) && !$archive_hero_style) {
-          $hero_url = $photos[$season];
-          $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
-          $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
+  // May 4 is a Garden celebration only; other sections show spring.
+  $visual_skin = ($season === 'may4' && $area !== 'garden') ? 'spring' : $season;
+  $hero_url = '';
+  $hero_candidates = array(
+      'images/' . $area . '-' . $visual_skin . '.jpg',
+      'images/' . $area . '-' . $visual_skin . '.png',
+  );
+  // The autumn Recipe Book photograph is a PNG.
+  if ($area === 'recipe-book' && $visual_skin === 'autumn') {
+      $hero_candidates = array_reverse($hero_candidates);
+  }
+  foreach ($hero_candidates as $candidate) {
+      if (file_exists(get_theme_file_path($candidate))) {
+          $hero_url = get_theme_file_uri($candidate);
+          break;
       }
+  }
+  if (!$hero_url && isset($photo_fallbacks[$area][$visual_skin])) {
+      $hero_url = $photo_fallbacks[$area][$visual_skin];
+  }
+  if (!$hero_url) {
+      // Allow a shared holiday hero, then the appropriate base-season photo.
+      foreach (array('images/' . $visual_skin . '.jpg', 'images/' . $visual_skin . '.png') as $candidate) {
+          if (file_exists(get_theme_file_path($candidate))) {
+              $hero_url = get_theme_file_uri($candidate);
+              break;
+          }
+      }
+  }
+  if (!$hero_url && isset($photo_fallbacks[$area][$editorial_season])) {
+      $hero_url = $photo_fallbacks[$area][$editorial_season];
+  }
+  if (!$hero_url && isset($base_images[$editorial_season])) {
+      $hero_url = get_theme_file_uri('images/' . $base_images[$editorial_season]);
+  }
+  if ($hero_url) {
+      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
+      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
   }
   if (is_tax('content_season')) {
       $hero_images = array(
