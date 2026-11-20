@@ -101,7 +101,7 @@ if(!function_exists("current_season")){
 
                                 // Fixed-date visual themes; May 4 follows May Day.
                                 // Dates use MMDD and the site's WordPress timezone.
-                                if ($date >= "0102" && $date <= "0214") {
+                                if ($date >= "0106" && $date <= "0214") {
                                     $season = "valentines";
                                 } elseif ($date >= "0429" && $date <= "0502") {
                                     $season = "mayday";
@@ -111,7 +111,7 @@ if(!function_exists("current_season")){
                                     $season = "halloween";
                                 } elseif ($date >= "1224" && $date <= "1226") {
                                     $season = "yule";
-                                } elseif ($date >= "1229" || $date <= "0101") {
+                                } elseif ($date >= "1229" || $date <= "0105") {
                                     $season = "ny";
                                 }
                               return $season;
