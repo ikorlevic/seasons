@@ -37,6 +37,20 @@
   // May 4 is a Garden celebration only; other sections show spring.
   $visual_skin = ($season === 'may4' && $area !== 'garden') ? 'spring' : $season;
   $hero_url = '';
+  // Short summer celebrations override only the Recipe Book hero, matching
+  // the featured-recipe dates in main-category-editorial.php.
+  $special_hero = '';
+  if ($area === 'recipe-book' && $visual_skin === 'summer') {
+      $month_day = wp_date('md');
+      if ($month_day >= '0620' && $month_day <= '0622') {
+          $special_hero = 'images/recipe-book-midsummer.jpg';
+      } elseif ($month_day >= '0801' && $month_day <= '0807') {
+          $special_hero = 'images/recipe-book-harvest.jpg';
+      }
+  }
+  if ($special_hero && file_exists(get_theme_file_path($special_hero))) {
+      $hero_url = get_theme_file_uri($special_hero);
+  }
   $hero_candidates = array(
       'images/' . $area . '-' . $visual_skin . '.jpg',
       'images/' . $area . '-' . $visual_skin . '.png',
@@ -46,7 +60,7 @@
       $hero_candidates = array_reverse($hero_candidates);
   }
   foreach ($hero_candidates as $candidate) {
-      if (file_exists(get_theme_file_path($candidate))) {
+      if (!$hero_url && file_exists(get_theme_file_path($candidate))) {
           $hero_url = get_theme_file_uri($candidate);
           break;
       }
