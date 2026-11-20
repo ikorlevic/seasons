@@ -20,6 +20,9 @@ function seasons_content_season($skin = null) {
     if (in_array($skin, array('yule', 'ny', 'valentines'), true)) {
         return 'winter';
     }
+    if (in_array($skin, array('mayday', 'may4'), true)) {
+        return 'spring';
+    }
     return $skin;
 }
 
@@ -79,7 +82,7 @@ if(!function_exists("current_season")){
     function current_season() {
                                 $season="spring";
 
-                                $date = date("md");
+                                $date = wp_date("md");
 
                                 if($date<"0321"){
                                     $season="winter";
@@ -96,13 +99,19 @@ if(!function_exists("current_season")){
                                     $season="winter";
                                 }
 
-                                if($date >= "0102" && $date <= "0214"){
+                                // Fixed-date visual themes; May 4 follows May Day.
+                                // Dates use MMDD and the site's WordPress timezone.
+                                if ($date >= "0102" && $date <= "0214") {
                                     $season = "valentines";
-                                }elseif($date >= "1510" && $date <= "3110"){
+                                } elseif ($date >= "0429" && $date <= "0502") {
+                                    $season = "mayday";
+                                } elseif ($date === "0504") {
+                                    $season = "may4";
+                                } elseif ($date >= "1015" && $date <= "1031") {
                                     $season = "halloween";
-                                }elseif("1224" <= $date && $date <="1226"){
+                                } elseif ($date >= "1224" && $date <= "1226") {
                                     $season = "yule";
-                                }elseif("1229"  <= $date && $date <= "0105"){
+                                } elseif ($date >= "1229" || $date <= "0101") {
                                     $season = "ny";
                                 }
                               return $season;
@@ -120,7 +129,7 @@ function get_selected_season($obj) {
             return $obj->slug;
         }
         if ($obj->taxonomy === 'category') {
-            $legacy_seasons = array('spring', 'summer', 'autumn', 'winter', 'halloween', 'yule', 'ny', 'valentines');
+            $legacy_seasons = array('spring', 'summer', 'autumn', 'winter', 'halloween', 'yule', 'ny', 'valentines', 'mayday', 'may4');
             return in_array($obj->slug, $legacy_seasons, true) ? $obj->slug : current_season();
         }
     }
