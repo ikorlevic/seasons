@@ -49,6 +49,37 @@
       $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
       $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($winter_home_image) . '");';
   }
+  // Special holiday images are optional. Keep the editorial content in its
+  // regular season, and fall back to the spring photograph when no asset exists.
+  $holiday_hero = in_array($season, array('mayday', 'may4'), true);
+  if ($holiday_hero) {
+      $area = is_category('recipes') ? 'recipe-book' : (is_category('home') ? 'at-home' : 'garden');
+      // May the Fourth is a Garden-only visual; other sections stay spring.
+      $special_image = ($season === 'may4' && $area !== 'garden') ? '' : 'images/' . $area . '-' . $season . '.jpg';
+      $fallback_image = 'images/spring.jpg';
+      $hero_image = ($special_image && file_exists(get_theme_file_path($special_image)))
+          ? $special_image : $fallback_image;
+      $hero_url = get_theme_file_uri($hero_image);
+      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
+      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
+  }
+
+  // Existing holiday photography; a local category-specific JPG always wins.
+  $holiday_photos = array(
+      'recipes' => array(
+          'ny' => 'https://seasonsingarden.com/wp-content/uploads/2019/01/citrus-cocktail-party.jpg',
+      ),
+      'home' => array(
+          'yule' => 'https://seasonsingarden.com/wp-content/uploads/2018/12/orange-setting-1.jpg',
+      ),
+  );
+  foreach ($holiday_photos as $category_slug => $photos) {
+      if (is_category($category_slug) && isset($photos[$season]) && !$archive_hero_style) {
+          $hero_url = $photos[$season];
+          $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
+          $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
+      }
+  }
   if (is_tax('content_season')) {
       $hero_images = array(
           'spring' => 'spring.jpg',
@@ -82,9 +113,20 @@
             <p><?php echo esc_html($hero_copy['description']); ?></p>
         <?php endif; ?>
     <?php else : ?>
-        <h1 class="bolder title"><?php echo esc_html($season); ?></h1>
-        <h2 class="title italic"><?php echo esc_html(season_moto($season)); ?></h2>
-        <p><?php echo wp_kses_post(season_desc($season)); ?></p>
+        <?php if ($season === 'mayday') : ?>
+            <h1 class="bolder title"><?php esc_html_e('May Day / Prvi maj', 'seasons'); ?></h1>
+            <h2 class="title italic"><?php esc_html_e('A Celebration of Spring', 'seasons'); ?></h2>
+            <p><?php esc_html_e('A day for the garden, seasonal traditions, good food, and time with friends.', 'seasons'); ?></p>
+        <?php elseif ($season === 'may4' && (is_category('garden') || is_home() || is_front_page())) : ?>
+            <h1 class="bolder title"><?php esc_html_e('May the 4th Be With You', 'seasons'); ?></h1>
+            <h2 class="title italic"><?php esc_html_e('Seedlings Ready for the Garden', 'seasons'); ?></h2>
+            <p><?php esc_html_e('A little fun as the new growing season begins.', 'seasons'); ?></p>
+        <?php else : ?>
+            <?php $display_season = $season === 'may4' ? 'spring' : $season; ?>
+            <h1 class="bolder title"><?php echo esc_html($display_season); ?></h1>
+            <h2 class="title italic"><?php echo esc_html(season_moto($display_season)); ?></h2>
+            <p><?php echo wp_kses_post(season_desc($display_season)); ?></p>
+        <?php endif; ?>
     <?php endif; ?>
 <style>
 /* Hero controls are defined here to avoid stale imported theme CSS. */
@@ -190,7 +232,7 @@
 <div class="seasons-hero-actions" style="display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;justify-content:center !important;gap:12px !important;width:auto !important;margin:20px auto 0 !important;">
     <div class="season-selector">
         <details class="season-selector-details">
-            <summary class="pill season-selector-trigger"><?php echo esc_html(ucfirst($season)); ?></summary>
+            <summary class="pill season-selector-trigger"><?php echo esc_html($season === 'mayday' ? 'May Day' : ($season === 'may4' ? 'Spring' : ucfirst($season))); ?></summary>
             <nav class="pill-menu season-selector-menu text-left" aria-label="<?php esc_attr_e('Choose a season', 'seasons'); ?>">
                 <?php seasons_render_taxonomy_navigation(); ?>
             </nav>
