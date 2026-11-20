@@ -295,3 +295,8 @@ body.content-season-archive .seasons-season-archive .seasons-home-more {
 body.content-season-archive .seasons-season-archive .seasons-home-card {
     background: var(--base-bg);
 }
+
+/* Homepage: one category-sourced Personal Note from each editorial area. */
+.seasons-this-season-note { min-width: 0; display: flex; flex-direction: column; }
+.seasons-this-season-area { display: block; margin: 0 0 10px 3px; color: #a35e35; font: 700 11px/1.5 Arial,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.seasons-this-season-note .seasons-garden-note { flex: 1; }
