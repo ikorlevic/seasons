@@ -16,58 +16,58 @@ get_header();
     if (is_wp_error($season_archive_url)) {
         $season_archive_url = null;
     }
-    // Three editorial picks for the current season, one from each part of the site.
-    $seasonal_picks = array();
-    $seasonal_pick_categories = array(
-        array('title' => __('In the Garden', 'seasons'), 'slugs' => array('garden')),
-        array('title' => __('Recipe Book', 'seasons'), 'slugs' => array('recipes', 'recipe-book')),
-        array('title' => __('At Home', 'seasons'), 'slugs' => array('at-home', 'home')),
+    // Reuse the same season-specific Personal Notes shown on the three category pages.
+    // Choose one random published note per area on each uncached page request.
+    $seasonal_notes = array();
+    $note_areas = array(
+        array('type' => 'garden_note', 'label' => __('In the Garden', 'seasons')),
+        array('type' => 'kitchen_note', 'label' => __('Recipe Book', 'seasons')),
+        array('type' => 'home_note', 'label' => __('At Home', 'seasons')),
     );
-    if ($season_term) {
-        foreach ($seasonal_pick_categories as $pick_category) {
-            $category = seasons_first_category($pick_category['slugs']);
-            if (!$category) {
-                continue;
-            }
-            $pick_query = new WP_Query(array(
-                'post_type' => 'post',
-                'post_status' => 'publish',
-                'cat' => (int) $category->term_id,
-                'tax_query' => array(array(
-                    'taxonomy' => 'content_season',
-                    'field' => 'term_id',
-                    'terms' => array((int) $season_term->term_id),
-                )),
-                'posts_per_page' => 1,
-                'orderby' => 'date',
-                'order' => 'DESC',
-                'ignore_sticky_posts' => true,
-                'no_found_rows' => true,
-            ));
-            if ($pick_query->have_posts()) {
-                $seasonal_picks[] = array('query' => $pick_query, 'title' => $pick_category['title']);
-            }
+    foreach ($note_areas as $area) {
+        if (!post_type_exists($area['type'])) {
+            continue;
+        }
+        $notes = get_posts(array(
+            'post_type' => $area['type'],
+            'post_status' => 'publish',
+            'posts_per_page' => 1,
+            'orderby' => 'rand',
+            'meta_query' => array(array(
+                'key' => '_seasons_note_season',
+                'value' => $active_garden_season,
+            )),
+            'suppress_filters' => false,
+        ));
+        if ($notes) {
+            $seasonal_notes[] = array('post' => $notes[0], 'label' => $area['label']);
         }
     }
-    if ($seasonal_picks) :
+    if ($seasonal_notes) :
     ?>
-    <section class="seasons-home-section seasons-home-this-season" aria-labelledby="seasons-this-season-title">
+    <section class="seasons-home-section seasons-home-from-garden seasons-home-this-season" aria-labelledby="seasons-this-season-title">
         <div class="seasons-home-container">
-            <div class="seasons-home-heading text-center">
-                <span class="seasons-home-eyebrow"><?php echo esc_html(ucfirst($active_garden_season)); ?></span>
+            <div class="seasons-home-heading">
+                <span class="seasons-home-eyebrow"><?php esc_html_e('Personal Notes', 'seasons'); ?></span>
                 <h2 id="seasons-this-season-title"><?php esc_html_e('This Season', 'seasons'); ?></h2>
-                <p><?php esc_html_e('Ideas for the garden, kitchen and home this season.', 'seasons'); ?></p>
+                <p><?php esc_html_e('Little discoveries from the garden, kitchen and home.', 'seasons'); ?></p>
             </div>
-            <div class="seasons-home-grid seasons-this-season-grid">
-                <?php foreach ($seasonal_picks as $pick) : ?>
-                    <?php $pick['query']->the_post(); ?>
-                    <?php get_template_part('templates-part/editorial-post-card', null, array('meta' => $pick['title'])); ?>
-                    <?php wp_reset_postdata(); ?>
-                <?php endforeach; ?>
+            <div class="seasons-garden-notes-grid seasons-garden-notes-count-<?php echo esc_attr((string) count($seasonal_notes)); ?>">
+                <?php
+                global $post;
+                foreach ($seasonal_notes as $note) :
+                    $post = $note['post'];
+                    setup_postdata($post);
+                ?>
+                    <div class="seasons-this-season-note">
+                        <span class="seasons-this-season-area"><?php echo esc_html($note['label']); ?></span>
+                        <?php get_template_part('templates-part/personal-note-card'); ?>
+                    </div>
+                <?php endforeach; wp_reset_postdata(); ?>
             </div>
         </div>
     </section>
-    <?php endif; wp_reset_postdata(); ?>
+    <?php endif; ?>
 
     <?php
     // Only Garden posts assigned to the active editorial season belong here.
