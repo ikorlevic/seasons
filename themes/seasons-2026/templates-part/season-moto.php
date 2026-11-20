@@ -119,8 +119,8 @@
             <p><?php esc_html_e('A day for the garden, seasonal traditions, good food, and time with friends.', 'seasons'); ?></p>
         <?php elseif ($season === 'may4' && (is_category('garden') || is_home() || is_front_page())) : ?>
             <h1 class="bolder title"><?php esc_html_e('May the 4th Be With You', 'seasons'); ?></h1>
-            <h2 class="title italic"><?php esc_html_e('Seedlings Ready for the Garden', 'seasons'); ?></h2>
-            <p><?php esc_html_e('A little fun as the new growing season begins.', 'seasons'); ?></p>
+            <h2 class="title italic"><?php esc_html_e('A Blessing Before the Growing Begins', 'seasons'); ?></h2>
+            <p><?php esc_html_e('For every little seedling venturing into the garden. May the force of spring be with you.', 'seasons'); ?></p>
         <?php else : ?>
             <?php $display_season = $season === 'may4' ? 'spring' : $season; ?>
             <h1 class="bolder title"><?php echo esc_html($display_season); ?></h1>
