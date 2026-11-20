@@ -17,7 +17,7 @@
   // Fall back to the existing shared hero until an image is uploaded.
   if (is_category(array('recipes', 'home'))) {
       $hero_prefix = is_category('recipes') ? 'recipe-book' : 'at-home';
-      $hero_file = $hero_prefix . '-' . $season . '.jpg';
+      $hero_file = $hero_prefix . '-' . $season . ($hero_prefix === 'recipe-book' && $season === 'autumn' ? '.png' : '.jpg');
       if (file_exists(get_theme_file_path('images/' . $hero_file))) {
           $hero_url = get_theme_file_uri('images/' . $hero_file);
           $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
