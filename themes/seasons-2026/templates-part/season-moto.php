@@ -31,6 +31,17 @@
       $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
       $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($summer_recipe_image) . '");';
   }
+  // New Year is a distinct visual skin within winter: celebrate at home.
+  // An at-home-ny.jpg in the theme can override this media-library image.
+  if (is_category('home') && $season === 'ny') {
+      $new_year_image = 'https://seasonsingarden.com/wp-content/uploads/2018/09/good-drink-in-good-company.jpg';
+      $new_year_file = 'images/at-home-ny.jpg';
+      if (file_exists(get_theme_file_path($new_year_file))) {
+          $new_year_image = get_theme_file_uri($new_year_file);
+      }
+      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
+      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($new_year_image) . '");';
+  }
   // Winter At Home: use the site's original Christmas table photograph
   // unless a dedicated at-home-winter.jpg is uploaded to the theme.
   if (is_category('home') && $season === 'winter' && !$archive_hero_style) {
