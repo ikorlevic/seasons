@@ -16,6 +16,60 @@ get_header();
     if (is_wp_error($season_archive_url)) {
         $season_archive_url = null;
     }
+    // Three editorial picks for the current season, one from each part of the site.
+    $seasonal_picks = array();
+    $seasonal_pick_categories = array(
+        array('title' => __('In the Garden', 'seasons'), 'slugs' => array('garden')),
+        array('title' => __('Recipe Book', 'seasons'), 'slugs' => array('recipes', 'recipe-book')),
+        array('title' => __('At Home', 'seasons'), 'slugs' => array('at-home', 'home')),
+    );
+    if ($season_term) {
+        foreach ($seasonal_pick_categories as $pick_category) {
+            $category = seasons_first_category($pick_category['slugs']);
+            if (!$category) {
+                continue;
+            }
+            $pick_query = new WP_Query(array(
+                'post_type' => 'post',
+                'post_status' => 'publish',
+                'cat' => (int) $category->term_id,
+                'tax_query' => array(array(
+                    'taxonomy' => 'content_season',
+                    'field' => 'term_id',
+                    'terms' => array((int) $season_term->term_id),
+                )),
+                'posts_per_page' => 1,
+                'orderby' => 'date',
+                'order' => 'DESC',
+                'ignore_sticky_posts' => true,
+                'no_found_rows' => true,
+            ));
+            if ($pick_query->have_posts()) {
+                $seasonal_picks[] = array('query' => $pick_query, 'title' => $pick_category['title']);
+            }
+        }
+    }
+    if ($seasonal_picks) :
+    ?>
+    <section class="seasons-home-section seasons-home-this-season" aria-labelledby="seasons-this-season-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading text-center">
+                <span class="seasons-home-eyebrow"><?php echo esc_html(ucfirst($active_garden_season)); ?></span>
+                <h2 id="seasons-this-season-title"><?php esc_html_e('This Season', 'seasons'); ?></h2>
+                <p><?php esc_html_e('Ideas for the garden, kitchen and home this season.', 'seasons'); ?></p>
+            </div>
+            <div class="seasons-home-grid seasons-this-season-grid">
+                <?php foreach ($seasonal_picks as $pick) : ?>
+                    <?php $pick['query']->the_post(); ?>
+                    <?php get_template_part('templates-part/editorial-post-card', null, array('meta' => $pick['title'])); ?>
+                    <?php wp_reset_postdata(); ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; wp_reset_postdata(); ?>
+
+    <?php
     // Only Garden posts assigned to the active editorial season belong here.
     $season_post = ($season_term && $garden_category) ? new WP_Query(array(
         'cat' => (int) $garden_category->term_id,
@@ -29,27 +83,6 @@ get_header();
         'order' => 'DESC',
         'ignore_sticky_posts' => true,
     )) : null;
-    <?php
-    // Load up to six editable notes for the current gardening season.
-    $garden_notes = seasons_personal_notes_query('garden_note', $active_garden_season);
-    if ($garden_notes->have_posts()) :
-    ?>
-    <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
-        <div class="seasons-home-container">
-            <div class="seasons-home-heading">
-                <span class="seasons-home-eyebrow"><?php esc_html_e('Personal Notes', 'seasons'); ?></span>
-                <h2 id="seasons-from-garden-title"><?php esc_html_e('From My Garden', 'seasons'); ?></h2>
-                <p><?php esc_html_e("Things I've learned growing through the seasons.", 'seasons'); ?></p>
-            </div>
-            <div class="seasons-garden-notes-grid seasons-garden-notes-count-<?php echo esc_attr((string) $garden_notes->post_count); ?>">
-                <?php while ($garden_notes->have_posts()) : $garden_notes->the_post(); ?>
-                    <?php get_template_part('templates-part/personal-note-card'); ?>
-                <?php endwhile; ?>
-            </div>
-        </div>
-    </section>
-    <?php endif; wp_reset_postdata(); ?>
-
     if ($season_post && $season_post->have_posts()) :
     ?>
     <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-garden-now-title">
