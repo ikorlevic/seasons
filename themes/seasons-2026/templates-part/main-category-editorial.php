@@ -60,6 +60,7 @@ get_header();
             if ($special_pick && $special_pick->post_status === 'publish') {
                 $special_feature = $base;
                 $special_feature['post__in'] = array((int) $special_pick->ID);
+                unset($special_feature['category__in']);
                 $candidates[] = $special_feature;
             }
         }
@@ -69,6 +70,7 @@ get_header();
             if ($pick && $pick->post_status === 'publish') {
                 $featured_pick = $base;
                 $featured_pick['post__in'] = array((int) $pick->ID);
+                unset($featured_pick['category__in']);
                 $candidates[] = $featured_pick;
             }
         }
