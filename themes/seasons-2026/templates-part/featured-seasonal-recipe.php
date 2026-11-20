@@ -27,6 +27,9 @@ if (!($recipe_query instanceof WP_Query) || !$recipe_query->have_posts()) {
                     <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                     <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 36)); ?></p>
                     <a class="seasons-home-readmore" href="<?php the_permalink(); ?>"><?php esc_html_e('Get the recipe', 'seasons'); ?> &rarr;</a>
+                    <?php if ($recipe_season === 'spring' && get_post_field('post_name', get_the_ID()) === 'parchment-baked-carrot-soup') : ?>
+                        <p><a href="<?php echo esc_url(home_url('/menus/all-about-carrot-easter-menu/')); ?>"><?php esc_html_e('Explore the full All About Carrot menu', 'seasons'); ?> &rarr;</a></p>
+                    <?php endif; ?>
                 </div>
             </article>
         <?php endwhile; ?>
