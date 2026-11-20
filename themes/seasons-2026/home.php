@@ -29,6 +29,27 @@ get_header();
         'order' => 'DESC',
         'ignore_sticky_posts' => true,
     )) : null;
+    <?php
+    // Load up to six editable notes for the current gardening season.
+    $garden_notes = seasons_personal_notes_query('garden_note', $active_garden_season);
+    if ($garden_notes->have_posts()) :
+    ?>
+    <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
+        <div class="seasons-home-container">
+            <div class="seasons-home-heading">
+                <span class="seasons-home-eyebrow"><?php esc_html_e('Personal Notes', 'seasons'); ?></span>
+                <h2 id="seasons-from-garden-title"><?php esc_html_e('From My Garden', 'seasons'); ?></h2>
+                <p><?php esc_html_e("Things I've learned growing through the seasons.", 'seasons'); ?></p>
+            </div>
+            <div class="seasons-garden-notes-grid seasons-garden-notes-count-<?php echo esc_attr((string) $garden_notes->post_count); ?>">
+                <?php while ($garden_notes->have_posts()) : $garden_notes->the_post(); ?>
+                    <?php get_template_part('templates-part/personal-note-card'); ?>
+                <?php endwhile; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; wp_reset_postdata(); ?>
+
     if ($season_post && $season_post->have_posts()) :
     ?>
     <section class="seasons-home-section seasons-home-garden-now" aria-labelledby="seasons-garden-now-title">
@@ -47,27 +68,6 @@ get_header();
                 <?php esc_html_e('Explore the season', 'seasons'); ?> &rarr;
             </a>
             <?php endif; ?>
-        </div>
-    </section>
-    <?php endif; wp_reset_postdata(); ?>
-
-    <?php
-    // Load up to six editable notes for the current gardening season.
-    $garden_notes = seasons_personal_notes_query('garden_note', $active_garden_season);
-    if ($garden_notes->have_posts()) :
-    ?>
-    <section class="seasons-home-section seasons-home-from-garden" aria-labelledby="seasons-from-garden-title">
-        <div class="seasons-home-container">
-            <div class="seasons-home-heading">
-                <span class="seasons-home-eyebrow"><?php esc_html_e('Personal Notes', 'seasons'); ?></span>
-                <h2 id="seasons-from-garden-title"><?php esc_html_e('From My Garden', 'seasons'); ?></h2>
-                <p><?php esc_html_e("Things I've learned growing through the seasons.", 'seasons'); ?></p>
-            </div>
-            <div class="seasons-garden-notes-grid seasons-garden-notes-count-<?php echo esc_attr((string) $garden_notes->post_count); ?>">
-                <?php while ($garden_notes->have_posts()) : $garden_notes->the_post(); ?>
-                    <?php get_template_part('templates-part/personal-note-card'); ?>
-                <?php endwhile; ?>
-            </div>
         </div>
     </section>
     <?php endif; wp_reset_postdata(); ?>
