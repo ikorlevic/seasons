@@ -78,8 +78,82 @@ function seasons_first_matching_query($query_candidates) {
 }
 
 
+/**
+ * Administrator-only holiday preview. Stored per user, never for visitors.
+ * The admin bar allows switching themes while navigating the live site.
+ */
+function seasons_preview_skins() {
+    return array(
+        'automatic' => __('Automatic (today)', 'seasons'),
+        'spring' => __('Spring', 'seasons'),
+        'summer' => __('Summer', 'seasons'),
+        'autumn' => __('Autumn', 'seasons'),
+        'winter' => __('Winter', 'seasons'),
+        'valentines' => __("Valentine's Day", 'seasons'),
+        'mayday' => __('May Day / Prvi maj', 'seasons'),
+        'may4' => __('May the 4th', 'seasons'),
+        'halloween' => __('Halloween', 'seasons'),
+        'yule' => __('Christmas / Yule', 'seasons'),
+        'ny' => __('New Year', 'seasons'),
+    );
+}
+
+function seasons_set_preview_skin() {
+    if (!current_user_can('manage_options')) {
+        wp_die(esc_html__('You cannot preview seasonal themes.', 'seasons'), '', array('response' => 403));
+    }
+    check_admin_referer('seasons_preview_skin');
+    $skin = isset($_GET['skin']) ? sanitize_key(wp_unslash($_GET['skin'])) : 'automatic';
+    if (!array_key_exists($skin, seasons_preview_skins())) {
+        wp_die(esc_html__('Unknown season.', 'seasons'), '', array('response' => 400));
+    }
+    if ($skin === 'automatic') {
+        delete_user_meta(get_current_user_id(), '_seasons_preview_skin');
+    } else {
+        update_user_meta(get_current_user_id(), '_seasons_preview_skin', $skin);
+    }
+    $return = isset($_GET['return']) ? wp_validate_redirect(esc_url_raw(wp_unslash($_GET['return'])), home_url('/')) : home_url('/');
+    wp_safe_redirect($return);
+    exit;
+}
+add_action('admin_post_seasons_preview_skin', 'seasons_set_preview_skin');
+
+function seasons_preview_admin_bar($admin_bar) {
+    if (!current_user_can('manage_options') || is_admin()) {
+        return;
+    }
+    $skins = seasons_preview_skins();
+    $active = get_user_meta(get_current_user_id(), '_seasons_preview_skin', true);
+    $active = isset($skins[$active]) && $active !== 'automatic' ? $active : 'automatic';
+    $admin_bar->add_node(array(
+        'id' => 'seasons-preview',
+        'title' => __('Preview: ', 'seasons') . $skins[$active],
+        'href' => false,
+    ));
+    foreach ($skins as $skin => $label) {
+        $url = add_query_arg(array(
+            'action' => 'seasons_preview_skin',
+            'skin' => $skin,
+            'return' => home_url(wp_unslash($_SERVER['REQUEST_URI'])),
+        ), admin_url('admin-post.php'));
+        $admin_bar->add_node(array(
+            'id' => 'seasons-preview-' . $skin,
+            'parent' => 'seasons-preview',
+            'title' => ($active === $skin ? '✓ ' : '') . $label,
+            'href' => wp_nonce_url($url, 'seasons_preview_skin'),
+        ));
+    }
+}
+add_action('admin_bar_menu', 'seasons_preview_admin_bar', 90);
+
 if(!function_exists("current_season")){
     function current_season() {
+                                if (is_user_logged_in() && current_user_can("manage_options")) {
+                                    $preview = get_user_meta(get_current_user_id(), "_seasons_preview_skin", true);
+                                    if ($preview && $preview !== "automatic" && array_key_exists($preview, seasons_preview_skins())) {
+                                        return $preview;
+                                    }
+                                }
                                 $season="spring";
 
                                 $date = wp_date("md");
