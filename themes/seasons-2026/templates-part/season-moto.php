@@ -31,6 +31,13 @@
       $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
       $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($summer_recipe_image) . '");';
   }
+  // Winter At Home: use the site's original Christmas table photograph
+  // unless a dedicated at-home-winter.jpg is uploaded to the theme.
+  if (is_category('home') && $season === 'winter' && !$archive_hero_style) {
+      $winter_home_image = 'https://seasonsingarden.com/wp-content/uploads/2018/12/orange-setting-1.jpg';
+      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
+      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($winter_home_image) . '");';
+  }
   if (is_tax('content_season')) {
       $hero_images = array(
           'spring' => 'spring.jpg',
