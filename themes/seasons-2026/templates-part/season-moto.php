@@ -24,6 +24,13 @@
           $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
       }
   }
+  // Use an existing Recipe Book photograph for summer unless a local
+  // recipe-book-summer.jpg has been supplied.
+  if (is_category('recipes') && $season === 'summer' && !$archive_hero_style) {
+      $summer_recipe_image = 'https://seasonsingarden.com/wp-content/uploads/2018/05/berrylicious-cupcakes-crate-small.jpg';
+      $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
+      $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($summer_recipe_image) . '");';
+  }
   if (is_tax('content_season')) {
       $hero_images = array(
           'spring' => 'spring.jpg',
