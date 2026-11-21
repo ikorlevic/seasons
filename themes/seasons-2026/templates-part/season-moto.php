@@ -92,6 +92,10 @@
   if ($hero_url) {
       $hero_overlay = 'linear-gradient(130deg, rgba(20, 38, 32, .46), rgba(20, 38, 32, .16))';
       $archive_hero_style = 'background-image: ' . $hero_overlay . ', url("' . esc_url($hero_url) . '");';
+      if ($area === 'at-home' && $visual_skin === 'halloween') {
+          // Show more of the upper teasel heads in the shallow archive hero.
+          $archive_hero_style .= ' background-position: center 35%;';
+      }
   }
   if (is_tax('content_season')) {
       $hero_images = array(
