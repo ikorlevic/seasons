@@ -36,11 +36,17 @@
   );
   // May 4 is a Garden celebration only; other sections show spring.
   $visual_skin = ($season === 'may4' && $area !== 'garden') ? 'spring' : $season;
+  // Harvest preview changes only the Recipe Book; other areas stay in summer.
+  if ($visual_skin === 'harvest' && $area !== 'recipe-book') {
+      $visual_skin = 'summer';
+  }
   $hero_url = '';
   // Short summer celebrations override only the Recipe Book hero, matching
   // the featured-recipe dates in main-category-editorial.php.
   $special_hero = '';
-  if ($area === 'recipe-book' && $visual_skin === 'summer') {
+  if ($area === 'recipe-book' && $season === 'harvest') {
+      $special_hero = 'images/recipe-book-harvest.jpg';
+  } elseif ($area === 'recipe-book' && $visual_skin === 'summer') {
       $month_day = wp_date('md');
       if ($month_day >= '0620' && $month_day <= '0622') {
           $special_hero = 'images/recipe-book-midsummer.jpg';
@@ -120,7 +126,11 @@
             <p><?php echo esc_html($hero_copy['description']); ?></p>
         <?php endif; ?>
     <?php else : ?>
-        <?php if ($season === 'mayday') : ?>
+        <?php if ($season === 'harvest' && $area === 'recipe-book') : ?>
+            <h1 class="bolder title"><?php esc_html_e('Harvest', 'seasons'); ?></h1>
+            <h2 class="title italic"><?php esc_html_e('Celebrating the First Harvest', 'seasons'); ?></h2>
+            <p><?php esc_html_e('A gathering around the table, with bread and the season’s first abundance.', 'seasons'); ?></p>
+        <?php elseif ($season === 'mayday') : ?>
             <h1 class="bolder title"><?php esc_html_e('May Day / Prvi maj', 'seasons'); ?></h1>
             <h2 class="title italic"><?php esc_html_e('A Celebration of Spring', 'seasons'); ?></h2>
             <p><?php esc_html_e('A day for the garden, seasonal traditions, good food, and time with friends.', 'seasons'); ?></p>
@@ -129,7 +139,7 @@
             <h2 class="title italic"><?php esc_html_e('A Blessing Before the Growing Begins', 'seasons'); ?></h2>
             <p><?php esc_html_e('For every little seedling venturing into the garden. May the force of spring be with you.', 'seasons'); ?></p>
         <?php else : ?>
-            <?php $display_season = $season === 'may4' ? 'spring' : $season; ?>
+            <?php $display_season = $season === 'may4' ? 'spring' : ($season === 'harvest' ? 'summer' : $season); ?>
             <h1 class="bolder title"><?php echo esc_html($display_season === 'ny' ? __('New Year', 'seasons') : $display_season); ?></h1>
             <h2 class="title italic"><?php echo esc_html(season_moto($display_season)); ?></h2>
             <p><?php echo wp_kses_post(season_desc($display_season)); ?></p>
