@@ -20,6 +20,9 @@ function seasons_content_season($skin = null) {
     if (in_array($skin, array('yule', 'ny', 'valentines'), true)) {
         return 'winter';
     }
+    if ($skin === 'harvest') {
+        return 'summer';
+    }
     if (in_array($skin, array('mayday', 'may4'), true)) {
         return 'spring';
     }
@@ -87,6 +90,7 @@ function seasons_preview_skins() {
         'automatic' => __('Automatic (today)', 'seasons'),
         'spring' => __('Spring', 'seasons'),
         'summer' => __('Summer', 'seasons'),
+        'harvest' => __('Harvest (preview)', 'seasons'),
         'autumn' => __('Autumn', 'seasons'),
         'winter' => __('Winter', 'seasons'),
         'valentines' => __("Valentine's Day", 'seasons'),
