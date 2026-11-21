@@ -50,7 +50,9 @@ get_header();
         // These dates can be refined once the site's celebration calendar is finalized.
         $month_day = wp_date('md');
         $special_recipe_slug = '';
-        if ($skin === 'summer' && $month_day >= '0620' && $month_day <= '0622') {
+        if ($skin === 'harvest') {
+            $special_recipe_slug = 'celebrating-harvest-with-bread-platter';
+        } elseif ($skin === 'summer' && $month_day >= '0620' && $month_day <= '0622') {
             $special_recipe_slug = 'white-chocolate-truffles-cherries';
         } elseif ($skin === 'summer' && $month_day >= '0801' && $month_day <= '0807') {
             $special_recipe_slug = 'celebrating-harvest-with-bread-platter';
