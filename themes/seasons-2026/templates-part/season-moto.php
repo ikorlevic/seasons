@@ -130,7 +130,7 @@
             <p><?php esc_html_e('For every little seedling venturing into the garden. May the force of spring be with you.', 'seasons'); ?></p>
         <?php else : ?>
             <?php $display_season = $season === 'may4' ? 'spring' : $season; ?>
-            <h1 class="bolder title"><?php echo esc_html($display_season); ?></h1>
+            <h1 class="bolder title"><?php echo esc_html($display_season === 'ny' ? __('New Year', 'seasons') : $display_season); ?></h1>
             <h2 class="title italic"><?php echo esc_html(season_moto($display_season)); ?></h2>
             <p><?php echo wp_kses_post(season_desc($display_season)); ?></p>
         <?php endif; ?>
