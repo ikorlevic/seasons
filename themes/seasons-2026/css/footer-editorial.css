@@ -34,3 +34,16 @@ body .seasons-editorial-footer a:hover,
 body .seasons-editorial-footer a:focus-visible { color: #fff; text-decoration: underline; }
 body .seasons-editorial-footer .seasons-footer-brand p,
 body .seasons-editorial-footer .seasons-footer-bottom { color: rgba(255,255,255,.78); }
+
+/* Seasonal skins: override legacy footer backgrounds even when old CSS loads late. */
+body .seasons-editorial-footer.seasons-footer-spring { background-color: #587c59; }
+body .seasons-editorial-footer.seasons-footer-summer { background-color: #476f54; }
+body .seasons-editorial-footer.seasons-footer-harvest { background-color: #805b35; }
+body .seasons-editorial-footer.seasons-footer-autumn { background-color: #875c35; }
+body .seasons-editorial-footer.seasons-footer-winter { background-color: #3e6171; }
+body .seasons-editorial-footer.seasons-footer-valentines { background-color: #8b4b60; }
+body .seasons-editorial-footer.seasons-footer-mayday { background-color: #56764b; }
+body .seasons-editorial-footer.seasons-footer-may4 { background-color: #587c59; }
+body .seasons-editorial-footer.seasons-footer-halloween { background-color: #7a2808; }
+body .seasons-editorial-footer.seasons-footer-yule { background-color: #3f644e; }
+body .seasons-editorial-footer.seasons-footer-ny { background-color: #2c2408; }
