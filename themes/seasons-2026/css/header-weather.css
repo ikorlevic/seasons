@@ -38,3 +38,16 @@ header.top .header-main .toggle.right svg { display: block; width: 30px; height:
     header.top .menu-top { order: 3; flex: 1 0 100%; }
     header.top .menu-top ul { gap: 8px 18px; }
 }
+
+/* Consistent editorial masthead on all templates, without legacy toggle blocks. */
+header.top .header-main { display: flex; align-items: center; }
+header.top .header-main > .site-brand { margin: 0; flex: 0 0 auto; white-space: nowrap; }
+header.top .header-main > .site-brand a { color: #4b2d23; text-decoration: none; font: inherit; background: transparent; padding: 0; }
+header.top .header-main > .site-brand::before,
+header.top .header-main > .site-brand::after { content: none; display: none; }
+header.top .header-main > .toggle.left { display: none; }
+header.top .header-main > .toggle.right { background: transparent !important; border: 0; box-shadow: none; padding: 0; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+header.top .header-main > .toggle.right::before,
+header.top .header-main > .toggle.right::after { content: none; }
+header.top .header-main > .toggle.right svg { width: 30px; height: 30px; }
+@media (max-width: 760px) { header.top .header-main > .site-brand { white-space: normal; } }
