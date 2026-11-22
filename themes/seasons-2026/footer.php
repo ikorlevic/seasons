@@ -2,7 +2,8 @@
 /**
  * Seasonal editorial footer. Existing WordPress menu locations remain supported.
  */
-$footer_season = function_exists('current_season') ? current_season() : 'spring';
+// Match the seasonal skin already selected for the page header, including admin previews.
+$footer_season = isset($season) && is_string($season) ? $season : (function_exists('current_season') ? current_season() : 'spring');
 $footer_groups = array(
     array('title' => __('Garden', 'seasons'), 'categories' => array('grow', 'propagate', 'projects', 'seasonal-tasks', 'garden')),
     array('title' => __('Recipe Book', 'seasons'), 'categories' => array('family-recipes', 'from-my-kitchen', 'preserving', 'drinks', 'recipes')),
