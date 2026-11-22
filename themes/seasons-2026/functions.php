@@ -714,13 +714,15 @@ add_action('wp_enqueue_scripts', 'seasons_enqueue_home_editorial_styles');
 
 /** Load the editorial footer styles on all front-end pages. */
 function seasons_enqueue_footer_editorial_styles() {
-    wp_enqueue_style('seasons-footer-editorial', get_template_directory_uri() . '/css/footer-editorial.css', array(), '1.0');
+    $path = get_template_directory() . '/css/footer-editorial.css';
+    wp_enqueue_style('seasons-footer-editorial', get_template_directory_uri() . '/css/footer-editorial.css', array(), file_exists($path) ? (string) filemtime($path) : '1.0');
 }
 add_action('wp_enqueue_scripts', 'seasons_enqueue_footer_editorial_styles');
 
 /** Weather presentation only; PDS Weather owns the data and its configuration. */
 function seasons_enqueue_header_weather_styles() {
-    wp_enqueue_style('seasons-header-weather', get_template_directory_uri() . '/css/header-weather.css', array(), '1.0');
+    $path = get_template_directory() . '/css/header-weather.css';
+    wp_enqueue_style('seasons-header-weather', get_template_directory_uri() . '/css/header-weather.css', array(), file_exists($path) ? (string) filemtime($path) : '1.0');
 }
 add_action('wp_enqueue_scripts', 'seasons_enqueue_header_weather_styles');
 
