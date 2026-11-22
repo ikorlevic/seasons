@@ -65,12 +65,10 @@
         </div>
         <div class="header-main d-flex jcse mx-20 align-center">
             <?php if (!is_home()){ ?>
-        <div class="toggle left">
-            <button onclick="window.location='<?php echo esc_url(home_url("/"))?>'" />
-        </div>
+        <?php // The site title is the home link; the legacy empty toggle was an unwanted coloured rectangle. ?>
         <?php } ?>
         <!-- img alt="Seasons In Garden" onclick="window.location='<?php echo esc_url(home_url("/"))?>'" class="logo" src="<?php echo get_template_directory_uri()?>/images/logo/logo-<?php echo $season?>.svg" alt="Seasons in the garden, works and all" -->
-        <h2 onclick="window.location='<?php echo esc_url(home_url("/"))?>'">Seasons in Garden</h2>
+        <h2 class="site-brand"><a href="<?php echo esc_url(home_url('/')); ?>">Seasons in Garden</a></h2>
 
         <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="primary-site-navigation" aria-label="<?php esc_attr_e('Open menu', 'seasons'); ?>" onclick="var nav=document.getElementById('primary-site-navigation'); var open=this.getAttribute('aria-expanded')!=='true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); this.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); nav.classList.toggle('open',open);"><span class="mobile-nav-toggle-icon" aria-hidden="true"></span></button>
 
